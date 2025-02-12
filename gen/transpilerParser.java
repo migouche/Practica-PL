@@ -16,7 +16,9 @@ public class transpilerParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T=1;
+		FUNCTION=1, BEGIN=2, END=3, INT=4, FLOAT=5, CONSTINT=6, CONSTFLOAT=7, 
+		WHITE_SPACE=8, INT_NUM=9, FLOAT_NUM=10, WORD=11, CONSLIT=12, ONE_LINE_COMMENT=13, 
+		MULTILINE_COMMENT=14, ID=15, T=16;
 	public static final int
 		RULE_g = 0;
 	private static String[] makeRuleNames() {
@@ -28,13 +30,16 @@ public class transpilerParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'f'"
+			null, "'FUNCTION'", "'BEGIN'", "'END'", "'INTEGER'", "'REAL'", "'CONSTINT'", 
+			"'CONSTREAL'", null, null, null, null, null, null, null, null, "'f'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "T"
+			null, "FUNCTION", "BEGIN", "END", "INT", "FLOAT", "CONSTINT", "CONSTFLOAT", 
+			"WHITE_SPACE", "INT_NUM", "FLOAT_NUM", "WORD", "CONSLIT", "ONE_LINE_COMMENT", 
+			"MULTILINE_COMMENT", "ID", "T"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -90,9 +95,9 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class GContext extends ParserRuleContext {
-		public List<TerminalNode> T() { return getTokens(transpilerParser.T); }
-		public TerminalNode T(int i) {
-			return getToken(transpilerParser.T, i);
+		public List<TerminalNode> MULTILINE_COMMENT() { return getTokens(transpilerParser.MULTILINE_COMMENT); }
+		public TerminalNode MULTILINE_COMMENT(int i) {
+			return getToken(transpilerParser.MULTILINE_COMMENT, i);
 		}
 		public GContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -120,20 +125,20 @@ public class transpilerParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(5);
+			setState(3); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T) {
+			do {
 				{
 				{
 				setState(2);
-				match(T);
+				match(MULTILINE_COMMENT);
 				}
 				}
-				setState(7);
+				setState(5); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			}
+			} while ( _la==MULTILINE_COMMENT );
 			}
 		}
 		catch (RecognitionException re) {
@@ -148,13 +153,12 @@ public class transpilerParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0001\t\u0002\u0000\u0007\u0000\u0001\u0000\u0005\u0000\u0004"+
-		"\b\u0000\n\u0000\f\u0000\u0007\t\u0000\u0001\u0000\u0000\u0000\u0001\u0000"+
-		"\u0000\u0000\b\u0000\u0005\u0001\u0000\u0000\u0000\u0002\u0004\u0005\u0001"+
-		"\u0000\u0000\u0003\u0002\u0001\u0000\u0000\u0000\u0004\u0007\u0001\u0000"+
-		"\u0000\u0000\u0005\u0003\u0001\u0000\u0000\u0000\u0005\u0006\u0001\u0000"+
-		"\u0000\u0000\u0006\u0001\u0001\u0000\u0000\u0000\u0007\u0005\u0001\u0000"+
-		"\u0000\u0000\u0001\u0005";
+		"\u0004\u0001\u0010\b\u0002\u0000\u0007\u0000\u0001\u0000\u0004\u0000\u0004"+
+		"\b\u0000\u000b\u0000\f\u0000\u0005\u0001\u0000\u0000\u0000\u0001\u0000"+
+		"\u0000\u0000\u0007\u0000\u0003\u0001\u0000\u0000\u0000\u0002\u0004\u0005"+
+		"\u000e\u0000\u0000\u0003\u0002\u0001\u0000\u0000\u0000\u0004\u0005\u0001"+
+		"\u0000\u0000\u0000\u0005\u0003\u0001\u0000\u0000\u0000\u0005\u0006\u0001"+
+		"\u0000\u0000\u0000\u0006\u0001\u0001\u0000\u0000\u0000\u0001\u0005";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

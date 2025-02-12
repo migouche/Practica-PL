@@ -1,9 +1,39 @@
 token literal names:
 null
+'FUNCTION'
+'BEGIN'
+'END'
+'INTEGER'
+'REAL'
+'CONSTINT'
+'CONSTREAL'
+null
+null
+null
+null
+null
+null
+null
+null
 'f'
 
 token symbolic names:
 null
+FUNCTION
+BEGIN
+END
+INT
+FLOAT
+CONSTINT
+CONSTFLOAT
+WHITE_SPACE
+INT_NUM
+FLOAT_NUM
+WORD
+CONSLIT
+ONE_LINE_COMMENT
+MULTILINE_COMMENT
+ID
 T
 
 rule names:
@@ -11,4 +41,4 @@ g
 
 
 atn:
-[4, 1, 1, 9, 2, 0, 7, 0, 1, 0, 5, 0, 4, 8, 0, 10, 0, 12, 0, 7, 9, 0, 1, 0, 0, 0, 1, 0, 0, 0, 8, 0, 5, 1, 0, 0, 0, 2, 4, 5, 1, 0, 0, 3, 2, 1, 0, 0, 0, 4, 7, 1, 0, 0, 0, 5, 3, 1, 0, 0, 0, 5, 6, 1, 0, 0, 0, 6, 1, 1, 0, 0, 0, 7, 5, 1, 0, 0, 0, 1, 5]
+[4, 1, 16, 8, 2, 0, 7, 0, 1, 0, 4, 0, 4, 8, 0, 11, 0, 12, 0, 5, 1, 0, 0, 0, 1, 0, 0, 0, 7, 0, 3, 1, 0, 0, 0, 2, 4, 5, 14, 0, 0, 3, 2, 1, 0, 0, 0, 4, 5, 1, 0, 0, 0, 5, 3, 1, 0, 0, 0, 5, 6, 1, 0, 0, 0, 6, 1, 1, 0, 0, 0, 1, 5]
