@@ -1,4 +1,4 @@
-// Generated from C:/Users/migou/codes/URJC/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+// Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -17,8 +17,8 @@ public class transpilerParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		FUNCTION=1, BEGIN=2, END=3, INT=4, FLOAT=5, CONSTINT=6, CONSTFLOAT=7, 
-		WHITE_SPACE=8, INT_NUM=9, FLOAT_NUM=10, WORD=11, CONSLIT=12, ONE_LINE_COMMENT=13, 
-		MULTILINE_COMMENT=14, ID=15, T=16;
+		WHITE_SPACE=8, ID=9, INT_NUM=10, FLOAT_NUM=11, CONSLIT=12, ONE_LINE_COMMENT=13, 
+		MULTILINE_COMMENT=14, T=15;
 	public static final int
 		RULE_g = 0;
 	private static String[] makeRuleNames() {
@@ -31,15 +31,15 @@ public class transpilerParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'FUNCTION'", "'BEGIN'", "'END'", "'INTEGER'", "'REAL'", "'CONSTINT'", 
-			"'CONSTREAL'", null, null, null, null, null, null, null, null, "'f'"
+			"'CONSTREAL'", null, null, null, null, null, null, null, "'f'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, "FUNCTION", "BEGIN", "END", "INT", "FLOAT", "CONSTINT", "CONSTFLOAT", 
-			"WHITE_SPACE", "INT_NUM", "FLOAT_NUM", "WORD", "CONSLIT", "ONE_LINE_COMMENT", 
-			"MULTILINE_COMMENT", "ID", "T"
+			"WHITE_SPACE", "ID", "INT_NUM", "FLOAT_NUM", "CONSLIT", "ONE_LINE_COMMENT", 
+			"MULTILINE_COMMENT", "T"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -95,6 +95,26 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class GContext extends ParserRuleContext {
+		public List<TerminalNode> INT_NUM() { return getTokens(transpilerParser.INT_NUM); }
+		public TerminalNode INT_NUM(int i) {
+			return getToken(transpilerParser.INT_NUM, i);
+		}
+		public List<TerminalNode> FLOAT_NUM() { return getTokens(transpilerParser.FLOAT_NUM); }
+		public TerminalNode FLOAT_NUM(int i) {
+			return getToken(transpilerParser.FLOAT_NUM, i);
+		}
+		public List<TerminalNode> CONSLIT() { return getTokens(transpilerParser.CONSLIT); }
+		public TerminalNode CONSLIT(int i) {
+			return getToken(transpilerParser.CONSLIT, i);
+		}
+		public List<TerminalNode> ID() { return getTokens(transpilerParser.ID); }
+		public TerminalNode ID(int i) {
+			return getToken(transpilerParser.ID, i);
+		}
+		public List<TerminalNode> ONE_LINE_COMMENT() { return getTokens(transpilerParser.ONE_LINE_COMMENT); }
+		public TerminalNode ONE_LINE_COMMENT(int i) {
+			return getToken(transpilerParser.ONE_LINE_COMMENT, i);
+		}
 		public List<TerminalNode> MULTILINE_COMMENT() { return getTokens(transpilerParser.MULTILINE_COMMENT); }
 		public TerminalNode MULTILINE_COMMENT(int i) {
 			return getToken(transpilerParser.MULTILINE_COMMENT, i);
@@ -125,20 +145,28 @@ public class transpilerParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(3); 
+			setState(5);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			do {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 32256L) != 0)) {
 				{
 				{
 				setState(2);
-				match(MULTILINE_COMMENT);
+				_la = _input.LA(1);
+				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 32256L) != 0)) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
 				}
 				}
-				setState(5); 
+				}
+				setState(7);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==MULTILINE_COMMENT );
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -153,12 +181,13 @@ public class transpilerParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0010\b\u0002\u0000\u0007\u0000\u0001\u0000\u0004\u0000\u0004"+
-		"\b\u0000\u000b\u0000\f\u0000\u0005\u0001\u0000\u0000\u0000\u0001\u0000"+
-		"\u0000\u0000\u0007\u0000\u0003\u0001\u0000\u0000\u0000\u0002\u0004\u0005"+
-		"\u000e\u0000\u0000\u0003\u0002\u0001\u0000\u0000\u0000\u0004\u0005\u0001"+
-		"\u0000\u0000\u0000\u0005\u0003\u0001\u0000\u0000\u0000\u0005\u0006\u0001"+
-		"\u0000\u0000\u0000\u0006\u0001\u0001\u0000\u0000\u0000\u0001\u0005";
+		"\u0004\u0001\u000f\t\u0002\u0000\u0007\u0000\u0001\u0000\u0005\u0000\u0004"+
+		"\b\u0000\n\u0000\f\u0000\u0007\t\u0000\u0001\u0000\u0000\u0000\u0001\u0000"+
+		"\u0000\u0001\u0001\u0000\t\u000e\b\u0000\u0005\u0001\u0000\u0000\u0000"+
+		"\u0002\u0004\u0007\u0000\u0000\u0000\u0003\u0002\u0001\u0000\u0000\u0000"+
+		"\u0004\u0007\u0001\u0000\u0000\u0000\u0005\u0003\u0001\u0000\u0000\u0000"+
+		"\u0005\u0006\u0001\u0000\u0000\u0000\u0006\u0001\u0001\u0000\u0000\u0000"+
+		"\u0007\u0005\u0001\u0000\u0000\u0000\u0001\u0005";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
