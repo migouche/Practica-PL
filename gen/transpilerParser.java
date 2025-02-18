@@ -1,4 +1,4 @@
-// Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+// Generated from C:/Users/migou/codes/URJC/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -18,7 +18,7 @@ public class transpilerParser extends Parser {
 	public static final int
 		FUNCTION=1, BEGIN=2, END=3, INT=4, FLOAT=5, CONSTINT=6, CONSTFLOAT=7, 
 		WHITE_SPACE=8, ID=9, INT_NUM=10, FLOAT_NUM=11, CONSLIT=12, ONE_LINE_COMMENT=13, 
-		MULTILINE_COMMENT=14, T=15;
+		MULTILINE_COMMENT=14;
 	public static final int
 		RULE_g = 0;
 	private static String[] makeRuleNames() {
@@ -31,7 +31,7 @@ public class transpilerParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'FUNCTION'", "'BEGIN'", "'END'", "'INTEGER'", "'REAL'", "'CONSTINT'", 
-			"'CONSTREAL'", null, null, null, null, null, null, null, "'f'"
+			"'CONSTREAL'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -39,7 +39,7 @@ public class transpilerParser extends Parser {
 		return new String[] {
 			null, "FUNCTION", "BEGIN", "END", "INT", "FLOAT", "CONSTINT", "CONSTFLOAT", 
 			"WHITE_SPACE", "ID", "INT_NUM", "FLOAT_NUM", "CONSLIT", "ONE_LINE_COMMENT", 
-			"MULTILINE_COMMENT", "T"
+			"MULTILINE_COMMENT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -119,6 +119,34 @@ public class transpilerParser extends Parser {
 		public TerminalNode MULTILINE_COMMENT(int i) {
 			return getToken(transpilerParser.MULTILINE_COMMENT, i);
 		}
+		public List<TerminalNode> FUNCTION() { return getTokens(transpilerParser.FUNCTION); }
+		public TerminalNode FUNCTION(int i) {
+			return getToken(transpilerParser.FUNCTION, i);
+		}
+		public List<TerminalNode> BEGIN() { return getTokens(transpilerParser.BEGIN); }
+		public TerminalNode BEGIN(int i) {
+			return getToken(transpilerParser.BEGIN, i);
+		}
+		public List<TerminalNode> END() { return getTokens(transpilerParser.END); }
+		public TerminalNode END(int i) {
+			return getToken(transpilerParser.END, i);
+		}
+		public List<TerminalNode> INT() { return getTokens(transpilerParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(transpilerParser.INT, i);
+		}
+		public List<TerminalNode> FLOAT() { return getTokens(transpilerParser.FLOAT); }
+		public TerminalNode FLOAT(int i) {
+			return getToken(transpilerParser.FLOAT, i);
+		}
+		public List<TerminalNode> CONSTINT() { return getTokens(transpilerParser.CONSTINT); }
+		public TerminalNode CONSTINT(int i) {
+			return getToken(transpilerParser.CONSTINT, i);
+		}
+		public List<TerminalNode> CONSTFLOAT() { return getTokens(transpilerParser.CONSTFLOAT); }
+		public TerminalNode CONSTFLOAT(int i) {
+			return getToken(transpilerParser.CONSTFLOAT, i);
+		}
 		public GContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -148,12 +176,12 @@ public class transpilerParser extends Parser {
 			setState(5);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 32256L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 32510L) != 0)) {
 				{
 				{
 				setState(2);
 				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 32256L) != 0)) ) {
+				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 32510L) != 0)) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -181,13 +209,13 @@ public class transpilerParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u000f\t\u0002\u0000\u0007\u0000\u0001\u0000\u0005\u0000\u0004"+
+		"\u0004\u0001\u000e\t\u0002\u0000\u0007\u0000\u0001\u0000\u0005\u0000\u0004"+
 		"\b\u0000\n\u0000\f\u0000\u0007\t\u0000\u0001\u0000\u0000\u0000\u0001\u0000"+
-		"\u0000\u0001\u0001\u0000\t\u000e\b\u0000\u0005\u0001\u0000\u0000\u0000"+
-		"\u0002\u0004\u0007\u0000\u0000\u0000\u0003\u0002\u0001\u0000\u0000\u0000"+
-		"\u0004\u0007\u0001\u0000\u0000\u0000\u0005\u0003\u0001\u0000\u0000\u0000"+
-		"\u0005\u0006\u0001\u0000\u0000\u0000\u0006\u0001\u0001\u0000\u0000\u0000"+
-		"\u0007\u0005\u0001\u0000\u0000\u0000\u0001\u0005";
+		"\u0000\u0001\u0002\u0000\u0001\u0007\t\u000e\b\u0000\u0005\u0001\u0000"+
+		"\u0000\u0000\u0002\u0004\u0007\u0000\u0000\u0000\u0003\u0002\u0001\u0000"+
+		"\u0000\u0000\u0004\u0007\u0001\u0000\u0000\u0000\u0005\u0003\u0001\u0000"+
+		"\u0000\u0000\u0005\u0006\u0001\u0000\u0000\u0000\u0006\u0001\u0001\u0000"+
+		"\u0000\u0000\u0007\u0005\u0001\u0000\u0000\u0000\u0001\u0005";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

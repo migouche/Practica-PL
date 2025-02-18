@@ -1,6 +1,7 @@
 grammar transpiler;
 
-g: (INT_NUM|FLOAT_NUM|CONSLIT|ID|CONSLIT|ONE_LINE_COMMENT|MULTILINE_COMMENT)*;
+g: (INT_NUM|FLOAT_NUM|CONSLIT|ID|CONSLIT|ONE_LINE_COMMENT|MULTILINE_COMMENT|FUNCTION|BEGIN|END|INT|FLOAT|CONSTINT|CONSTFLOAT
+|OPEN_BRACKET|CLOSE_BRACKET|OPEN_PAREN|CLOSE_PAREN|SEMICOLON|COLON|COMMA|WALRUS)*;
 
 fragment IDENTIFIER_START: [a-zA-Z_];
 fragment IDENTIFIER_PART: [a-zA-Z_0-9];
@@ -17,8 +18,20 @@ FLOAT: 'REAL';
 CONSTINT: 'CONSTINT';
 CONSTFLOAT: 'CONSTREAL';
 
+// CHARACTERS
+
+OPEN_PAREN: '(';
+CLOSE_PAREN: ')';
+OPEN_BRACKET: '[';
+CLOSE_BRACKET: ']';
+SEMICOLON: ';';
+COLON: ':';
+COMMA: ',';
+WALRUS: ':=';
+
 // - LITERALS 
-WHITE_SPACE: [ \t\r\n,.]+ -> skip;
+WHITE_SPACE: [ \t\r\n]+ -> skip;
+THREE_DOTS: '…' -> skip; // ponemos esto por ahora para saltarnos esto del ejemplo
 
 // - ID
 ID: IDENTIFIER_START IDENTIFIER_PART*;
@@ -36,7 +49,5 @@ CONSLIT: '\'' (WORD|'\\\''|~['])+ '\'';
 
 
 // - COMMENTS 
-ONE_LINE_COMMENT : '{' ~[}\n]* '}';
+ONE_LINE_COMMENT : '{' ~('}')* '}';
 MULTILINE_COMMENT : '(*' .*? '*)';
-
-T: 'f';
