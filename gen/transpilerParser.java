@@ -16,9 +16,10 @@ public class transpilerParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		FUNCTION=1, BEGIN=2, END=3, INT=4, FLOAT=5, CONSTINT=6, CONSTFLOAT=7, 
-		WHITE_SPACE=8, ID=9, INT_NUM=10, FLOAT_NUM=11, CONSLIT=12, ONE_LINE_COMMENT=13, 
-		MULTILINE_COMMENT=14;
+		FUNCTION=1, BEGIN=2, END=3, PROCEDURE=4, INT=5, FLOAT=6, CONSTINT=7, CONSTFLOAT=8, 
+		OPEN_PAREN=9, CLOSE_PAREN=10, OPEN_BRACKET=11, CLOSE_BRACKET=12, SEMICOLON=13, 
+		COLON=14, COMMA=15, WALRUS=16, WHITE_SPACE=17, ID=18, INT_NUM=19, FLOAT_NUM=20, 
+		CONSLIT=21, ONE_LINE_COMMENT=22, MULTILINE_COMMENT=23;
 	public static final int
 		RULE_g = 0;
 	private static String[] makeRuleNames() {
@@ -30,16 +31,18 @@ public class transpilerParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'FUNCTION'", "'BEGIN'", "'END'", "'INTEGER'", "'REAL'", "'CONSTINT'", 
-			"'CONSTREAL'"
+			null, "'FUNCTION'", "'BEGIN'", "'END'", "'PROCEDURE'", "'INTEGER'", "'REAL'", 
+			"'CONSTINT'", "'CONSTREAL'", "'('", "')'", "'['", "']'", "';'", "':'", 
+			"','", "':='"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "FUNCTION", "BEGIN", "END", "INT", "FLOAT", "CONSTINT", "CONSTFLOAT", 
-			"WHITE_SPACE", "ID", "INT_NUM", "FLOAT_NUM", "CONSLIT", "ONE_LINE_COMMENT", 
-			"MULTILINE_COMMENT"
+			null, "FUNCTION", "BEGIN", "END", "PROCEDURE", "INT", "FLOAT", "CONSTINT", 
+			"CONSTFLOAT", "OPEN_PAREN", "CLOSE_PAREN", "OPEN_BRACKET", "CLOSE_BRACKET", 
+			"SEMICOLON", "COLON", "COMMA", "WALRUS", "WHITE_SPACE", "ID", "INT_NUM", 
+			"FLOAT_NUM", "CONSLIT", "ONE_LINE_COMMENT", "MULTILINE_COMMENT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -147,6 +150,42 @@ public class transpilerParser extends Parser {
 		public TerminalNode CONSTFLOAT(int i) {
 			return getToken(transpilerParser.CONSTFLOAT, i);
 		}
+		public List<TerminalNode> OPEN_BRACKET() { return getTokens(transpilerParser.OPEN_BRACKET); }
+		public TerminalNode OPEN_BRACKET(int i) {
+			return getToken(transpilerParser.OPEN_BRACKET, i);
+		}
+		public List<TerminalNode> CLOSE_BRACKET() { return getTokens(transpilerParser.CLOSE_BRACKET); }
+		public TerminalNode CLOSE_BRACKET(int i) {
+			return getToken(transpilerParser.CLOSE_BRACKET, i);
+		}
+		public List<TerminalNode> OPEN_PAREN() { return getTokens(transpilerParser.OPEN_PAREN); }
+		public TerminalNode OPEN_PAREN(int i) {
+			return getToken(transpilerParser.OPEN_PAREN, i);
+		}
+		public List<TerminalNode> CLOSE_PAREN() { return getTokens(transpilerParser.CLOSE_PAREN); }
+		public TerminalNode CLOSE_PAREN(int i) {
+			return getToken(transpilerParser.CLOSE_PAREN, i);
+		}
+		public List<TerminalNode> SEMICOLON() { return getTokens(transpilerParser.SEMICOLON); }
+		public TerminalNode SEMICOLON(int i) {
+			return getToken(transpilerParser.SEMICOLON, i);
+		}
+		public List<TerminalNode> COLON() { return getTokens(transpilerParser.COLON); }
+		public TerminalNode COLON(int i) {
+			return getToken(transpilerParser.COLON, i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(transpilerParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(transpilerParser.COMMA, i);
+		}
+		public List<TerminalNode> WALRUS() { return getTokens(transpilerParser.WALRUS); }
+		public TerminalNode WALRUS(int i) {
+			return getToken(transpilerParser.WALRUS, i);
+		}
+		public List<TerminalNode> PROCEDURE() { return getTokens(transpilerParser.PROCEDURE); }
+		public TerminalNode PROCEDURE(int i) {
+			return getToken(transpilerParser.PROCEDURE, i);
+		}
 		public GContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -176,12 +215,12 @@ public class transpilerParser extends Parser {
 			setState(5);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 32510L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 16646142L) != 0)) {
 				{
 				{
 				setState(2);
 				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 32510L) != 0)) ) {
+				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 16646142L) != 0)) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -209,9 +248,9 @@ public class transpilerParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u000e\t\u0002\u0000\u0007\u0000\u0001\u0000\u0005\u0000\u0004"+
+		"\u0004\u0001\u0017\t\u0002\u0000\u0007\u0000\u0001\u0000\u0005\u0000\u0004"+
 		"\b\u0000\n\u0000\f\u0000\u0007\t\u0000\u0001\u0000\u0000\u0000\u0001\u0000"+
-		"\u0000\u0001\u0002\u0000\u0001\u0007\t\u000e\b\u0000\u0005\u0001\u0000"+
+		"\u0000\u0001\u0002\u0000\u0001\u0010\u0012\u0017\b\u0000\u0005\u0001\u0000"+
 		"\u0000\u0000\u0002\u0004\u0007\u0000\u0000\u0000\u0003\u0002\u0001\u0000"+
 		"\u0000\u0000\u0004\u0007\u0001\u0000\u0000\u0000\u0005\u0003\u0001\u0000"+
 		"\u0000\u0000\u0005\u0006\u0001\u0000\u0000\u0000\u0006\u0001\u0001\u0000"+

@@ -3,10 +3,19 @@ null
 'FUNCTION'
 'BEGIN'
 'END'
+'PROCEDURE'
 'INTEGER'
 'REAL'
 'CONSTINT'
 'CONSTREAL'
+'('
+')'
+'['
+']'
+';'
+':'
+','
+':='
 null
 null
 null
@@ -20,10 +29,19 @@ null
 FUNCTION
 BEGIN
 END
+PROCEDURE
 INT
 FLOAT
 CONSTINT
 CONSTFLOAT
+OPEN_PAREN
+CLOSE_PAREN
+OPEN_BRACKET
+CLOSE_BRACKET
+SEMICOLON
+COLON
+COMMA
+WALRUS
 WHITE_SPACE
 ID
 INT_NUM
@@ -37,4 +55,4 @@ g
 
 
 atn:
-[4, 1, 14, 9, 2, 0, 7, 0, 1, 0, 5, 0, 4, 8, 0, 10, 0, 12, 0, 7, 9, 0, 1, 0, 0, 0, 1, 0, 0, 1, 2, 0, 1, 7, 9, 14, 8, 0, 5, 1, 0, 0, 0, 2, 4, 7, 0, 0, 0, 3, 2, 1, 0, 0, 0, 4, 7, 1, 0, 0, 0, 5, 3, 1, 0, 0, 0, 5, 6, 1, 0, 0, 0, 6, 1, 1, 0, 0, 0, 7, 5, 1, 0, 0, 0, 1, 5]
+[4, 1, 23, 9, 2, 0, 7, 0, 1, 0, 5, 0, 4, 8, 0, 10, 0, 12, 0, 7, 9, 0, 1, 0, 0, 0, 1, 0, 0, 1, 2, 0, 1, 16, 18, 23, 8, 0, 5, 1, 0, 0, 0, 2, 4, 7, 0, 0, 0, 3, 2, 1, 0, 0, 0, 4, 7, 1, 0, 0, 0, 5, 3, 1, 0, 0, 0, 5, 6, 1, 0, 0, 0, 6, 1, 1, 0, 0, 0, 7, 5, 1, 0, 0, 0, 1, 5]
