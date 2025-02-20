@@ -18,8 +18,11 @@ public class transpilerParser extends Parser {
 	public static final int
 		FUNCTION=1, BEGIN=2, END=3, PROCEDURE=4, INT=5, FLOAT=6, CONSTINT=7, CONSTFLOAT=8, 
 		OPEN_PAREN=9, CLOSE_PAREN=10, OPEN_BRACKET=11, CLOSE_BRACKET=12, SEMICOLON=13, 
-		COLON=14, COMMA=15, WALRUS=16, WHITE_SPACE=17, ID=18, INT_NUM=19, FLOAT_NUM=20, 
-		CONSLIT=21, ONE_LINE_COMMENT=22, MULTILINE_COMMENT=23;
+		COLON=14, COMMA=15, WALRUS=16, PLUS=17, MINUS=18, TIMES=19, SLASH=20, 
+		AT=21, HASH=22, CARET=23, MOD=24, DIV=25, EQUAL=26, NOT_EQUAL=27, LESS_THAN=28, 
+		GREATER_THAN=29, LESS_OR_EQUAL=30, GREATER_OR_EQUAL=31, AND=32, OR=33, 
+		NOT=34, IN=35, WHITE_SPACE=36, ID=37, INT_NUM=38, FLOAT_NUM=39, CONSLIT=40, 
+		ONE_LINE_COMMENT=41, MULTILINE_COMMENT=42;
 	public static final int
 		RULE_g = 0;
 	private static String[] makeRuleNames() {
@@ -31,9 +34,10 @@ public class transpilerParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'FUNCTION'", "'BEGIN'", "'END'", "'PROCEDURE'", "'INTEGER'", "'REAL'", 
-			"'CONSTINT'", "'CONSTREAL'", "'('", "')'", "'['", "']'", "';'", "':'", 
-			"','", "':='"
+			null, null, null, null, null, null, null, null, null, "'('", "')'", "'['", 
+			"']'", "';'", "':'", "','", "':='", "'+'", "'-'", "'*'", "'/'", "'@'", 
+			"'#'", "'^'", "'mod'", "'div'", "'='", "'<>'", "'<'", "'>'", "'<='", 
+			"'>='", "'and'", "'or'", "'not'", "'in'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -41,8 +45,11 @@ public class transpilerParser extends Parser {
 		return new String[] {
 			null, "FUNCTION", "BEGIN", "END", "PROCEDURE", "INT", "FLOAT", "CONSTINT", 
 			"CONSTFLOAT", "OPEN_PAREN", "CLOSE_PAREN", "OPEN_BRACKET", "CLOSE_BRACKET", 
-			"SEMICOLON", "COLON", "COMMA", "WALRUS", "WHITE_SPACE", "ID", "INT_NUM", 
-			"FLOAT_NUM", "CONSLIT", "ONE_LINE_COMMENT", "MULTILINE_COMMENT"
+			"SEMICOLON", "COLON", "COMMA", "WALRUS", "PLUS", "MINUS", "TIMES", "SLASH", 
+			"AT", "HASH", "CARET", "MOD", "DIV", "EQUAL", "NOT_EQUAL", "LESS_THAN", 
+			"GREATER_THAN", "LESS_OR_EQUAL", "GREATER_OR_EQUAL", "AND", "OR", "NOT", 
+			"IN", "WHITE_SPACE", "ID", "INT_NUM", "FLOAT_NUM", "CONSLIT", "ONE_LINE_COMMENT", 
+			"MULTILINE_COMMENT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -186,6 +193,78 @@ public class transpilerParser extends Parser {
 		public TerminalNode PROCEDURE(int i) {
 			return getToken(transpilerParser.PROCEDURE, i);
 		}
+		public List<TerminalNode> PLUS() { return getTokens(transpilerParser.PLUS); }
+		public TerminalNode PLUS(int i) {
+			return getToken(transpilerParser.PLUS, i);
+		}
+		public List<TerminalNode> MINUS() { return getTokens(transpilerParser.MINUS); }
+		public TerminalNode MINUS(int i) {
+			return getToken(transpilerParser.MINUS, i);
+		}
+		public List<TerminalNode> TIMES() { return getTokens(transpilerParser.TIMES); }
+		public TerminalNode TIMES(int i) {
+			return getToken(transpilerParser.TIMES, i);
+		}
+		public List<TerminalNode> SLASH() { return getTokens(transpilerParser.SLASH); }
+		public TerminalNode SLASH(int i) {
+			return getToken(transpilerParser.SLASH, i);
+		}
+		public List<TerminalNode> AT() { return getTokens(transpilerParser.AT); }
+		public TerminalNode AT(int i) {
+			return getToken(transpilerParser.AT, i);
+		}
+		public List<TerminalNode> HASH() { return getTokens(transpilerParser.HASH); }
+		public TerminalNode HASH(int i) {
+			return getToken(transpilerParser.HASH, i);
+		}
+		public List<TerminalNode> CARET() { return getTokens(transpilerParser.CARET); }
+		public TerminalNode CARET(int i) {
+			return getToken(transpilerParser.CARET, i);
+		}
+		public List<TerminalNode> MOD() { return getTokens(transpilerParser.MOD); }
+		public TerminalNode MOD(int i) {
+			return getToken(transpilerParser.MOD, i);
+		}
+		public List<TerminalNode> DIV() { return getTokens(transpilerParser.DIV); }
+		public TerminalNode DIV(int i) {
+			return getToken(transpilerParser.DIV, i);
+		}
+		public List<TerminalNode> EQUAL() { return getTokens(transpilerParser.EQUAL); }
+		public TerminalNode EQUAL(int i) {
+			return getToken(transpilerParser.EQUAL, i);
+		}
+		public List<TerminalNode> NOT_EQUAL() { return getTokens(transpilerParser.NOT_EQUAL); }
+		public TerminalNode NOT_EQUAL(int i) {
+			return getToken(transpilerParser.NOT_EQUAL, i);
+		}
+		public List<TerminalNode> LESS_THAN() { return getTokens(transpilerParser.LESS_THAN); }
+		public TerminalNode LESS_THAN(int i) {
+			return getToken(transpilerParser.LESS_THAN, i);
+		}
+		public List<TerminalNode> LESS_OR_EQUAL() { return getTokens(transpilerParser.LESS_OR_EQUAL); }
+		public TerminalNode LESS_OR_EQUAL(int i) {
+			return getToken(transpilerParser.LESS_OR_EQUAL, i);
+		}
+		public List<TerminalNode> GREATER_OR_EQUAL() { return getTokens(transpilerParser.GREATER_OR_EQUAL); }
+		public TerminalNode GREATER_OR_EQUAL(int i) {
+			return getToken(transpilerParser.GREATER_OR_EQUAL, i);
+		}
+		public List<TerminalNode> GREATER_THAN() { return getTokens(transpilerParser.GREATER_THAN); }
+		public TerminalNode GREATER_THAN(int i) {
+			return getToken(transpilerParser.GREATER_THAN, i);
+		}
+		public List<TerminalNode> AND() { return getTokens(transpilerParser.AND); }
+		public TerminalNode AND(int i) {
+			return getToken(transpilerParser.AND, i);
+		}
+		public List<TerminalNode> OR() { return getTokens(transpilerParser.OR); }
+		public TerminalNode OR(int i) {
+			return getToken(transpilerParser.OR, i);
+		}
+		public List<TerminalNode> IN() { return getTokens(transpilerParser.IN); }
+		public TerminalNode IN(int i) {
+			return getToken(transpilerParser.IN, i);
+		}
 		public GContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -215,12 +294,12 @@ public class transpilerParser extends Parser {
 			setState(5);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 16646142L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 8710193676286L) != 0)) {
 				{
 				{
 				setState(2);
 				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 16646142L) != 0)) ) {
+				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 8710193676286L) != 0)) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -248,13 +327,13 @@ public class transpilerParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0017\t\u0002\u0000\u0007\u0000\u0001\u0000\u0005\u0000\u0004"+
+		"\u0004\u0001*\t\u0002\u0000\u0007\u0000\u0001\u0000\u0005\u0000\u0004"+
 		"\b\u0000\n\u0000\f\u0000\u0007\t\u0000\u0001\u0000\u0000\u0000\u0001\u0000"+
-		"\u0000\u0001\u0002\u0000\u0001\u0010\u0012\u0017\b\u0000\u0005\u0001\u0000"+
-		"\u0000\u0000\u0002\u0004\u0007\u0000\u0000\u0000\u0003\u0002\u0001\u0000"+
-		"\u0000\u0000\u0004\u0007\u0001\u0000\u0000\u0000\u0005\u0003\u0001\u0000"+
-		"\u0000\u0000\u0005\u0006\u0001\u0000\u0000\u0000\u0006\u0001\u0001\u0000"+
-		"\u0000\u0000\u0007\u0005\u0001\u0000\u0000\u0000\u0001\u0005";
+		"\u0000\u0001\u0003\u0000\u0001!##%*\b\u0000\u0005\u0001\u0000\u0000\u0000"+
+		"\u0002\u0004\u0007\u0000\u0000\u0000\u0003\u0002\u0001\u0000\u0000\u0000"+
+		"\u0004\u0007\u0001\u0000\u0000\u0000\u0005\u0003\u0001\u0000\u0000\u0000"+
+		"\u0005\u0006\u0001\u0000\u0000\u0000\u0006\u0001\u0001\u0000\u0000\u0000"+
+		"\u0007\u0005\u0001\u0000\u0000\u0000\u0001\u0005";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -1,13 +1,13 @@
 token literal names:
 null
-'FUNCTION'
-'BEGIN'
-'END'
-'PROCEDURE'
-'INTEGER'
-'REAL'
-'CONSTINT'
-'CONSTREAL'
+null
+null
+null
+null
+null
+null
+null
+null
 '('
 ')'
 '['
@@ -16,6 +16,25 @@ null
 ':'
 ','
 ':='
+'+'
+'-'
+'*'
+'/'
+'@'
+'#'
+'^'
+'mod'
+'div'
+'='
+'<>'
+'<'
+'>'
+'<='
+'>='
+'and'
+'or'
+'not'
+'in'
 null
 null
 null
@@ -42,6 +61,25 @@ SEMICOLON
 COLON
 COMMA
 WALRUS
+PLUS
+MINUS
+TIMES
+SLASH
+AT
+HASH
+CARET
+MOD
+DIV
+EQUAL
+NOT_EQUAL
+LESS_THAN
+GREATER_THAN
+LESS_OR_EQUAL
+GREATER_OR_EQUAL
+AND
+OR
+NOT
+IN
 WHITE_SPACE
 ID
 INT_NUM
@@ -55,4 +93,4 @@ g
 
 
 atn:
-[4, 1, 23, 9, 2, 0, 7, 0, 1, 0, 5, 0, 4, 8, 0, 10, 0, 12, 0, 7, 9, 0, 1, 0, 0, 0, 1, 0, 0, 1, 2, 0, 1, 16, 18, 23, 8, 0, 5, 1, 0, 0, 0, 2, 4, 7, 0, 0, 0, 3, 2, 1, 0, 0, 0, 4, 7, 1, 0, 0, 0, 5, 3, 1, 0, 0, 0, 5, 6, 1, 0, 0, 0, 6, 1, 1, 0, 0, 0, 7, 5, 1, 0, 0, 0, 1, 5]
+[4, 1, 42, 9, 2, 0, 7, 0, 1, 0, 5, 0, 4, 8, 0, 10, 0, 12, 0, 7, 9, 0, 1, 0, 0, 0, 1, 0, 0, 1, 3, 0, 1, 33, 35, 35, 37, 42, 8, 0, 5, 1, 0, 0, 0, 2, 4, 7, 0, 0, 0, 3, 2, 1, 0, 0, 0, 4, 7, 1, 0, 0, 0, 5, 3, 1, 0, 0, 0, 5, 6, 1, 0, 0, 0, 6, 1, 1, 0, 0, 0, 7, 5, 1, 0, 0, 0, 1, 5]
