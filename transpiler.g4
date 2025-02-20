@@ -5,53 +5,6 @@ fragment IDENTIFIER_START: [a-zA-Z];
 fragment IDENTIFIER_PART: [a-zA-Z_0-9];
 
 
-// KEYWORDS
-FUNCTION: 'FUNCTION' | 'function';
-BEGIN: 'BEGIN' | 'begin';
-END: 'END' | 'end';
-PROCEDURE: 'PROCEDURE' | 'procedure';
-VAR: 'VAR' | 'var';
-PROGRAM: 'PROGRAM' | 'program';
-USES: 'USES' | 'uses';
-
-// TYPES
-CONST: 'CONST' | 'const' ;
-INT: 'INTEGER' | 'integer';
-FLOAT: 'REAL' | 'real';
-CONSTINT: 'CONSTINT' | 'constint';
-CONSTFLOAT: 'CONSTREAL' | 'constreal';
-
-// CHARACTERS
-
-DOT: '.';
-OPEN_PAREN: '(';
-CLOSE_PAREN: ')';
-OPEN_BRACKET: '[';
-CLOSE_BRACKET: ']';
-SEMICOLON: ';';
-COLON: ':';
-COMMA: ',';
-WALRUS: ':='; // ASSIGN
-PLUS: '+';
-MINUS: '-';
-TIMES: '*';
-SLASH: '/';
-AT: '@';
-HASH: '#';
-CARET: '^';
-MOD: 'mod';
-DIV: 'div';
-EQUAL: '=';
-NOT_EQUAL: '<>';
-LESS_THAN: '<';
-GREATER_THAN: '>';
-LESS_OR_EQUAL: '<=';
-GREATER_OR_EQUAL: '>=';
-AND: 'and';
-OR: 'or';
-NOT: 'not';
-IN: 'in';
-
 
 
 //############################################
@@ -84,33 +37,34 @@ MULTILINE_COMMENT : '(*' .*? '*)' -> skip;
 //ESPECIFICACION SINTATICA DEL LENGUAJE FUENTE
 //############################################
 
-prg : PROGRAM ID SEMICOLON blq DOT libimport*;
-libimport: USES ID SEMICOLON;
-blq : dcllist BEGIN sentlist END;
+prg : 'PROGRAM' | 'program' ID ';' blq '.' libimport*;
+libimport: 'USES' | ID ';';
+blq : dcllist ('BEGIN' | 'begin') sentlist ('END' | 'end');
 dcllist :  | dcllist dcl ;
 sentlist : sent | sentlist sent;
 
 // DECLARACIONES
 dcl : defcte | defvar | defproc | deffun;
-defcte : CONST ctelist;
-ctelist : ID EQUAL simpvalue SEMICOLON | ctelist ID EQUAL simpvalue SEMICOLON;
+defcte : 'CONST' | 'const' ctelist;
+ctelist : ID '=' simpvalue ';' | ctelist ID '=' simpvalue ';';
 simpvalue : FLOAT_NUM | INT_NUM | CONSTLIT;
-defvar : VAR defvarlist SEMICOLON;
-defvarlist : varlist COLON tbas | defvarlist SEMICOLON varlist COLON tbas;
-varlist : ID | ID COMMA varlist;
-defproc :  PROCEDURE ID formal_paramlist SEMICOLON blq SEMICOLON;
-deffun : FUNCTION ID formal_paramlist COLON tbas SEMICOLON blq SEMICOLON;
-formal_paramlist :  | OPEN_PAREN formal_param CLOSE_PAREN;
-formal_param :  varlist COLON tbas | varlist COLON tbas SEMICOLON formal_param;
-tbas :  INT | FLOAT;
+defvar : ('VAR' | 'VAR') defvarlist ';';
+defvarlist : varlist '.' tbas | defvarlist ';' varlist '.' tbas;
+varlist : ID | ID ',' varlist;
+defproc :  ('PROCEDURE' | 'procedure') ID formal_paramlist ';' blq ';';
+deffun : ('FUNCTION' | 'function') ID formal_paramlist ':' tbas ';' blq ';';
+formal_paramlist :  | '(' formal_param ')';
+formal_param :  varlist ':' tbas | varlist ':' tbas ';' formal_param;
+tbas :  'INTEGER' | 'REAL' | 'BOOLEAN' | 'CHAR' | 'STRING' |
+        'integer' | 'real' | 'boolean' | 'char' | 'string';
 
 //ZONA DE SENTENCIAS
-sent :  asig SEMICOLON | proc_call SEMICOLON;
-asig :  ID WALRUS exp;
+sent :  asig ';' | proc_call ';';
+asig :  ID ':=' exp;
 exp :  exp op exp | factor;
 op :  oparit;
-oparit :  PLUS | MINUS | TIMES | DIV | MOD;
-factor :  simpvalue | OPEN_PAREN exp CLOSE_PAREN | ID subparamlist;
-subparamlist :    | OPEN_PAREN explist CLOSE_PAREN;
-explist :  exp | exp COMMA explist;
+oparit :  '+' | '-' | '*' | '/' | 'mod' | 'div' | 'MOD' | 'DIV';
+factor :  simpvalue | '(' exp ')' | ID subparamlist;
+subparamlist :    | '(' explist ')';
+explist :  exp | exp ',' explist;
 proc_call :  ID subparamlist;

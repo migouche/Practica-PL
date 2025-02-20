@@ -1,0 +1,11 @@
+program HelloWorld;
+
+function func1(p1 : INTEGER; p2, p3: REAL): INTEGER;
+begin
+    e := p1 + (p2 * p3);
+end;
+
+(* Here the main program block starts *)
+begin
+   PI := 3.13;
+end.
