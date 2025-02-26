@@ -41,15 +41,18 @@ prg : 'PROGRAM' | 'program' ID ';' blq '.' libimport*;
 libimport: 'USES' | ID ';';
 blq : dcllist ('BEGIN' | 'begin') sentlist ('END' | 'end');
 dcllist :  | dcllist dcl ;
-sentlist : sent | sentlist sent;
+sentlist : sent sentlist_p;
+sentlist_p : | sent sentlist_p;
 
 // DECLARACIONES
 dcl : defcte | defvar | defproc | deffun;
 defcte : 'CONST' | 'const' ctelist;
-ctelist : ID '=' simpvalue ';' | ctelist ID '=' simpvalue ';';
+ctelist : ID '=' simpvalue ';' |  ID '=' simpvalue ';' ctelist_p;
+ctelist_p :  | ID '=' simpvalue ';' ctelist_p;
 simpvalue : FLOAT_NUM | INT_NUM | CONSTLIT;
 defvar : ('VAR' | 'VAR') defvarlist ';';
-defvarlist : varlist '.' tbas | defvarlist ';' varlist '.' tbas;
+defvarlist : varlist '.' tbas | ';' varlist '.' tbas defvarlist_p;
+defvarlist_p :  | ';' varlist '.' tbas defvarlist_p;
 varlist : ID | ID ',' varlist;
 defproc :  ('PROCEDURE' | 'procedure') ID formal_paramlist ';' blq ';';
 deffun : ('FUNCTION' | 'function') ID formal_paramlist ':' tbas ';' blq ';';
@@ -61,7 +64,11 @@ tbas :  'INTEGER' | 'REAL' | 'BOOLEAN' | 'CHAR' | 'STRING' |
 //ZONA DE SENTENCIAS
 sent :  asig ';' | proc_call ';';
 asig :  ID ':=' exp;
-exp :  exp op exp | factor;
+// exp :  exp op exp | factor;
+exp : factor exp_p;
+exp_p : op exp exp_p | ;
+
+
 op :  oparit;
 oparit :  '+' | '-' | '*' | '/' | 'mod' | 'div' | 'MOD' | 'DIV';
 factor :  simpvalue | '(' exp ')' | ID subparamlist;

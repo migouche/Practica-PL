@@ -1,4 +1,4 @@
-// Generated from C:/Users/migou/codes/URJC/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+// Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -40,6 +40,12 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSentlist(transpilerParser.SentlistContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link transpilerParser#sentlist_p}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSentlist_p(transpilerParser.Sentlist_pContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link transpilerParser#dcl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -58,6 +64,12 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCtelist(transpilerParser.CtelistContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link transpilerParser#ctelist_p}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCtelist_p(transpilerParser.Ctelist_pContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link transpilerParser#simpvalue}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -75,6 +87,12 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDefvarlist(transpilerParser.DefvarlistContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link transpilerParser#defvarlist_p}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDefvarlist_p(transpilerParser.Defvarlist_pContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link transpilerParser#varlist}.
 	 * @param ctx the parse tree
@@ -129,6 +147,12 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExp(transpilerParser.ExpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link transpilerParser#exp_p}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExp_p(transpilerParser.Exp_pContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link transpilerParser#op}.
 	 * @param ctx the parse tree

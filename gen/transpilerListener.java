@@ -1,4 +1,4 @@
-// Generated from C:/Users/migou/codes/URJC/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+// Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -57,6 +57,16 @@ public interface transpilerListener extends ParseTreeListener {
 	 */
 	void exitSentlist(transpilerParser.SentlistContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link transpilerParser#sentlist_p}.
+	 * @param ctx the parse tree
+	 */
+	void enterSentlist_p(transpilerParser.Sentlist_pContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#sentlist_p}.
+	 * @param ctx the parse tree
+	 */
+	void exitSentlist_p(transpilerParser.Sentlist_pContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link transpilerParser#dcl}.
 	 * @param ctx the parse tree
 	 */
@@ -87,6 +97,16 @@ public interface transpilerListener extends ParseTreeListener {
 	 */
 	void exitCtelist(transpilerParser.CtelistContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link transpilerParser#ctelist_p}.
+	 * @param ctx the parse tree
+	 */
+	void enterCtelist_p(transpilerParser.Ctelist_pContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#ctelist_p}.
+	 * @param ctx the parse tree
+	 */
+	void exitCtelist_p(transpilerParser.Ctelist_pContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link transpilerParser#simpvalue}.
 	 * @param ctx the parse tree
 	 */
@@ -116,6 +136,16 @@ public interface transpilerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDefvarlist(transpilerParser.DefvarlistContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link transpilerParser#defvarlist_p}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefvarlist_p(transpilerParser.Defvarlist_pContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#defvarlist_p}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefvarlist_p(transpilerParser.Defvarlist_pContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link transpilerParser#varlist}.
 	 * @param ctx the parse tree
@@ -206,6 +236,16 @@ public interface transpilerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExp(transpilerParser.ExpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link transpilerParser#exp_p}.
+	 * @param ctx the parse tree
+	 */
+	void enterExp_p(transpilerParser.Exp_pContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#exp_p}.
+	 * @param ctx the parse tree
+	 */
+	void exitExp_p(transpilerParser.Exp_pContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link transpilerParser#op}.
 	 * @param ctx the parse tree

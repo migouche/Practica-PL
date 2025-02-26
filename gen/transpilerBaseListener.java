@@ -1,4 +1,4 @@
-// Generated from C:/Users/migou/codes/URJC/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+// Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -76,6 +76,18 @@ public class transpilerBaseListener implements transpilerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSentlist_p(transpilerParser.Sentlist_pContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSentlist_p(transpilerParser.Sentlist_pContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDcl(transpilerParser.DclContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -112,6 +124,18 @@ public class transpilerBaseListener implements transpilerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCtelist_p(transpilerParser.Ctelist_pContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCtelist_p(transpilerParser.Ctelist_pContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSimpvalue(transpilerParser.SimpvalueContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -143,6 +167,18 @@ public class transpilerBaseListener implements transpilerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDefvarlist(transpilerParser.DefvarlistContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDefvarlist_p(transpilerParser.Defvarlist_pContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDefvarlist_p(transpilerParser.Defvarlist_pContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -251,6 +287,18 @@ public class transpilerBaseListener implements transpilerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExp(transpilerParser.ExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExp_p(transpilerParser.Exp_pContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExp_p(transpilerParser.Exp_pContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
