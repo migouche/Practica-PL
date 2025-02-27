@@ -16,12 +16,6 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrg(transpilerParser.PrgContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link transpilerParser#libimport}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLibimport(transpilerParser.LibimportContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link transpilerParser#blq}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -100,6 +94,12 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVarlist(transpilerParser.VarlistContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link transpilerParser#varlist_p}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarlist_p(transpilerParser.Varlist_pContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link transpilerParser#defproc}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -124,6 +124,12 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFormal_param(transpilerParser.Formal_paramContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link transpilerParser#formal_param_p}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFormal_param_p(transpilerParser.Formal_param_pContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link transpilerParser#tbas}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -136,11 +142,11 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSent(transpilerParser.SentContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link transpilerParser#asig}.
+	 * Visit a parse tree produced by {@link transpilerParser#sent_p}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAsig(transpilerParser.AsigContext ctx);
+	T visitSent_p(transpilerParser.Sent_pContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link transpilerParser#exp}.
 	 * @param ctx the parse tree
@@ -184,9 +190,9 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExplist(transpilerParser.ExplistContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link transpilerParser#proc_call}.
+	 * Visit a parse tree produced by {@link transpilerParser#explist_p}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitProc_call(transpilerParser.Proc_callContext ctx);
+	T visitExplist_p(transpilerParser.Explist_pContext ctx);
 }

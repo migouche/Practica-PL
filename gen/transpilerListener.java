@@ -17,16 +17,6 @@ public interface transpilerListener extends ParseTreeListener {
 	 */
 	void exitPrg(transpilerParser.PrgContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link transpilerParser#libimport}.
-	 * @param ctx the parse tree
-	 */
-	void enterLibimport(transpilerParser.LibimportContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link transpilerParser#libimport}.
-	 * @param ctx the parse tree
-	 */
-	void exitLibimport(transpilerParser.LibimportContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link transpilerParser#blq}.
 	 * @param ctx the parse tree
 	 */
@@ -157,6 +147,16 @@ public interface transpilerListener extends ParseTreeListener {
 	 */
 	void exitVarlist(transpilerParser.VarlistContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link transpilerParser#varlist_p}.
+	 * @param ctx the parse tree
+	 */
+	void enterVarlist_p(transpilerParser.Varlist_pContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#varlist_p}.
+	 * @param ctx the parse tree
+	 */
+	void exitVarlist_p(transpilerParser.Varlist_pContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link transpilerParser#defproc}.
 	 * @param ctx the parse tree
 	 */
@@ -197,6 +197,16 @@ public interface transpilerListener extends ParseTreeListener {
 	 */
 	void exitFormal_param(transpilerParser.Formal_paramContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link transpilerParser#formal_param_p}.
+	 * @param ctx the parse tree
+	 */
+	void enterFormal_param_p(transpilerParser.Formal_param_pContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#formal_param_p}.
+	 * @param ctx the parse tree
+	 */
+	void exitFormal_param_p(transpilerParser.Formal_param_pContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link transpilerParser#tbas}.
 	 * @param ctx the parse tree
 	 */
@@ -217,15 +227,15 @@ public interface transpilerListener extends ParseTreeListener {
 	 */
 	void exitSent(transpilerParser.SentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link transpilerParser#asig}.
+	 * Enter a parse tree produced by {@link transpilerParser#sent_p}.
 	 * @param ctx the parse tree
 	 */
-	void enterAsig(transpilerParser.AsigContext ctx);
+	void enterSent_p(transpilerParser.Sent_pContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link transpilerParser#asig}.
+	 * Exit a parse tree produced by {@link transpilerParser#sent_p}.
 	 * @param ctx the parse tree
 	 */
-	void exitAsig(transpilerParser.AsigContext ctx);
+	void exitSent_p(transpilerParser.Sent_pContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link transpilerParser#exp}.
 	 * @param ctx the parse tree
@@ -297,13 +307,13 @@ public interface transpilerListener extends ParseTreeListener {
 	 */
 	void exitExplist(transpilerParser.ExplistContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link transpilerParser#proc_call}.
+	 * Enter a parse tree produced by {@link transpilerParser#explist_p}.
 	 * @param ctx the parse tree
 	 */
-	void enterProc_call(transpilerParser.Proc_callContext ctx);
+	void enterExplist_p(transpilerParser.Explist_pContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link transpilerParser#proc_call}.
+	 * Exit a parse tree produced by {@link transpilerParser#explist_p}.
 	 * @param ctx the parse tree
 	 */
-	void exitProc_call(transpilerParser.Proc_callContext ctx);
+	void exitExplist_p(transpilerParser.Explist_pContext ctx);
 }

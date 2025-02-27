@@ -28,18 +28,6 @@ public class transpilerBaseListener implements transpilerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLibimport(transpilerParser.LibimportContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitLibimport(transpilerParser.LibimportContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterBlq(transpilerParser.BlqContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -196,6 +184,18 @@ public class transpilerBaseListener implements transpilerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterVarlist_p(transpilerParser.Varlist_pContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVarlist_p(transpilerParser.Varlist_pContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDefproc(transpilerParser.DefprocContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -244,6 +244,18 @@ public class transpilerBaseListener implements transpilerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFormal_param_p(transpilerParser.Formal_param_pContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFormal_param_p(transpilerParser.Formal_param_pContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTbas(transpilerParser.TbasContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -268,13 +280,13 @@ public class transpilerBaseListener implements transpilerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAsig(transpilerParser.AsigContext ctx) { }
+	@Override public void enterSent_p(transpilerParser.Sent_pContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAsig(transpilerParser.AsigContext ctx) { }
+	@Override public void exitSent_p(transpilerParser.Sent_pContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -364,13 +376,13 @@ public class transpilerBaseListener implements transpilerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterProc_call(transpilerParser.Proc_callContext ctx) { }
+	@Override public void enterExplist_p(transpilerParser.Explist_pContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitProc_call(transpilerParser.Proc_callContext ctx) { }
+	@Override public void exitExplist_p(transpilerParser.Explist_pContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
