@@ -227,6 +227,66 @@ public interface transpilerListener extends ParseTreeListener {
 	 */
 	void exitSent(transpilerParser.SentContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link transpilerParser#if_aux}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf_aux(transpilerParser.If_auxContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#if_aux}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf_aux(transpilerParser.If_auxContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link transpilerParser#expcond}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpcond(transpilerParser.ExpcondContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#expcond}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpcond(transpilerParser.ExpcondContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link transpilerParser#expcond_p}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpcond_p(transpilerParser.Expcond_pContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#expcond_p}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpcond_p(transpilerParser.Expcond_pContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link transpilerParser#oplog}.
+	 * @param ctx the parse tree
+	 */
+	void enterOplog(transpilerParser.OplogContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#oplog}.
+	 * @param ctx the parse tree
+	 */
+	void exitOplog(transpilerParser.OplogContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link transpilerParser#opcomp}.
+	 * @param ctx the parse tree
+	 */
+	void enterOpcomp(transpilerParser.OpcompContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#opcomp}.
+	 * @param ctx the parse tree
+	 */
+	void exitOpcomp(transpilerParser.OpcompContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link transpilerParser#inc}.
+	 * @param ctx the parse tree
+	 */
+	void enterInc(transpilerParser.IncContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#inc}.
+	 * @param ctx the parse tree
+	 */
+	void exitInc(transpilerParser.IncContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link transpilerParser#sent_p}.
 	 * @param ctx the parse tree
 	 */

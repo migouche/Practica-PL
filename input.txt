@@ -1,24 +1,23 @@
-{declaracion de función CON parámetros}
-FUNCTION fun1 ( a:INTEGER ; b:REAL ) : INTEGER
-BEGIN
+(* Ejemplo 1: Programa simple con if-then-else *)
+program CondicionesSimples;
+var
+  a, b, c: INTEGER;
+begin
+  a := 5;
+  b := 10;
+  c := 15;
 
-proc2; {llamada de procedimiento}
-END;
-{declaración de función SIN parámetros}
-FUNCTION fun2 : REAL
-BEGIN
+  if a < b then
+    writeln('a es menor que b');
 
-proc1(1.3 , -4); {llamada de procedimiento}
-END;
-{declaración de procedimiento CON parámetros}
-PROCEDURE proc1 ( c:REAL ; d:INTEGER )
-BEGIN
+  if (a < b) and (b < c) then
+    begin
+      a := a + 1;
+      writeln('a fue incrementado');
+    end;  (* Se agregó el punto y coma aquí *)
 
-valor := fun1(1 , 1.0); {llamada de funcion}
-END
-{declaración de procedimiento SIN parámetros}
-PROCEDURE proc2
-BEGIN
-
-valor := fun2; {llamada de funcion}
-END
+  if not (a > b) then
+    writeln('a no es mayor que b')
+  else
+    writeln('a es mayor que b');
+end.
