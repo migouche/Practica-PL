@@ -7,7 +7,7 @@ options {
 
 
 //############################################
-//           REGLAS SINTACTICAS
+//           REGLAS LEXICAS
 //############################################
 
 fragment IDENTIFIER_START: [a-zA-Z];
@@ -40,13 +40,11 @@ MULTILINE_COMMENT : '(*' .*? '*)' -> skip;
 //############################################
 
 //--PROGRAMA--
-prg : ('PROGRAM' | 'program') ID ';'  blq '.';
+prg : ('PROGRAM' | 'program') ID ';'  blq '.' |  'unit' ID ';' dcllist '.';
 blq : dcllist ('BEGIN' | 'begin') sentlist ('END' | 'end');
 dcllist :  | dcl dcllist ;
 sentlist : sent sentlist_p;
 sentlist_p : | sent sentlist_p;
-
-
 
 
 //--DECLARACIONES--
@@ -56,8 +54,8 @@ ctelist : ID '=' simpvalue ';' ctelist_p;
 ctelist_p :  | ID '=' simpvalue ';' ctelist_p;
 simpvalue : FLOAT_NUM | INT_NUM | CONSTLIT;
 defvar : ('VAR' | 'var') defvarlist ';';
-defvarlist : varlist '.' tbas defvarlist_p;
-defvarlist_p :  | ';' varlist '.' tbas defvarlist_p;
+defvarlist : varlist ':' tbas defvarlist_p;
+defvarlist_p :  | ';' varlist ':' tbas defvarlist_p;
 varlist : ID varlist_p;
 varlist_p :  | ',' ID varlist_p;
 defproc :  ('PROCEDURE' | 'procedure') ID formal_paramlist ';' blq ';';
