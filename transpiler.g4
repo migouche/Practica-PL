@@ -40,11 +40,14 @@ MULTILINE_COMMENT : '(*' .*? '*)' -> skip;
 //############################################
 
 //--PROGRAMA--
-prg : ('PROGRAM' | 'program') ID ';' blq '.';
+prg : ('PROGRAM' | 'program') ID ';'  blq '.';
 blq : dcllist ('BEGIN' | 'begin') sentlist ('END' | 'end');
 dcllist :  | dcl dcllist ;
 sentlist : sent sentlist_p;
 sentlist_p : | sent sentlist_p;
+
+
+
 
 //--DECLARACIONES--
 dcl : defcte | defvar | defproc | deffun;
@@ -67,17 +70,24 @@ tbas :  'INTEGER' | 'REAL' | 'BOOLEAN' | 'CHAR' | 'STRING' |
 
 //--ZONA DE SENTENCIAS--
 
-//Tengo que mirarlo: original ->
-//sent ::= asig ";" | proc_call ";"
-//asig ::= ID ":=" exp
-//exp ::= exp op exp | factor
-sent : ID sent_p ';';
-sent_p : subparamlist | ':=' exp;
+sent :'if' expcond 'then' blq 'else' blq
+| 'while' expcond 'do' blq
+| 'repeat' blq 'until' expcond ';'
+| 'for' ID ':=' exp inc exp 'do' blq
+| ID sent_p ';';
+
+expcond : factor expcond_p;
+expcond_p :  | op factor expcond_p;
+oplog : 'or' | 'and';
+opcomp : '<' | '>' | '<=' | '>=' | '=';
+
+inc : 'to' | 'downto';
+sent_p :subparamlist | ':=' exp ;
 exp   : factor exp_p;
 exp_p :  | op factor exp_p;
-op :  oparit; //esto es absurdo, no se quita por la parte opcional, será necesario porque hay más tipos de 'op'
+op :  oparit | opcomp | oplog; //esto es absurdo, no se quita por la parte opcional, será necesario porque hay más tipos de 'op'
 oparit :  '+' | '-' | '*' | '/' | 'mod' | 'div' | 'MOD' | 'DIV';
-factor :  simpvalue | '(' exp ')' | ID subparamlist;
+factor :  simpvalue | '(' exp ')' | ID subparamlist | 'not' factor;
 subparamlist :    | '(' explist ')';
 explist :  exp explist_p;
-explist_p :  | ',' exp explist_p;
+explist_p :  | ',' exp explist_p;//oplog ::= "or" | "and"

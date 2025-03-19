@@ -227,16 +227,6 @@ public interface transpilerListener extends ParseTreeListener {
 	 */
 	void exitSent(transpilerParser.SentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link transpilerParser#if_aux}.
-	 * @param ctx the parse tree
-	 */
-	void enterIf_aux(transpilerParser.If_auxContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link transpilerParser#if_aux}.
-	 * @param ctx the parse tree
-	 */
-	void exitIf_aux(transpilerParser.If_auxContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link transpilerParser#expcond}.
 	 * @param ctx the parse tree
 	 */
