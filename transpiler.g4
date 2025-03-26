@@ -19,14 +19,15 @@ PROCEDURE: 'PROCEDURE' | 'procedure';
 FUNCTION : 'FUNCTION' | 'function';
 VAR : 'VAR' | 'var';
 
+OPARIT :  '+' | '-' | '*' | '/' | 'mod' | 'div' | 'MOD' | 'DIV';
+OPLOG : 'or' | 'and';
+OPCOMP : '<' | '>' | '<=' | '>=' | '=';
+
 //--PARTE OPCIONAL--
 TBAS :  'INTEGER' | 'REAL' | 'BOOLEAN' | 'CHAR' | 'STRING' |
         'integer' | 'real' | 'boolean' | 'char' | 'string';
 INC : 'to' | 'downto';
-
-
-
-
+UNIT : 'unit' | 'UNIT';
 
 fragment IDENTIFIER_START: [a-zA-Z];
 fragment IDENTIFIER_PART: [a-zA-Z_0-9];
@@ -54,14 +55,12 @@ ONE_LINE_COMMENT : '{' ~('}')* '}' -> skip;
 MULTILINE_COMMENT : '(*' .*? '*)' -> skip;
 
 
-
-
 //############################################
 //ESPECIFICACION SINTATICA DEL LENGUAJE FUENTE
 //############################################
 
 //--PROGRAMA--
-prg : PROGRAM ID ';' blq '.';
+prg : PROGRAM ID ';' blq '.' | UNIT ID ';' dcllist '.' ;
 blq : dcllist BEGIN sentlist END;
 dcllist :  | dcl dcllist ;
 sentlist : sent_master sentlist_p;
@@ -102,18 +101,15 @@ sent_p : subparamlist | ':=' exp; //Incluye el proc_call y el asig, para evitar 
 
 exp : factor exp_p;
 exp_p :  | op factor exp_p;
-op :  oparit | oplog | opcomp;
-oparit :  '+' | '-' | '*' | '/' | 'mod' | 'div' | 'MOD' | 'DIV';
-oplog : 'or' | 'and';
-opcomp : '<' | '>' | '<=' | '>=' | '=';
+op :  OPARIT | OPLOG | OPCOMP;
 factor :  simpvalue | '(' exp ')' | ID subparamlist;
 subparamlist :    | '(' explist ')';
 explist :  exp explist_p;
 explist_p :  | ',' exp explist_p;
 
 expcond : factorcond expcond_p;
-expcond_p :  | oplog factorcond expcond_p;
-factorcond: exp op exp | '(' exp ')' | 'not' factorcond;
+expcond_p :  | OPLOG factorcond expcond_p;
+factorcond: exp op exp | '(' exp ')' | 'not' factorcond; //HAY QUE METERLO EN FACTOR
 
 //--SENTENCIAS CONTROL DE FLUJO--
 

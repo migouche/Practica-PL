@@ -190,24 +190,6 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOp(transpilerParser.OpContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link transpilerParser#oparit}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOparit(transpilerParser.OparitContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link transpilerParser#oplog}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOplog(transpilerParser.OplogContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link transpilerParser#opcomp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOpcomp(transpilerParser.OpcompContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link transpilerParser#factor}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
