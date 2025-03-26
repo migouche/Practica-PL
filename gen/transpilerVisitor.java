@@ -130,17 +130,41 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFormal_param_p(transpilerParser.Formal_param_pContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link transpilerParser#tbas}.
+	 * Visit a parse tree produced by {@link transpilerParser#sent_master}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTbas(transpilerParser.TbasContext ctx);
+	T visitSent_master(transpilerParser.Sent_masterContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link transpilerParser#sent}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitSent(transpilerParser.SentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link transpilerParser#if}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf(transpilerParser.IfContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link transpilerParser#while}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhile(transpilerParser.WhileContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link transpilerParser#repeat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRepeat(transpilerParser.RepeatContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link transpilerParser#for}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFor(transpilerParser.ForContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link transpilerParser#sent_p}.
 	 * @param ctx the parse tree

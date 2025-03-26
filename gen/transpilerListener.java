@@ -207,15 +207,15 @@ public interface transpilerListener extends ParseTreeListener {
 	 */
 	void exitFormal_param_p(transpilerParser.Formal_param_pContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link transpilerParser#tbas}.
+	 * Enter a parse tree produced by {@link transpilerParser#sent_master}.
 	 * @param ctx the parse tree
 	 */
-	void enterTbas(transpilerParser.TbasContext ctx);
+	void enterSent_master(transpilerParser.Sent_masterContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link transpilerParser#tbas}.
+	 * Exit a parse tree produced by {@link transpilerParser#sent_master}.
 	 * @param ctx the parse tree
 	 */
-	void exitTbas(transpilerParser.TbasContext ctx);
+	void exitSent_master(transpilerParser.Sent_masterContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link transpilerParser#sent}.
 	 * @param ctx the parse tree
@@ -226,6 +226,46 @@ public interface transpilerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSent(transpilerParser.SentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link transpilerParser#if}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf(transpilerParser.IfContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#if}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf(transpilerParser.IfContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link transpilerParser#while}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhile(transpilerParser.WhileContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#while}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhile(transpilerParser.WhileContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link transpilerParser#repeat}.
+	 * @param ctx the parse tree
+	 */
+	void enterRepeat(transpilerParser.RepeatContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#repeat}.
+	 * @param ctx the parse tree
+	 */
+	void exitRepeat(transpilerParser.RepeatContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link transpilerParser#for}.
+	 * @param ctx the parse tree
+	 */
+	void enterFor(transpilerParser.ForContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#for}.
+	 * @param ctx the parse tree
+	 */
+	void exitFor(transpilerParser.ForContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link transpilerParser#sent_p}.
 	 * @param ctx the parse tree

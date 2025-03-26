@@ -256,13 +256,13 @@ public class transpilerBaseListener implements transpilerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTbas(transpilerParser.TbasContext ctx) { }
+	@Override public void enterSent_master(transpilerParser.Sent_masterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTbas(transpilerParser.TbasContext ctx) { }
+	@Override public void exitSent_master(transpilerParser.Sent_masterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -275,6 +275,54 @@ public class transpilerBaseListener implements transpilerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSent(transpilerParser.SentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIf(transpilerParser.IfContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIf(transpilerParser.IfContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterWhile(transpilerParser.WhileContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitWhile(transpilerParser.WhileContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRepeat(transpilerParser.RepeatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRepeat(transpilerParser.RepeatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFor(transpilerParser.ForContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFor(transpilerParser.ForContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

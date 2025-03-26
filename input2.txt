@@ -11,10 +11,16 @@ begin
   y := 3.5;
 
   if (a < b) and (x < y) then
+  begin
     writeln('Primera condición verdadera');
+  end
+  else begin writeln('no'); end
 
   if (a > b) or (c > a) then
+  begin
     writeln('Segunda condición verdadera');
+    end
+  else begin writeln('no'); end
 
   if not((a > b) and (c < a)) then
   begin
@@ -29,7 +35,10 @@ begin
   end  (* Aquí falta el end para cerrar correctamente el else *)
 
   if (a < b) and ((c > a) or (x < y)) then
+  begin
     writeln('Condición compleja verdadera');
+    end
+  else begin writeln('no'); end
 
   (* Bucle while que incrementa 'a' hasta que sea mayor que 'b' *)
   while a < b do

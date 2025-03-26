@@ -10,6 +10,24 @@ options {
 //           REGLAS LEXICAS
 //############################################
 
+//--RESERVED WORDS--
+PROGRAM : 'PROGRAM' | 'program';
+BEGIN : 'BEGIN' | 'begin';
+END : 'END' | 'end';
+CONST: 'CONST' | 'const';
+PROCEDURE: 'PROCEDURE' | 'procedure';
+FUNCTION : 'FUNCTION' | 'function';
+VAR : 'VAR' | 'var';
+
+//--PARTE OPCIONAL--
+TBAS :  'INTEGER' | 'REAL' | 'BOOLEAN' | 'CHAR' | 'STRING' |
+        'integer' | 'real' | 'boolean' | 'char' | 'string';
+INC : 'to' | 'downto';
+
+
+
+
+
 fragment IDENTIFIER_START: [a-zA-Z];
 fragment IDENTIFIER_PART: [a-zA-Z_0-9];
 
@@ -35,14 +53,8 @@ CONSTLIT: '\'' ('\\\''|~['])+ '\'';
 ONE_LINE_COMMENT : '{' ~('}')* '}' -> skip;
 MULTILINE_COMMENT : '(*' .*? '*)' -> skip;
 
-//--RESERVED WORDS--
-PROGRAM : 'PROGRAM' | 'program';
-BEGIN : 'BEGIN' | 'begin';
-END : 'END' | 'end';
-CONST: 'CONST' | 'const';
-PROCEDURE: 'PROCEDURE' | 'procedure';
-FUNCTION : 'FUNCTION' | 'function';
-VAR : 'VAR' | 'var';
+
+
 
 //############################################
 //ESPECIFICACION SINTATICA DEL LENGUAJE FUENTE
@@ -52,8 +64,8 @@ VAR : 'VAR' | 'var';
 prg : PROGRAM ID ';' blq '.';
 blq : dcllist BEGIN sentlist END;
 dcllist :  | dcl dcllist ;
-sentlist : sent sentlist_p;
-sentlist_p : | sent sentlist_p;
+sentlist : sent_master sentlist_p;
+sentlist_p : | sent_master sentlist_p;
 
 //--DECLARACIONES--
 dcl : defcte | defvar | defproc | deffun;
@@ -63,24 +75,32 @@ ctelist_p :  | ID '=' simpvalue ';' ctelist_p;
 simpvalue : CONSTREAL | CONSTINT | CONSTLIT;
 defvar : VAR defvarlist ';';
 /*
-defvarlist ::= varlist ":" tbas | defvarlist ";" varlist ":" tbas
+defvarlist ::= varlist ":" TBAS | defvarlist ";" varlist ":" TBAS
 */
-defvarlist : varlist ':' tbas defvarlist_p;
-defvarlist_p :  | ';' varlist ':' tbas defvarlist_p;
+defvarlist : varlist ':' TBAS defvarlist_p;
+defvarlist_p :  | ';' varlist ':' TBAS defvarlist_p;
 varlist : ID varlist_p;
 varlist_p :  | ',' ID varlist_p;
 defproc :  PROCEDURE ID formal_paramlist ';' blq ';';
-deffun : FUNCTION ID formal_paramlist ':' tbas ';' blq ';';
+deffun : FUNCTION ID formal_paramlist ':' TBAS ';' blq ';';
 formal_paramlist :  | '(' formal_param ')';
-formal_param :  varlist ':' tbas formal_param_p;
-formal_param_p :  | ';' varlist ':' tbas formal_param_p;
-tbas :  'INTEGER' | 'REAL' | 'BOOLEAN' | 'CHAR' | 'STRING' |
-        'integer' | 'real' | 'boolean' | 'char' | 'string';
+formal_param :  varlist ':' TBAS formal_param_p;
+formal_param_p :  | ';' varlist ':' TBAS formal_param_p;
+
 
 //--ZONA DE SENTENCIAS--
+
+sent_master: if | while | repeat | for |sent;
+
 sent : ID sent_p ';';
+if: 'if' expcond 'then' blq 'else' blq;
+while : 'while' expcond 'do' blq;
+repeat : 'repeat' blq 'until' expcond ';';
+for : 'for' ID ':=' exp INC exp 'do' blq;
+
 sent_p : subparamlist | ':=' exp; //Incluye el proc_call y el asig, para evitar no determinismo
-exp   : factor exp_p;
+
+exp : factor exp_p;
 exp_p :  | op factor exp_p;
 op :  oparit | oplog | opcomp;
 oparit :  '+' | '-' | '*' | '/' | 'mod' | 'div' | 'MOD' | 'DIV';
@@ -91,7 +111,7 @@ subparamlist :    | '(' explist ')';
 explist :  exp explist_p;
 explist_p :  | ',' exp explist_p;
 
-expcond : factorcond oplog factorcond expcond_p;
+expcond : factorcond expcond_p;
 expcond_p :  | oplog factorcond expcond_p;
 factorcond: exp op exp | '(' exp ')' | 'not' factorcond;
 
@@ -105,4 +125,8 @@ sent ::= ...
 | "for" ID ":=" exp inc exp "do" blq
 inc ::= "to" | "downto"
 */
+
+
+
+
 
