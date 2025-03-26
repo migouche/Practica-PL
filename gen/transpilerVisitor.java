@@ -1,4 +1,4 @@
-// Generated from C:/Users/migou/codes/URJC/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+// Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -142,42 +142,6 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSent(transpilerParser.SentContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link transpilerParser#if_aux}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIf_aux(transpilerParser.If_auxContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link transpilerParser#expcond}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpcond(transpilerParser.ExpcondContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link transpilerParser#expcond_p}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpcond_p(transpilerParser.Expcond_pContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link transpilerParser#oplog}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOplog(transpilerParser.OplogContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link transpilerParser#opcomp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOpcomp(transpilerParser.OpcompContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link transpilerParser#inc}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInc(transpilerParser.IncContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link transpilerParser#sent_p}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -208,6 +172,18 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOparit(transpilerParser.OparitContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link transpilerParser#oplog}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOplog(transpilerParser.OplogContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link transpilerParser#opcomp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOpcomp(transpilerParser.OpcompContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link transpilerParser#factor}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -231,4 +207,22 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExplist_p(transpilerParser.Explist_pContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link transpilerParser#expcond}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpcond(transpilerParser.ExpcondContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link transpilerParser#expcond_p}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpcond_p(transpilerParser.Expcond_pContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link transpilerParser#factorcond}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFactorcond(transpilerParser.FactorcondContext ctx);
 }

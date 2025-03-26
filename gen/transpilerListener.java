@@ -1,4 +1,4 @@
-// Generated from C:/Users/migou/codes/URJC/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+// Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -227,66 +227,6 @@ public interface transpilerListener extends ParseTreeListener {
 	 */
 	void exitSent(transpilerParser.SentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link transpilerParser#if_aux}.
-	 * @param ctx the parse tree
-	 */
-	void enterIf_aux(transpilerParser.If_auxContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link transpilerParser#if_aux}.
-	 * @param ctx the parse tree
-	 */
-	void exitIf_aux(transpilerParser.If_auxContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link transpilerParser#expcond}.
-	 * @param ctx the parse tree
-	 */
-	void enterExpcond(transpilerParser.ExpcondContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link transpilerParser#expcond}.
-	 * @param ctx the parse tree
-	 */
-	void exitExpcond(transpilerParser.ExpcondContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link transpilerParser#expcond_p}.
-	 * @param ctx the parse tree
-	 */
-	void enterExpcond_p(transpilerParser.Expcond_pContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link transpilerParser#expcond_p}.
-	 * @param ctx the parse tree
-	 */
-	void exitExpcond_p(transpilerParser.Expcond_pContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link transpilerParser#oplog}.
-	 * @param ctx the parse tree
-	 */
-	void enterOplog(transpilerParser.OplogContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link transpilerParser#oplog}.
-	 * @param ctx the parse tree
-	 */
-	void exitOplog(transpilerParser.OplogContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link transpilerParser#opcomp}.
-	 * @param ctx the parse tree
-	 */
-	void enterOpcomp(transpilerParser.OpcompContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link transpilerParser#opcomp}.
-	 * @param ctx the parse tree
-	 */
-	void exitOpcomp(transpilerParser.OpcompContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link transpilerParser#inc}.
-	 * @param ctx the parse tree
-	 */
-	void enterInc(transpilerParser.IncContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link transpilerParser#inc}.
-	 * @param ctx the parse tree
-	 */
-	void exitInc(transpilerParser.IncContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link transpilerParser#sent_p}.
 	 * @param ctx the parse tree
 	 */
@@ -337,6 +277,26 @@ public interface transpilerListener extends ParseTreeListener {
 	 */
 	void exitOparit(transpilerParser.OparitContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link transpilerParser#oplog}.
+	 * @param ctx the parse tree
+	 */
+	void enterOplog(transpilerParser.OplogContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#oplog}.
+	 * @param ctx the parse tree
+	 */
+	void exitOplog(transpilerParser.OplogContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link transpilerParser#opcomp}.
+	 * @param ctx the parse tree
+	 */
+	void enterOpcomp(transpilerParser.OpcompContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#opcomp}.
+	 * @param ctx the parse tree
+	 */
+	void exitOpcomp(transpilerParser.OpcompContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link transpilerParser#factor}.
 	 * @param ctx the parse tree
 	 */
@@ -376,4 +336,34 @@ public interface transpilerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExplist_p(transpilerParser.Explist_pContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link transpilerParser#expcond}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpcond(transpilerParser.ExpcondContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#expcond}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpcond(transpilerParser.ExpcondContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link transpilerParser#expcond_p}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpcond_p(transpilerParser.Expcond_pContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#expcond_p}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpcond_p(transpilerParser.Expcond_pContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link transpilerParser#factorcond}.
+	 * @param ctx the parse tree
+	 */
+	void enterFactorcond(transpilerParser.FactorcondContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#factorcond}.
+	 * @param ctx the parse tree
+	 */
+	void exitFactorcond(transpilerParser.FactorcondContext ctx);
 }
