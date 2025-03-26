@@ -157,13 +157,6 @@ public class transpilerBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSent_master(transpilerParser.Sent_masterContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitSent(transpilerParser.SentContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

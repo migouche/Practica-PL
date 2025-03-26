@@ -207,16 +207,6 @@ public interface transpilerListener extends ParseTreeListener {
 	 */
 	void exitFormal_param_p(transpilerParser.Formal_param_pContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link transpilerParser#sent_master}.
-	 * @param ctx the parse tree
-	 */
-	void enterSent_master(transpilerParser.Sent_masterContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link transpilerParser#sent_master}.
-	 * @param ctx the parse tree
-	 */
-	void exitSent_master(transpilerParser.Sent_masterContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link transpilerParser#sent}.
 	 * @param ctx the parse tree
 	 */

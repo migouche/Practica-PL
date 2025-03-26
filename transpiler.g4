@@ -63,8 +63,8 @@ MULTILINE_COMMENT : '(*' .*? '*)' -> skip;
 prg : PROGRAM ID ';' blq '.' | UNIT ID ';' dcllist '.' ;
 blq : dcllist BEGIN sentlist END;
 dcllist :  | dcl dcllist ;
-sentlist : sent_master sentlist_p;
-sentlist_p : | sent_master sentlist_p;
+sentlist : sent sentlist_p;
+sentlist_p : | sent sentlist_p;
 
 //--DECLARACIONES--
 dcl : defcte | defvar | defproc | deffun;
@@ -88,15 +88,11 @@ formal_param_p :  | ';' varlist ':' TBAS formal_param_p;
 
 
 //--ZONA DE SENTENCIAS--
-
-sent_master: if | while | repeat | for |sent;
-
-sent : ID sent_p ';';
+sent: if | while | repeat | for |ID sent_p ';';
 if: 'if' expcond 'then' blq 'else' blq;
 while : 'while' expcond 'do' blq;
 repeat : 'repeat' blq 'until' expcond ';';
 for : 'for' ID ':=' exp INC exp 'do' blq;
-
 sent_p : subparamlist | ':=' exp; //Incluye el proc_call y el asig, para evitar no determinismo
 
 exp : factor exp_p;
@@ -114,12 +110,7 @@ factorcond: exp op exp | '(' exp ')' | 'not' factorcond; //HAY QUE METERLO EN FA
 //--SENTENCIAS CONTROL DE FLUJO--
 
 /*
-sent ::= ...
-| "if" expcond "then" blq "else" blq
-| "while" expcond "do" blq
-| "repeat" blq "until" expcond ";"
-| "for" ID ":=" exp inc exp "do" blq
-inc ::= "to" | "downto"
+prg ::= … | "unit" ID ";" dcllist "."
 */
 
 
