@@ -2312,9 +2312,7 @@ public class transpilerParser extends Parser {
 		public ExpContext exp(int i) {
 			return getRuleContext(ExpContext.class,i);
 		}
-		public OpContext op() {
-			return getRuleContext(OpContext.class,0);
-		}
+		public TerminalNode OPCOMP() { return getToken(transpilerParser.OPCOMP, 0); }
 		public FactorcondContext factorcond() {
 			return getRuleContext(FactorcondContext.class,0);
 		}
@@ -2350,7 +2348,7 @@ public class transpilerParser extends Parser {
 				setState(286);
 				exp();
 				setState(287);
-				op();
+				match(OPCOMP);
 				setState(288);
 				exp();
 				}
@@ -2556,14 +2554,14 @@ public class transpilerParser extends Parser {
 		"\u0000\u0118\u0119\u0005\u001a\u0000\u0000\u0119\u011a\u0003F#\u0000\u011a"+
 		"\u011b\u0003D\"\u0000\u011b\u011d\u0001\u0000\u0000\u0000\u011c\u0117"+
 		"\u0001\u0000\u0000\u0000\u011c\u0118\u0001\u0000\u0000\u0000\u011dE\u0001"+
-		"\u0000\u0000\u0000\u011e\u011f\u00034\u001a\u0000\u011f\u0120\u00038\u001c"+
-		"\u0000\u0120\u0121\u00034\u001a\u0000\u0121\u0129\u0001\u0000\u0000\u0000"+
-		"\u0122\u0123\u0005\u0006\u0000\u0000\u0123\u0124\u00034\u001a\u0000\u0124"+
-		"\u0125\u0005\u0007\u0000\u0000\u0125\u0129\u0001\u0000\u0000\u0000\u0126"+
-		"\u0127\u0005\u0011\u0000\u0000\u0127\u0129\u0003F#\u0000\u0128\u011e\u0001"+
-		"\u0000\u0000\u0000\u0128\u0122\u0001\u0000\u0000\u0000\u0128\u0126\u0001"+
-		"\u0000\u0000\u0000\u0129G\u0001\u0000\u0000\u0000\u0011T_hn\u0080\u0094"+
-		"\u009d\u00b4\u00c2\u00cc\u00ec\u00f6\u0101\u0108\u0112\u011c\u0128";
+		"\u0000\u0000\u0000\u011e\u011f\u00034\u001a\u0000\u011f\u0120\u0005\u001b"+
+		"\u0000\u0000\u0120\u0121\u00034\u001a\u0000\u0121\u0129\u0001\u0000\u0000"+
+		"\u0000\u0122\u0123\u0005\u0006\u0000\u0000\u0123\u0124\u00034\u001a\u0000"+
+		"\u0124\u0125\u0005\u0007\u0000\u0000\u0125\u0129\u0001\u0000\u0000\u0000"+
+		"\u0126\u0127\u0005\u0011\u0000\u0000\u0127\u0129\u0003F#\u0000\u0128\u011e"+
+		"\u0001\u0000\u0000\u0000\u0128\u0122\u0001\u0000\u0000\u0000\u0128\u0126"+
+		"\u0001\u0000\u0000\u0000\u0129G\u0001\u0000\u0000\u0000\u0011T_hn\u0080"+
+		"\u0094\u009d\u00b4\u00c2\u00cc\u00ec\u00f6\u0101\u0108\u0112\u011c\u0128";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -102,18 +102,6 @@ factor :  simpvalue | '(' exp ')' | ID subparamlist;
 subparamlist :    | '(' explist ')';
 explist :  exp explist_p;
 explist_p :  | ',' exp explist_p;
-
 expcond : factorcond expcond_p;
 expcond_p :  | OPLOG factorcond expcond_p;
-factorcond: exp op exp | '(' exp ')' | 'not' factorcond; //HAY QUE METERLO EN FACTOR
-
-//--SENTENCIAS CONTROL DE FLUJO--
-
-/*
-prg ::= … | "unit" ID ";" dcllist "."
-*/
-
-
-
-
-
+factorcond: exp OPCOMP exp | '(' exp ')' | 'not' factorcond; //HAY QUE METERLO EN FACTOR
