@@ -89,7 +89,8 @@ formal_param_p :  | ';' varlist ':' TBAS formal_param_p;
 
 //--ZONA DE SENTENCIAS--
 sent: if | while | repeat | for |ID sent_p ';';
-if: 'if' expcond 'then' blq 'else' blq;
+if: 'if' expcond 'then' blq if_p;
+if_p :  | 'else' blq;
 while : 'while' expcond 'do' blq;
 repeat : 'repeat' blq 'until' expcond ';';
 for : 'for' ID ':=' exp INC exp 'do' blq;
