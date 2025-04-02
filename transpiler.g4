@@ -105,4 +105,4 @@ explist :  exp explist_p;
 explist_p :  | ',' exp explist_p;
 expcond : factorcond expcond_p;
 expcond_p :  | OPLOG factorcond expcond_p;
-factorcond: exp OPCOMP exp | '(' exp ')' | 'not' factorcond; //HAY QUE METERLO EN FACTOR
+factorcond: exp OPCOMP exp | '(' exp ')' | 'not' factorcond;

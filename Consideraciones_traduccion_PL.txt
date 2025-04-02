@@ -1,0 +1,25 @@
+@parser:members{
+	int contador;
+	Function func;
+	public ParserMiniPascalv11(..., int count){
+	contador = count;
+	...
+	}
+}
+
+
+
+public class Function(){
+	String nombre;
+	String tipo;
+	String retorno;
+	ArrayList<String> params;
+
+public function(String nombre, String tipo, String retorno, ArrayList<String> params )
+}
+
+
+FUNCTION:  "function" ID formal_paramlist ':' tbas ';' blq';' {func = new Function($ID.text, $tbas.vlex, ...);};
+
+tbas returns [String vlex]: 'INTEGER' {$vlex = "int";} | 'REAL' {$vlex = "float";} ;
+		↑ (puede ser de distintos valores, puede devolver incluso un Function)
