@@ -25,12 +25,13 @@ public class Combinator {
     public String createFunction(String ID,String formal_paramlist, String tbas, String blq){
         String result;
         result = tbas;
+        result += " " + ID + " ";
         if(formal_paramlist.equals("")){
             result += "( void )";
         }else{
             result += formal_paramlist;
         }
-        result += "\n{\n";
+        result += "{\n";
         result += blq;
         result += "\n}";
         return result;
@@ -51,7 +52,7 @@ public class Combinator {
         result = tbas;
         result += " ";
         result += varlist;
-        result += ";\n";
+        //result += ";\n";
         return result;
     }
 }

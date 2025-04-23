@@ -6,6 +6,11 @@ const
 var
   a, b, c: INTEGER;
   f: REAL;
+
+  function fun1 ( a:INTEGER ; b:REAL ) : INTEGER;
+    begin
+    proc2;
+    end;
 begin
   a := 5;
   b := 10;
