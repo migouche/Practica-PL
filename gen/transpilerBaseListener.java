@@ -256,6 +256,18 @@ public class transpilerBaseListener implements transpilerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTbas(transpilerParser.TbasContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTbas(transpilerParser.TbasContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSent(transpilerParser.SentContext ctx) { }
 	/**
 	 * {@inheritDoc}

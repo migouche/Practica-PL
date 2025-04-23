@@ -130,6 +130,12 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFormal_param_p(transpilerParser.Formal_param_pContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link transpilerParser#tbas}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTbas(transpilerParser.TbasContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link transpilerParser#sent}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

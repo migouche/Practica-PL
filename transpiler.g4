@@ -1,9 +1,13 @@
 grammar transpiler;
 
-/*
-options {
-    caseInsensitive = true;
-} */
+@parser :: members{
+    private Combinator combinator = new Combinator();
+
+    public void printAtEnd(){
+        System.out.println(combinator.toString());
+    }
+
+}
 
 
 //############################################
@@ -24,8 +28,6 @@ OPLOG : 'or' | 'and';
 OPCOMP : '<' | '>' | '<=' | '>=' | '=';
 
 //--PARTE OPCIONAL--
-TBAS :  'INTEGER' | 'REAL' | 'BOOLEAN' | 'CHAR' | 'STRING' |
-        'integer' | 'real' | 'boolean' | 'char' | 'string';
 INC : 'to' | 'downto';
 UNIT : 'unit' | 'UNIT';
 
@@ -60,31 +62,31 @@ MULTILINE_COMMENT : '(*' .*? '*)' -> skip;
 //############################################
 
 //--PROGRAMA--
-prg : PROGRAM ID ';' blq '.' | UNIT ID ';' dcllist '.' ;
-blq : dcllist BEGIN sentlist END;
-dcllist :  | dcl dcllist ;
-sentlist : sent sentlist_p;
+prg : PROGRAM ID ';' blq '.' {combinator.addToCombinator($ID.text + $blq.v); printAtEnd();} | UNIT ID ';' dcllist '.' {combinator.addToCombinator($ID.text + $dcllist.v); printAtEnd();};
+blq returns [String v] : dcllist BEGIN sentlist END {$v ="blq";};
+dcllist returns [String v] :  | dcl dcllist ;
+sentlist returns [String v] : sent sentlist_p;
 sentlist_p : | sent sentlist_p;
 
 //--DECLARACIONES--
 dcl : defcte | defvar | defproc | deffun;
-defcte : CONST ctelist;
-ctelist : ID '=' simpvalue ';' ctelist_p;
-ctelist_p :  | ID '=' simpvalue ';' ctelist_p;
-simpvalue : CONSTREAL | CONSTINT | CONSTLIT;
+defcte returns [String v] : CONST ctelist {$v= $ctelist.v; System.out.print($ctelist.v);};
+ctelist returns [String v] : ID '=' simpvalue ';' ctelist_p {$v = combinator.createConst($ID.text, $simpvalue.v) +  $ctelist_p.v;};
+ctelist_p returns [String v] : {$v= "";} | ID '=' simpvalue ';' ctelist_p{$v = combinator.createConst($ID.text, $simpvalue.v) +  $ctelist_p.v;};
+simpvalue returns [String v] : CONSTREAL {$v= $CONSTREAL.text;} | CONSTINT {$v= $CONSTINT.text;}| CONSTLIT {$v= $CONSTLIT.text;};
 defvar : VAR defvarlist ';';
-/*
-defvarlist ::= varlist ":" TBAS | defvarlist ";" varlist ":" TBAS
-*/
-defvarlist : varlist ':' TBAS defvarlist_p;
-defvarlist_p :  | ';' varlist ':' TBAS defvarlist_p;
-varlist : ID varlist_p;
-varlist_p :  | ',' ID varlist_p;
+
+
+defvarlist : varlist ':' tbas defvarlist_p;
+defvarlist_p :  | ';' varlist ':' tbas defvarlist_p;
+varlist returns[String v] : ID varlist_p {$v= $ID.text + $varlist_p.v;};
+varlist_p returns[String v]: {$v= "";} | ',' ID varlist_p {$v= "," + $ID.text + $varlist_p.v;};
 defproc :  PROCEDURE ID formal_paramlist ';' blq ';';
-deffun : FUNCTION ID formal_paramlist ':' TBAS ';' blq ';';
-formal_paramlist :  | '(' formal_param ')';
-formal_param :  varlist ':' TBAS formal_param_p;
-formal_param_p :  | ';' varlist ':' TBAS formal_param_p;
+deffun returns[String v] : FUNCTION ID formal_paramlist ':' tbas ';' blq ';'{$v= combinator.createFunction($ID.text,$formal_paramlist.text, $tbas.v, $blq.v);};
+formal_paramlist returns [String v]: {$v="";} | '(' formal_param ')' {$v= "(" + $formal_param.v + ")";};
+formal_param returns [String v] :  varlist ':' tbas formal_param_p {$v= $tbas.v + $varlist.v + ";\n" + $formal_param_p.v;};
+formal_param_p returns [String v] : {$v="";} | ';' varlist ':' tbas formal_param_p {$v= $tbas.v + $varlist.v + ";\n" + $formal_param_p.v;};
+tbas returns[String v] : 'INTEGER'{$v="int";} | 'REAL'{$v="float";}|'integer'{$v="int";} | 'real'{$v="float";};
 
 
 //--ZONA DE SENTENCIAS--
@@ -98,7 +100,7 @@ sent_p : subparamlist | ':=' exp; //Incluye el proc_call y el asig, para evitar 
 
 exp : factor exp_p;
 exp_p :  | op factor exp_p;
-op :  OPARIT | OPLOG | OPCOMP;
+op returns [String v] :  OPARIT{$v= $OPARIT.text;} | OPLOG{$v= $OPLOG.text;} | OPCOMP{$v= $OPCOMP.text;};
 factor :  simpvalue | '(' exp ')' | ID subparamlist;
 subparamlist :    | '(' explist ')';
 explist :  exp explist_p;

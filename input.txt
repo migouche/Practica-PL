@@ -1,5 +1,8 @@
 (* Ejemplo 1: Programa simple con if-then-else *)
 program CondicionesSimples;
+const
+  NUMERO = 45.32;
+  NUMERO_MAXIMO = 10;
 var
   a, b, c: INTEGER;
 begin
@@ -8,16 +11,22 @@ begin
   c := 15;
 
   if a < b then
+    begin
     writeln('a es menor que b');
+    end
 
   if (a < b) and (b < c) then
     begin
       a := a + 1;
       writeln('a fue incrementado');
-    end;  (* Se agregó el punto y coma aquí *)
+    end
 
   if not (a > b) then
-    writeln('a no es mayor que b')
+    begin
+    writeln('a no es mayor que b');
+    end
   else
+  begin
     writeln('a es mayor que b');
+    end
 end.
