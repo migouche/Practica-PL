@@ -5,6 +5,7 @@ const
   NUMERO_MAXIMO = 10;
 var
   a, b, c: INTEGER;
+  f: REAL;
 begin
   a := 5;
   b := 10;

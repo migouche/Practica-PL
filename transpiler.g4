@@ -4,7 +4,7 @@ grammar transpiler;
     private Combinator combinator = new Combinator();
 
     public void printAtEnd(){
-        System.out.println(combinator.toString());
+        //System.out.println(combinator.toString());
     }
 
 }
@@ -69,23 +69,29 @@ sentlist returns [String v] : sent sentlist_p;
 sentlist_p : | sent sentlist_p;
 
 //--DECLARACIONES--
-dcl : defcte | defvar | defproc | deffun;
+dcl returns [String v] : defcte {$v= $defcte.v;} | defvar | defproc | deffun;
+
+// # constantes #
 defcte returns [String v] : CONST ctelist {$v= $ctelist.v; System.out.print($ctelist.v);};
 ctelist returns [String v] : ID '=' simpvalue ';' ctelist_p {$v = combinator.createConst($ID.text, $simpvalue.v) +  $ctelist_p.v;};
 ctelist_p returns [String v] : {$v= "";} | ID '=' simpvalue ';' ctelist_p{$v = combinator.createConst($ID.text, $simpvalue.v) +  $ctelist_p.v;};
 simpvalue returns [String v] : CONSTREAL {$v= $CONSTREAL.text;} | CONSTINT {$v= $CONSTINT.text;}| CONSTLIT {$v= $CONSTLIT.text;};
-defvar : VAR defvarlist ';';
 
-
-defvarlist : varlist ':' tbas defvarlist_p;
-defvarlist_p :  | ';' varlist ':' tbas defvarlist_p;
+// # variables # (fer) --> NS SI ESTA BIEN, REVISAR LA GRAMATICA
+defvar returns [String v] : VAR defvarlist ';' {$v= $defvarlist.v; System.out.print($defvarlist.v);};
+defvarlist returns [String v] : varlist ':' tbas defvarlist_p{$v = combinator.createVarlist($varlist.v, $tbas.v) + $defvarlist_p.v;};
+defvarlist_p returns [String v]: {$v = "";} | ';' varlist ':' tbas defvarlist_p {$v = combinator.createVarlist($varlist.v, $tbas.v) + $defvarlist_p.v;};
 varlist returns[String v] : ID varlist_p {$v= $ID.text + $varlist_p.v;};
 varlist_p returns[String v]: {$v= "";} | ',' ID varlist_p {$v= "," + $ID.text + $varlist_p.v;};
-defproc :  PROCEDURE ID formal_paramlist ';' blq ';';
+
+defproc returns[String v] :  PROCEDURE ID formal_paramlist ';' blq ';' {$v= combinator.createFunction($ID.text,$formal_paramlist.text, "void", $blq.v);};
+
 deffun returns[String v] : FUNCTION ID formal_paramlist ':' tbas ';' blq ';'{$v= combinator.createFunction($ID.text,$formal_paramlist.text, $tbas.v, $blq.v);};
-formal_paramlist returns [String v]: {$v="";} | '(' formal_param ')' {$v= "(" + $formal_param.v + ")";};
-formal_param returns [String v] :  varlist ':' tbas formal_param_p {$v= $tbas.v + $varlist.v + ";\n" + $formal_param_p.v;};
-formal_param_p returns [String v] : {$v="";} | ';' varlist ':' tbas formal_param_p {$v= $tbas.v + $varlist.v + ";\n" + $formal_param_p.v;};
+
+// # formal param list # TODO implementar esto
+formal_paramlist :  | '(' formal_param ')';
+formal_param :  varlist ':' tbas formal_param_p;
+formal_param_p :  | ';' varlist ':' tbas formal_param_p ;
 tbas returns[String v] : 'INTEGER'{$v="int";} | 'REAL'{$v="float";}|'integer'{$v="int";} | 'real'{$v="float";};
 
 

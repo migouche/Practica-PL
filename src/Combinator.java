@@ -45,4 +45,13 @@ public class Combinator {
         result += "\n";
         return result;
     }
+
+    public String createVarlist(String varlist, String tbas){
+        String result;
+        result = tbas;
+        result += " ";
+        result += varlist;
+        result += ";\n";
+        return result;
+    }
 }
