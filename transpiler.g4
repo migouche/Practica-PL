@@ -62,15 +62,15 @@ MULTILINE_COMMENT : '(*' .*? '*)' -> skip;
 //############################################
 
 //--PROGRAMA--
-prg : PROGRAM ID ';' blq '.' {combinator.addToCombinator($ID.text + $blq.v); printAtEnd();} | UNIT ID ';' dcllist '.' {combinator.addToCombinator($ID.text + $dcllist.v); printAtEnd();};
-blq returns [String v] : dcllist BEGIN sentlist END {$v ="blq";};
-dcllist returns [String v] :  | dcl dcllist ;
-sentlist returns [String v] : sent sentlist_p;
-sentlist_p : | sent sentlist_p;
+prg : PROGRAM ID ';' blq '.' {System.out.println($blq.v);} | UNIT ID ';' dcllist '.' {System.out.println($dcllist.v);};
+blq returns [String v] : dcllist BEGIN sentlist END {$v = $dcllist.v + $sentlist.v;};
+dcllist returns [String v] :  {$v="";} | dcl dcllist {$v =$dcl.v + $dcllist.v;} ;
+sentlist returns [String v] : sent sentlist_p {$v =$sent.v + $sentlist_p.v;};
+sentlist_p returns [String v]: {$v="";}| sent sentlist_p {$v =$sent.v + $sentlist_p.v;};
 
 //--DECLARACIONES--
-dcl returns [String v] : defcte {$v= $defcte.v; System.out.print($defcte.v);} | defvar {$v= $defvar.v; System.out.print($defvar.v);}
-    | defproc {$v= $defproc.v; System.out.print($defproc.v);} | deffun {$v= $deffun.v; System.out.print($deffun.v);};
+dcl returns [String v] : defcte {$v= $defcte.v; } | defvar {$v= $defvar.v; }
+    | defproc {$v= $defproc.v;} | deffun {$v= $deffun.v;};
 
 // # constantes #
 defcte returns [String v] : CONST ctelist {$v= $ctelist.v; };
@@ -98,21 +98,22 @@ tbas returns[String v] : 'INTEGER'{$v="int";} | 'REAL'{$v="float";}|'integer'{$v
 
 
 //--ZONA DE SENTENCIAS--
-sent: if | while | repeat | for |ID sent_p ';';
-if: 'if' expcond 'then' blq if_p;
-if_p :  | 'else' blq;
+sent returns[String v] : if_ {$v= $if_.v;} | while {$v= "while";} | repeat {$v= "repeat";} | for {$v= "for";} |ID sent_p ';' {$v= $ID.text + $sent_p.v + ";\n";};
+if_ returns[String v] : 'if' expcond 'then' blq if_p {$v= combinator.createIf($expcond.v, $blq.v) + $if_p.v;};
+if_p returns[String v]:  {$v= "";}| 'else' blq {$v= combinator.createElse($blq.v);};
 while : 'while' expcond 'do' blq;
 repeat : 'repeat' blq 'until' expcond ';';
 for : 'for' ID ':=' exp INC exp 'do' blq;
-sent_p : subparamlist | ':=' exp; //Incluye el proc_call y el asig, para evitar no determinismo
+sent_p returns[String v]: subparamlist {$v= $subparamlist.v;}| ':=' exp  {$v= "=" + $exp.v;}; //Incluye el proc_call y el asig, para evitar no determinismo
 
-exp : factor exp_p;
-exp_p :  | op factor exp_p;
-op returns [String v] :  OPARIT{$v= $OPARIT.text;} | OPLOG{$v= $OPLOG.text;} | OPCOMP{$v= $OPCOMP.text;};
-factor :  simpvalue | '(' exp ')' | ID subparamlist;
-subparamlist :    | '(' explist ')';
-explist :  exp explist_p;
-explist_p :  | ',' exp explist_p;
-expcond : factorcond expcond_p;
-expcond_p :  | OPLOG factorcond expcond_p;
-factorcond: exp OPCOMP exp | '(' exp ')' | 'not' factorcond;
+exp returns[String v] : factor exp_p {$v= $factor.v + $exp_p.v;};
+exp_p returns[String v]: {$v= "";}| op factor exp_p {$v= $op.v + $factor.v;};
+op returns [String v] :  OPARIT{$v= $OPARIT.text;} | OPLOG{$v= $OPLOG.text;} | OPCOMP{$v= $OPCOMP.text;}; //TODO preguntar acerca de como pasar el OPLOG ya que no vale el .text (or -> ||)
+
+factor returns[String v]:  simpvalue {$v= $simpvalue.v;}| '(' exp ')'{$v= "( " + $exp.v + " )";} | ID subparamlist {$v= $ID.text + $subparamlist.v;};
+subparamlist returns[String v]:  {$v= "";} | '(' explist ')' {$v= "( " + $explist.v + " )";};
+explist returns[String v]:  exp explist_p {$v= $exp.v + $explist_p.v;};
+explist_p returns[String v]:   {$v= "";} | ',' exp explist_p  {$v= ", " + $exp.v + $explist_p.v;};
+expcond returns[String v] : factorcond expcond_p {$v= $factorcond.v + $expcond_p.v;};
+expcond_p returns[String v] : {$v= "";} | OPLOG factorcond expcond_p {$v= $OPLOG.text + $factorcond.v + $expcond_p.v;};
+factorcond returns[String v] : exp OPCOMP exp {$v= $exp.v + $OPCOMP.text + $exp.v;} | '(' exp ')' {$v= "( " + $exp.v + " )";}| 'not' factorcond {$v= "!" + $factorcond.v;};

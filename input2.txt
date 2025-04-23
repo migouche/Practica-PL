@@ -1,55 +1,28 @@
-(* Ejemplo 5: Expresiones condicionales complejas *)
-program ExpresionesComplejas;
+program Demo;
+
+const
+  PI = 3.14;
+  SALUDO = 'Hola';
+
 var
-  a, b, c, i: INTEGER;
-  x, y: REAL;
+  x, y: INTEGER;
+  r: REAL;
+
+procedure MostrarMensaje(m: INTEGER);
 begin
-  a := 5;
-  b := 10;
-  c := 15;
-  x := 2.5;
-  y := 3.5;
+  writeln(SALUDO);
+  writeln('Mensaje con número:', m);
+end;
 
-  if (a < b) and (x < y) then
-  begin
-    writeln('Primera condición verdadera');
-  end
-  else begin writeln('no'); end
+function Sumar(a, b: INTEGER): INTEGER;
+begin
+  Sumar := a + b;
+end;
 
-  if (a > b) or (c > a) then
-  begin
-    writeln('Segunda condición verdadera');
-    end
-  else begin writeln('no'); end
-
-  if not((a > b) and (c < a)) then
-  begin
-    a := a + 1;
-    b := b - 1;
-  end
-  else
-  begin
-    c := c * 2;
-    b := b * 8;
-    a := a * 87;
-  end  (* Aquí falta el end para cerrar correctamente el else *)
-
-  if (a < b) and ((c > a) or (x < y)) then
-  begin
-    writeln('Condición compleja verdadera');
-    end
-  else begin writeln('no'); end
-
-  (* Bucle while que incrementa 'a' hasta que sea mayor que 'b' *)
-  while a < b do
-  begin
-    writeln('Incrementando a: ', a);
-    a := a + 2;
-  end (* Se cierra correctamente el bloque del while *)
-
-  (* Bucle for que muestra los valores del 1 al 5 *)
-  for i := 1 to 5 do
-  begin
-    writeln('Iteración del for: ', i);
-  end (* Se cierra correctamente el bloque del for *)
+begin
+  x := 10;
+  y := 5;
+  r := PI * x;
+  MostrarMensaje(x);
+  y := Sumar(x, y);
 end.

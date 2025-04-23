@@ -32,8 +32,8 @@ public class Combinator {
             result += formal_paramlist;
         }
         result += "{\n";
-        result += blq;
-        result += "\n}";
+        result += "\t" + blq;
+        result += "}\n";
         return result;
     }
 
@@ -53,6 +53,27 @@ public class Combinator {
         result += " ";
         result += varlist;
         //result += ";\n";
+        return result;
+    }
+
+    public String createIf(String expcond, String blq){
+        String result;
+        result = "\nif ";
+        result += "(";
+        result += expcond;
+        result += ")\n";
+        result += "{\n";
+        result += "\t" + blq;
+        result += "\n}";
+        return result;
+    }
+
+    public String createElse(String blq){
+        String result;
+        result = " else";
+        result += "{\n";
+        result += "\t" + blq;
+        result += "\n}";
         return result;
     }
 }

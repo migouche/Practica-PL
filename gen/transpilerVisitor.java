@@ -142,11 +142,11 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSent(transpilerParser.SentContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link transpilerParser#if}.
+	 * Visit a parse tree produced by {@link transpilerParser#if_}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIf(transpilerParser.IfContext ctx);
+	T visitIf_(transpilerParser.If_Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link transpilerParser#if_p}.
 	 * @param ctx the parse tree
