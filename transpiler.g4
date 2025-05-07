@@ -128,16 +128,16 @@ tbas returns[String v] :
 
 //--ZONA DE SENTENCIAS--
 sent[int tabs] returns[String v] :
-    if_ {$v = "\t".repeat($tabs) + $if_.v;} |
-    while {$v= "\t".repeat($tabs) + "while";} |
-    repeat {$v="\t".repeat($tabs) + "repeat";} |
-    for {$v="\t".repeat($tabs) + "for";} |
+    if_[$tabs] { $v = $if_.v;} |
+    while[$tabs] {$v= "\t".repeat($tabs) + "while";} |
+    repeat[$tabs] {$v="\t".repeat($tabs) + "repeat";} |
+    for[$tabs] {$v="\t".repeat($tabs) + "for";} |
     ID sent_p ';' {$v= "\t".repeat($tabs) + $ID.text + $sent_p.v + ";\n";};
-if_ returns[String v] : 'if' expcond 'then' blq[false, 0] if_p {$v= combinator.createIf($expcond.v, $blq.v) + $if_p.v;};
-if_p returns[String v]:  {$v= "";}| 'else' blq[false, 0] {$v= combinator.createElse($blq.v);};
-while : 'while' expcond 'do' blq[false, 0];
-repeat : 'repeat' blq[false, 0] 'until' expcond ';';
-for : 'for' ID ':=' exp INC exp 'do' blq[false, 0];
+if_[int tabs] returns[String v] : 'if' expcond 'then' blq[false, $tabs] if_p[$tabs] {$v= combinator.createIf($expcond.v, $blq.v, $tabs) + $if_p.v;};
+if_p[int tabs] returns[String v]:  {$v= "";}| 'else' blq[false, $tabs] {$v= combinator.createElse($blq.v, $tabs);};
+while[int tabs] : 'while' expcond 'do' blq[false, $tabs];
+repeat[int tabs] : 'repeat' blq[false, $tabs] 'until' expcond ';';
+for[int tabs] : 'for' ID ':=' exp INC exp 'do' blq[false, $tabs];
 sent_p returns[String v]:
     subparamlist {$v= $subparamlist.v;} |
     ':=' exp  {$v= "=" + $exp.v;}; //Incluye el proc_call y el asig, para evitar no determinismo

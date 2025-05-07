@@ -1,4 +1,4 @@
-// Generated from C:/Users/migou/codes/URJC/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+// Generated from C:/Users/migouche/codes/urjc/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -1641,15 +1641,15 @@ public class transpilerParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(246);
-				((SentContext)_localctx).if_ = if_();
-				((SentContext)_localctx).v =  "\t".repeat(_localctx.tabs) + ((SentContext)_localctx).if_.v;
+				((SentContext)_localctx).if_ = if_(_localctx.tabs);
+				 ((SentContext)_localctx).v =  ((SentContext)_localctx).if_.v;
 				}
 				break;
 			case T__14:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(249);
-				while_();
+				while_(_localctx.tabs);
 				((SentContext)_localctx).v =  "\t".repeat(_localctx.tabs) + "while";
 				}
 				break;
@@ -1657,7 +1657,7 @@ public class transpilerParser extends Parser {
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(252);
-				repeat();
+				repeat(_localctx.tabs);
 				((SentContext)_localctx).v = "\t".repeat(_localctx.tabs) + "repeat";
 				}
 				break;
@@ -1665,7 +1665,7 @@ public class transpilerParser extends Parser {
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(255);
-				for_();
+				for_(_localctx.tabs);
 				((SentContext)_localctx).v = "\t".repeat(_localctx.tabs) + "for";
 				}
 				break;
@@ -1698,6 +1698,7 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class If_Context extends ParserRuleContext {
+		public int tabs;
 		public String v;
 		public ExpcondContext expcond;
 		public BlqContext blq;
@@ -1711,8 +1712,10 @@ public class transpilerParser extends Parser {
 		public If_pContext if_p() {
 			return getRuleContext(If_pContext.class,0);
 		}
-		public If_Context(ParserRuleContext parent, int invokingState) {
+		public If_Context(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public If_Context(ParserRuleContext parent, int invokingState, int tabs) {
 			super(parent, invokingState);
+			this.tabs = tabs;
 		}
 		@Override public int getRuleIndex() { return RULE_if_; }
 		@Override
@@ -1730,8 +1733,8 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final If_Context if_() throws RecognitionException {
-		If_Context _localctx = new If_Context(_ctx, getState());
+	public final If_Context if_(int tabs) throws RecognitionException {
+		If_Context _localctx = new If_Context(_ctx, getState(), tabs);
 		enterRule(_localctx, 44, RULE_if_);
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -1743,10 +1746,10 @@ public class transpilerParser extends Parser {
 			setState(267);
 			match(T__12);
 			setState(268);
-			((If_Context)_localctx).blq = blq(false, 0);
+			((If_Context)_localctx).blq = blq(false, _localctx.tabs);
 			setState(269);
-			((If_Context)_localctx).if_p = if_p();
-			((If_Context)_localctx).v =  combinator.createIf(((If_Context)_localctx).expcond.v, ((If_Context)_localctx).blq.v) + ((If_Context)_localctx).if_p.v;
+			((If_Context)_localctx).if_p = if_p(_localctx.tabs);
+			((If_Context)_localctx).v =  combinator.createIf(((If_Context)_localctx).expcond.v, ((If_Context)_localctx).blq.v, _localctx.tabs) + ((If_Context)_localctx).if_p.v;
 			}
 		}
 		catch (RecognitionException re) {
@@ -1762,13 +1765,16 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class If_pContext extends ParserRuleContext {
+		public int tabs;
 		public String v;
 		public BlqContext blq;
 		public BlqContext blq() {
 			return getRuleContext(BlqContext.class,0);
 		}
-		public If_pContext(ParserRuleContext parent, int invokingState) {
+		public If_pContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public If_pContext(ParserRuleContext parent, int invokingState, int tabs) {
 			super(parent, invokingState);
+			this.tabs = tabs;
 		}
 		@Override public int getRuleIndex() { return RULE_if_p; }
 		@Override
@@ -1786,8 +1792,8 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final If_pContext if_p() throws RecognitionException {
-		If_pContext _localctx = new If_pContext(_ctx, getState());
+	public final If_pContext if_p(int tabs) throws RecognitionException {
+		If_pContext _localctx = new If_pContext(_ctx, getState(), tabs);
 		enterRule(_localctx, 46, RULE_if_p);
 		try {
 			setState(277);
@@ -1810,8 +1816,8 @@ public class transpilerParser extends Parser {
 				setState(273);
 				match(T__13);
 				setState(274);
-				((If_pContext)_localctx).blq = blq(false, 0);
-				((If_pContext)_localctx).v =  combinator.createElse(((If_pContext)_localctx).blq.v);
+				((If_pContext)_localctx).blq = blq(false, _localctx.tabs);
+				((If_pContext)_localctx).v =  combinator.createElse(((If_pContext)_localctx).blq.v, _localctx.tabs);
 				}
 				break;
 			default:
@@ -1831,14 +1837,17 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class WhileContext extends ParserRuleContext {
+		public int tabs;
 		public ExpcondContext expcond() {
 			return getRuleContext(ExpcondContext.class,0);
 		}
 		public BlqContext blq() {
 			return getRuleContext(BlqContext.class,0);
 		}
-		public WhileContext(ParserRuleContext parent, int invokingState) {
+		public WhileContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public WhileContext(ParserRuleContext parent, int invokingState, int tabs) {
 			super(parent, invokingState);
+			this.tabs = tabs;
 		}
 		@Override public int getRuleIndex() { return RULE_while; }
 		@Override
@@ -1856,8 +1865,8 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final WhileContext while_() throws RecognitionException {
-		WhileContext _localctx = new WhileContext(_ctx, getState());
+	public final WhileContext while_(int tabs) throws RecognitionException {
+		WhileContext _localctx = new WhileContext(_ctx, getState(), tabs);
 		enterRule(_localctx, 48, RULE_while);
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -1869,7 +1878,7 @@ public class transpilerParser extends Parser {
 			setState(281);
 			match(T__15);
 			setState(282);
-			blq(false, 0);
+			blq(false, _localctx.tabs);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1885,14 +1894,17 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class RepeatContext extends ParserRuleContext {
+		public int tabs;
 		public BlqContext blq() {
 			return getRuleContext(BlqContext.class,0);
 		}
 		public ExpcondContext expcond() {
 			return getRuleContext(ExpcondContext.class,0);
 		}
-		public RepeatContext(ParserRuleContext parent, int invokingState) {
+		public RepeatContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public RepeatContext(ParserRuleContext parent, int invokingState, int tabs) {
 			super(parent, invokingState);
+			this.tabs = tabs;
 		}
 		@Override public int getRuleIndex() { return RULE_repeat; }
 		@Override
@@ -1910,8 +1922,8 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final RepeatContext repeat() throws RecognitionException {
-		RepeatContext _localctx = new RepeatContext(_ctx, getState());
+	public final RepeatContext repeat(int tabs) throws RecognitionException {
+		RepeatContext _localctx = new RepeatContext(_ctx, getState(), tabs);
 		enterRule(_localctx, 50, RULE_repeat);
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -1919,7 +1931,7 @@ public class transpilerParser extends Parser {
 			setState(284);
 			match(T__16);
 			setState(285);
-			blq(false, 0);
+			blq(false, _localctx.tabs);
 			setState(286);
 			match(T__17);
 			setState(287);
@@ -1941,6 +1953,7 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ForContext extends ParserRuleContext {
+		public int tabs;
 		public TerminalNode ID() { return getToken(transpilerParser.ID, 0); }
 		public List<ExpContext> exp() {
 			return getRuleContexts(ExpContext.class);
@@ -1952,8 +1965,10 @@ public class transpilerParser extends Parser {
 		public BlqContext blq() {
 			return getRuleContext(BlqContext.class,0);
 		}
-		public ForContext(ParserRuleContext parent, int invokingState) {
+		public ForContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public ForContext(ParserRuleContext parent, int invokingState, int tabs) {
 			super(parent, invokingState);
+			this.tabs = tabs;
 		}
 		@Override public int getRuleIndex() { return RULE_for; }
 		@Override
@@ -1971,8 +1986,8 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final ForContext for_() throws RecognitionException {
-		ForContext _localctx = new ForContext(_ctx, getState());
+	public final ForContext for_(int tabs) throws RecognitionException {
+		ForContext _localctx = new ForContext(_ctx, getState(), tabs);
 		enterRule(_localctx, 52, RULE_for);
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -1992,7 +2007,7 @@ public class transpilerParser extends Parser {
 			setState(296);
 			match(T__15);
 			setState(297);
-			blq(false, 0);
+			blq(false, _localctx.tabs);
 			}
 		}
 		catch (RecognitionException re) {
