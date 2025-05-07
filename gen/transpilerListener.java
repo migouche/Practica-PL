@@ -317,6 +317,16 @@ public interface transpilerListener extends ParseTreeListener {
 	 */
 	void exitOp(transpilerParser.OpContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link transpilerParser#oplog}.
+	 * @param ctx the parse tree
+	 */
+	void enterOplog(transpilerParser.OplogContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link transpilerParser#oplog}.
+	 * @param ctx the parse tree
+	 */
+	void exitOplog(transpilerParser.OplogContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link transpilerParser#factor}.
 	 * @param ctx the parse tree
 	 */
