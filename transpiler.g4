@@ -24,7 +24,6 @@ FUNCTION : 'FUNCTION' | 'function';
 VAR : 'VAR' | 'var';
 
 OPARIT :  '+' | '-' | '*' | '/' | 'mod' | 'div' | 'MOD' | 'DIV';
-OPLOG : 'or' | 'and';
 OPCOMP : '<' | '>' | '<=' | '>=' | '=';
 
 //--PARTE OPCIONAL--
@@ -122,5 +121,5 @@ subparamlist returns[String v]:  {$v= "";} | '(' explist ')' {$v= "( " + $explis
 explist returns[String v]:  exp explist_p {$v= $exp.v + $explist_p.v;};
 explist_p returns[String v]:   {$v= "";} | ',' exp explist_p  {$v= ", " + $exp.v + $explist_p.v;};
 expcond returns[String v] : factorcond expcond_p {$v= $factorcond.v + $expcond_p.v;};
-expcond_p returns[String v] : {$v= "";} | OPLOG factorcond expcond_p {$v= $OPLOG.text + $factorcond.v + $expcond_p.v;};
+expcond_p returns[String v] : {$v= "";} | oplog factorcond expcond_p {$v= $oplog.v + $factorcond.v + $expcond_p.v;};
 factorcond returns[String v] : exp OPCOMP exp {$v= $exp.v + $OPCOMP.text + $exp.v;} | '(' exp ')' {$v= "( " + $exp.v + " )";}| 'not' factorcond {$v= "!" + $factorcond.v;};
