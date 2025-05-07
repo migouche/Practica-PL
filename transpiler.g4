@@ -62,8 +62,8 @@ MULTILINE_COMMENT : '(*' .*? '*)' -> skip;
 //############################################
 
 //--PROGRAMA--
-prg : PROGRAM ID ';' blq[true] '.' {System.out.println($blq.v);} | UNIT ID ';' dcllist '.' {System.out.println($dcllist.v);};
-blq[boolean is_main] returns [String v] : dcllist BEGIN sentlist END {
+prg : PROGRAM ID ';' blq[true, 0] '.' {System.out.println($blq.v);} | UNIT ID ';' dcllist '.' {System.out.println($dcllist.v);};
+blq[boolean is_main, int tab] returns [String v] : dcllist BEGIN sentlist[$tab + 1] END {
     if(is_main){
         $v = $dcllist.v + "void main ( void )\n{\n"+ $sentlist.v + "\n}";
     }
@@ -72,8 +72,8 @@ blq[boolean is_main] returns [String v] : dcllist BEGIN sentlist END {
     }
 };
 dcllist returns [String v] :  {$v="";} | dcl dcllist {$v =$dcl.v + $dcllist.v;} ;
-sentlist returns [String v] : sent sentlist_p {$v =$sent.v + $sentlist_p.v;};
-sentlist_p returns [String v]: {$v="";}| sent sentlist_p {$v =$sent.v + $sentlist_p.v;};
+sentlist[int tab] returns [String v] : sent[tab] sentlist_p[tab] {$v =$sent.v + $sentlist_p.v;};
+sentlist_p[int tab] returns [String v]: {$v="";}| sent[tab] sentlist_p[tab] {$v =$sent.v + $sentlist_p.v;};
 
 //--DECLARACIONES--
 dcl returns [String v] : defcte {$v= $defcte.v; } | defvar {$v= $defvar.v; }
@@ -105,10 +105,11 @@ tbas returns[String v] : 'INTEGER'{$v="int";} | 'REAL'{$v="float";}|'integer'{$v
 
 
 //--ZONA DE SENTENCIAS--
-sent[int tabs] returns[String v] :if_ {$v = "\t".repeat(tabs) + $if_.v;} |
-                                    while {$v= "\t".repeat(tabs) + "while";} |
-                                    repeat {$v= "repeat";} | for {$v="\t".repeat(tabs) + "for";} |
-                                    ID sent_p ';' {$v= "\t".repeat(tabs) + $ID.text + $sent_p.v + ";\n";};
+sent[int tabs] returns[String v] :if_ {$v = "\t".repeat($tabs) + $if_.v;} |
+                                    while {$v= "\t".repeat($tabs) + "while";} |
+                                    repeat {$v="\t".repeat($tabs) + "repeat";} |
+                                    for {$v="\t".repeat($tabs) + "for";} |
+                                    ID sent_p ';' {$v= "\t".repeat($tabs) + $ID.text + $sent_p.v + ";\n";};
 
 if_ returns[String v] : 'if' expcond 'then' blq[false] if_p {$v= combinator.createIf($expcond.v, $blq.v) + $if_p.v;};
 if_p returns[String v]:  {$v= "";}| 'else' blq[false] {$v= combinator.createElse($blq.v);};
@@ -117,14 +118,39 @@ repeat : 'repeat' blq[false] 'until' expcond ';';
 for : 'for' ID ':=' exp INC exp 'do' blq[false];
 sent_p returns[String v]: subparamlist {$v= $subparamlist.v;}| ':=' exp  {$v= "=" + $exp.v;}; //Incluye el proc_call y el asig, para evitar no determinismo
 
+
 exp returns[String v] : factor exp_p {$v= $factor.v + $exp_p.v;};
-exp_p returns[String v]: {$v= "";}| op factor exp_p {$v= $op.v + $factor.v;};
-op returns [String v] :  OPARIT{$v= $OPARIT.text;} | oplog {$v= $oplog.v;} | OPCOMP{$v= $OPCOMP.text;};
-oplog returns [String v] : 'or'{$v= "||";} | 'and'{$v= "&&";};
-factor returns[String v]:  simpvalue {$v= $simpvalue.v;}| '(' exp ')'{$v= "( " + $exp.v + " )";} | ID subparamlist {$v= $ID.text + $subparamlist.v;};
-subparamlist returns[String v]:  {$v= "";} | '(' explist ')' {$v= "( " + $explist.v + " )";};
-explist returns[String v]:  exp explist_p {$v= $exp.v + $explist_p.v;};
-explist_p returns[String v]:   {$v= "";} | ',' exp explist_p  {$v= ", " + $exp.v + $explist_p.v;};
+
+exp_p returns[String v]:
+    {$v= "";} |
+    op factor exp_p {$v= $op.v + $factor.v;};
+
+op returns [String v] :
+    OPARIT{$v= $OPARIT.text;} |
+    OPLOG{$v= $OPLOG.text;} |
+    OPCOMP{$v= $OPCOMP.text;}; //TODO preguntar acerca de como pasar el OPLOG ya que no vale el .text (or -> ||)
+
+factor returns[String v]:
+    simpvalue {$v= $simpvalue.v;} |
+    '(' exp ')'{$v= "( " + $exp.v + " )";} |
+    ID subparamlist {$v= $ID.text + $subparamlist.v;};
+
+subparamlist returns[String v]: {$v= "";} |
+    '(' explist ')' {$v= "( " + $explist.v + " )";};
+
+explist returns[String v]: exp explist_p {$v= $exp.v + $explist_p.v;};
+
+explist_p returns[String v]:
+    {$v= "";} |
+    ',' exp explist_p  {$v= ", " + $exp.v + $explist_p.v;};
+
 expcond returns[String v] : factorcond expcond_p {$v= $factorcond.v + $expcond_p.v;};
-expcond_p returns[String v] : {$v= "";} | OPLOG factorcond expcond_p {$v= $OPLOG.text + $factorcond.v + $expcond_p.v;};
-factorcond returns[String v] : exp OPCOMP exp {$v= $exp.v + $OPCOMP.text + $exp.v;} | '(' exp ')' {$v= "( " + $exp.v + " )";}| 'not' factorcond {$v= "!" + $factorcond.v;};
+
+expcond_p returns[String v] :
+    {$v= "";} |
+    OPLOG factorcond expcond_p {$v= $OPLOG.text + $factorcond.v + $expcond_p.v;};
+
+factorcond returns[String v] :
+    exp OPCOMP exp {$v= $exp.v + $OPCOMP.text + $exp.v;} |
+    '(' exp ')' {$v= "( " + $exp.v + " )";} |
+    'not' factorcond {$v= "!" + $factorcond.v;};
