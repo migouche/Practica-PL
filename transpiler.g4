@@ -105,7 +105,11 @@ tbas returns[String v] : 'INTEGER'{$v="int";} | 'REAL'{$v="float";}|'integer'{$v
 
 
 //--ZONA DE SENTENCIAS--
-sent returns[String v] : if_ {$v= $if_.v;} | while {$v= "while";} | repeat {$v= "repeat";} | for {$v= "for";} |ID sent_p ';' {$v= $ID.text + $sent_p.v + ";\n";};
+sent[int tabs] returns[String v] :if_ {$v = "\t".repeat(tabs) + $if_.v;} |
+                                    while {$v= "\t".repeat(tabs) + "while";} |
+                                    repeat {$v= "repeat";} | for {$v="\t".repeat(tabs) + "for";} |
+                                    ID sent_p ';' {$v= "\t".repeat(tabs) + $ID.text + $sent_p.v + ";\n";};
+
 if_ returns[String v] : 'if' expcond 'then' blq[false] if_p {$v= combinator.createIf($expcond.v, $blq.v) + $if_p.v;};
 if_p returns[String v]:  {$v= "";}| 'else' blq[false] {$v= combinator.createElse($blq.v);};
 while : 'while' expcond 'do' blq[false];
