@@ -26,7 +26,7 @@ public class Combinator {
         String result;
         result = tbas;
         result += " " + ID + " ";
-        if(formal_paramlist.equals("")){
+        if(formal_paramlist.isEmpty()){
             result += "( void )";
         }else{
             result += formal_paramlist;

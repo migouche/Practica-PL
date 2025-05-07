@@ -169,7 +169,7 @@ public class transpilerParser extends Parser {
 				setState(78);
 				match(T__0);
 				setState(79);
-				((PrgContext)_localctx).blq = blq();
+				((PrgContext)_localctx).blq = blq(true);
 				setState(80);
 				match(T__1);
 				System.out.println(((PrgContext)_localctx).blq.v);
@@ -208,6 +208,7 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class BlqContext extends ParserRuleContext {
+		public boolean is_main;
 		public String v;
 		public DcllistContext dcllist;
 		public SentlistContext sentlist;
@@ -219,8 +220,10 @@ public class transpilerParser extends Parser {
 			return getRuleContext(SentlistContext.class,0);
 		}
 		public TerminalNode END() { return getToken(transpilerParser.END, 0); }
-		public BlqContext(ParserRuleContext parent, int invokingState) {
+		public BlqContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public BlqContext(ParserRuleContext parent, int invokingState, boolean is_main) {
 			super(parent, invokingState);
+			this.is_main = is_main;
 		}
 		@Override public int getRuleIndex() { return RULE_blq; }
 		@Override
@@ -238,8 +241,8 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final BlqContext blq() throws RecognitionException {
-		BlqContext _localctx = new BlqContext(_ctx, getState());
+	public final BlqContext blq(boolean is_main) throws RecognitionException {
+		BlqContext _localctx = new BlqContext(_ctx, getState(), is_main);
 		enterRule(_localctx, 2, RULE_blq);
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -252,7 +255,14 @@ public class transpilerParser extends Parser {
 			((BlqContext)_localctx).sentlist = sentlist();
 			setState(95);
 			match(END);
-			((BlqContext)_localctx).v =  ((BlqContext)_localctx).dcllist.v + ((BlqContext)_localctx).sentlist.v;
+
+			    if(is_main){
+			        ((BlqContext)_localctx).v =  ((BlqContext)_localctx).dcllist.v + "void main ( void )\n{\n"+ ((BlqContext)_localctx).sentlist.v + "\n}";
+			    }
+			    else{
+			        ((BlqContext)_localctx).v =  ((BlqContext)_localctx).dcllist.v + ((BlqContext)_localctx).sentlist.v;
+			    }
+
 			}
 		}
 		catch (RecognitionException re) {
@@ -1183,7 +1193,7 @@ public class transpilerParser extends Parser {
 			setState(195);
 			match(T__0);
 			setState(196);
-			((DefprocContext)_localctx).blq = blq();
+			((DefprocContext)_localctx).blq = blq(false);
 			setState(197);
 			match(T__0);
 			((DefprocContext)_localctx).v =  combinator.createFunction((((DefprocContext)_localctx).ID!=null?((DefprocContext)_localctx).ID.getText():null),((DefprocContext)_localctx).formal_paramlist.v, "void", ((DefprocContext)_localctx).blq.v);
@@ -1256,7 +1266,7 @@ public class transpilerParser extends Parser {
 			setState(205);
 			match(T__0);
 			setState(206);
-			((DeffunContext)_localctx).blq = blq();
+			((DeffunContext)_localctx).blq = blq(false);
 			setState(207);
 			match(T__0);
 			((DeffunContext)_localctx).v =  combinator.createFunction((((DeffunContext)_localctx).ID!=null?((DeffunContext)_localctx).ID.getText():null),((DeffunContext)_localctx).formal_paramlist.v, ((DeffunContext)_localctx).tbas.v, ((DeffunContext)_localctx).blq.v);
@@ -1710,7 +1720,7 @@ public class transpilerParser extends Parser {
 			setState(265);
 			match(T__12);
 			setState(266);
-			((If_Context)_localctx).blq = blq();
+			((If_Context)_localctx).blq = blq(false);
 			setState(267);
 			((If_Context)_localctx).if_p = if_p();
 			((If_Context)_localctx).v =  combinator.createIf(((If_Context)_localctx).expcond.v, ((If_Context)_localctx).blq.v) + ((If_Context)_localctx).if_p.v;
@@ -1777,7 +1787,7 @@ public class transpilerParser extends Parser {
 				setState(271);
 				match(T__13);
 				setState(272);
-				((If_pContext)_localctx).blq = blq();
+				((If_pContext)_localctx).blq = blq(false);
 				((If_pContext)_localctx).v =  combinator.createElse(((If_pContext)_localctx).blq.v);
 				}
 				break;
@@ -1836,7 +1846,7 @@ public class transpilerParser extends Parser {
 			setState(279);
 			match(T__15);
 			setState(280);
-			blq();
+			blq(false);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1886,7 +1896,7 @@ public class transpilerParser extends Parser {
 			setState(282);
 			match(T__16);
 			setState(283);
-			blq();
+			blq(false);
 			setState(284);
 			match(T__17);
 			setState(285);
@@ -1959,7 +1969,7 @@ public class transpilerParser extends Parser {
 			setState(294);
 			match(T__15);
 			setState(295);
-			blq();
+			blq(false);
 			}
 		}
 		catch (RecognitionException re) {

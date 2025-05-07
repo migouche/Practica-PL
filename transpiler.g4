@@ -62,8 +62,15 @@ MULTILINE_COMMENT : '(*' .*? '*)' -> skip;
 //############################################
 
 //--PROGRAMA--
-prg : PROGRAM ID ';' blq '.' {System.out.println($blq.v);} | UNIT ID ';' dcllist '.' {System.out.println($dcllist.v);};
-blq returns [String v] : dcllist BEGIN sentlist END {$v = $dcllist.v + $sentlist.v;};
+prg : PROGRAM ID ';' blq[true] '.' {System.out.println($blq.v);} | UNIT ID ';' dcllist '.' {System.out.println($dcllist.v);};
+blq[boolean is_main] returns [String v] : dcllist BEGIN sentlist END {
+    if(is_main){
+        $v = $dcllist.v + "void main ( void )\n{\n"+ $sentlist.v + "\n}";
+    }
+    else{
+        $v = $dcllist.v + $sentlist.v;
+    }
+};
 dcllist returns [String v] :  {$v="";} | dcl dcllist {$v =$dcl.v + $dcllist.v;} ;
 sentlist returns [String v] : sent sentlist_p {$v =$sent.v + $sentlist_p.v;};
 sentlist_p returns [String v]: {$v="";}| sent sentlist_p {$v =$sent.v + $sentlist_p.v;};
@@ -85,9 +92,9 @@ defvarlist_p returns [String v]: {$v = ";\n";} | ';' varlist ':' tbas defvarlist
 varlist returns[String v] : ID varlist_p {$v= $ID.text + $varlist_p.v;};
 varlist_p returns[String v]: {$v= "";} | ',' ID varlist_p {$v= "," + $ID.text + $varlist_p.v;};
 
-defproc returns[String v] :  PROCEDURE ID formal_paramlist ';' blq ';' {$v= combinator.createFunction($ID.text,$formal_paramlist.v, "void", $blq.v);};
+defproc returns[String v] :  PROCEDURE ID formal_paramlist ';' blq[false] ';' {$v= combinator.createFunction($ID.text,$formal_paramlist.v, "void", $blq.v);};
 
-deffun returns[String v] : FUNCTION ID formal_paramlist ':' tbas ';' blq ';'{$v= combinator.createFunction($ID.text,$formal_paramlist.v, $tbas.v, $blq.v);};
+deffun returns[String v] : FUNCTION ID formal_paramlist ':' tbas ';' blq[false] ';'{$v= combinator.createFunction($ID.text,$formal_paramlist.v, $tbas.v, $blq.v);};
 
 // # formal param list #
 formal_paramlist returns[String v] :  {$v= "";} | '(' formal_param ')' {$v= "( " + $formal_param.v + " )";};
@@ -99,11 +106,11 @@ tbas returns[String v] : 'INTEGER'{$v="int";} | 'REAL'{$v="float";}|'integer'{$v
 
 //--ZONA DE SENTENCIAS--
 sent returns[String v] : if_ {$v= $if_.v;} | while {$v= "while";} | repeat {$v= "repeat";} | for {$v= "for";} |ID sent_p ';' {$v= $ID.text + $sent_p.v + ";\n";};
-if_ returns[String v] : 'if' expcond 'then' blq if_p {$v= combinator.createIf($expcond.v, $blq.v) + $if_p.v;};
-if_p returns[String v]:  {$v= "";}| 'else' blq {$v= combinator.createElse($blq.v);};
-while : 'while' expcond 'do' blq;
-repeat : 'repeat' blq 'until' expcond ';';
-for : 'for' ID ':=' exp INC exp 'do' blq;
+if_ returns[String v] : 'if' expcond 'then' blq[false] if_p {$v= combinator.createIf($expcond.v, $blq.v) + $if_p.v;};
+if_p returns[String v]:  {$v= "";}| 'else' blq[false] {$v= combinator.createElse($blq.v);};
+while : 'while' expcond 'do' blq[false];
+repeat : 'repeat' blq[false] 'until' expcond ';';
+for : 'for' ID ':=' exp INC exp 'do' blq[false];
 sent_p returns[String v]: subparamlist {$v= $subparamlist.v;}| ':=' exp  {$v= "=" + $exp.v;}; //Incluye el proc_call y el asig, para evitar no determinismo
 
 exp returns[String v] : factor exp_p {$v= $factor.v + $exp_p.v;};
