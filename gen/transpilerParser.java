@@ -1,4 +1,4 @@
-// Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+// Generated from C:/Users/migou/codes/URJC/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -169,7 +169,7 @@ public class transpilerParser extends Parser {
 				setState(80);
 				match(T__0);
 				setState(81);
-				((PrgContext)_localctx).blq = blq(true);
+				((PrgContext)_localctx).blq = blq(true, 0);
 				setState(82);
 				match(T__1);
 				System.out.println(((PrgContext)_localctx).blq.v);
@@ -185,7 +185,7 @@ public class transpilerParser extends Parser {
 				setState(87);
 				match(T__0);
 				setState(88);
-				((PrgContext)_localctx).dcllist = dcllist();
+				((PrgContext)_localctx).dcllist = dcllist(0);
 				setState(89);
 				match(T__1);
 				System.out.println(((PrgContext)_localctx).dcllist.v);
@@ -209,6 +209,7 @@ public class transpilerParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class BlqContext extends ParserRuleContext {
 		public boolean is_main;
+		public int tab;
 		public String v;
 		public DcllistContext dcllist;
 		public SentlistContext sentlist;
@@ -221,9 +222,10 @@ public class transpilerParser extends Parser {
 		}
 		public TerminalNode END() { return getToken(transpilerParser.END, 0); }
 		public BlqContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
-		public BlqContext(ParserRuleContext parent, int invokingState, boolean is_main) {
+		public BlqContext(ParserRuleContext parent, int invokingState, boolean is_main, int tab) {
 			super(parent, invokingState);
 			this.is_main = is_main;
+			this.tab = tab;
 		}
 		@Override public int getRuleIndex() { return RULE_blq; }
 		@Override
@@ -241,18 +243,18 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final BlqContext blq(boolean is_main) throws RecognitionException {
-		BlqContext _localctx = new BlqContext(_ctx, getState(), is_main);
+	public final BlqContext blq(boolean is_main,int tab) throws RecognitionException {
+		BlqContext _localctx = new BlqContext(_ctx, getState(), is_main, tab);
 		enterRule(_localctx, 2, RULE_blq);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(94);
-			((BlqContext)_localctx).dcllist = dcllist();
+			((BlqContext)_localctx).dcllist = dcllist(_localctx.tab);
 			setState(95);
 			match(BEGIN);
 			setState(96);
-			((BlqContext)_localctx).sentlist = sentlist();
+			((BlqContext)_localctx).sentlist = sentlist(_localctx.tab + 1);
 			setState(97);
 			match(END);
 
@@ -278,6 +280,7 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class DcllistContext extends ParserRuleContext {
+		public int tab;
 		public String v;
 		public DclContext dcl;
 		public DcllistContext dcllist;
@@ -287,8 +290,10 @@ public class transpilerParser extends Parser {
 		public DcllistContext dcllist() {
 			return getRuleContext(DcllistContext.class,0);
 		}
-		public DcllistContext(ParserRuleContext parent, int invokingState) {
+		public DcllistContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public DcllistContext(ParserRuleContext parent, int invokingState, int tab) {
 			super(parent, invokingState);
+			this.tab = tab;
 		}
 		@Override public int getRuleIndex() { return RULE_dcllist; }
 		@Override
@@ -306,8 +311,8 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final DcllistContext dcllist() throws RecognitionException {
-		DcllistContext _localctx = new DcllistContext(_ctx, getState());
+	public final DcllistContext dcllist(int tab) throws RecognitionException {
+		DcllistContext _localctx = new DcllistContext(_ctx, getState(), tab);
 		enterRule(_localctx, 4, RULE_dcllist);
 		try {
 			setState(105);
@@ -327,9 +332,9 @@ public class transpilerParser extends Parser {
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(101);
-				((DcllistContext)_localctx).dcl = dcl();
+				((DcllistContext)_localctx).dcl = dcl(_localctx.tab);
 				setState(102);
-				((DcllistContext)_localctx).dcllist = dcllist();
+				((DcllistContext)_localctx).dcllist = dcllist(_localctx.tab);
 				((DcllistContext)_localctx).v = ((DcllistContext)_localctx).dcl.v + ((DcllistContext)_localctx).dcllist.v;
 				}
 				break;
@@ -350,6 +355,7 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class SentlistContext extends ParserRuleContext {
+		public int tab;
 		public String v;
 		public SentContext sent;
 		public Sentlist_pContext sentlist_p;
@@ -359,8 +365,10 @@ public class transpilerParser extends Parser {
 		public Sentlist_pContext sentlist_p() {
 			return getRuleContext(Sentlist_pContext.class,0);
 		}
-		public SentlistContext(ParserRuleContext parent, int invokingState) {
+		public SentlistContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public SentlistContext(ParserRuleContext parent, int invokingState, int tab) {
 			super(parent, invokingState);
+			this.tab = tab;
 		}
 		@Override public int getRuleIndex() { return RULE_sentlist; }
 		@Override
@@ -378,16 +386,16 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final SentlistContext sentlist() throws RecognitionException {
-		SentlistContext _localctx = new SentlistContext(_ctx, getState());
+	public final SentlistContext sentlist(int tab) throws RecognitionException {
+		SentlistContext _localctx = new SentlistContext(_ctx, getState(), tab);
 		enterRule(_localctx, 6, RULE_sentlist);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(107);
-			((SentlistContext)_localctx).sent = sent();
+			((SentlistContext)_localctx).sent = sent(_localctx.tab);
 			setState(108);
-			((SentlistContext)_localctx).sentlist_p = sentlist_p();
+			((SentlistContext)_localctx).sentlist_p = sentlist_p(_localctx.tab);
 			((SentlistContext)_localctx).v = ((SentlistContext)_localctx).sent.v + ((SentlistContext)_localctx).sentlist_p.v;
 			}
 		}
@@ -404,6 +412,7 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Sentlist_pContext extends ParserRuleContext {
+		public int tab;
 		public String v;
 		public SentContext sent;
 		public Sentlist_pContext sentlist_p;
@@ -413,8 +422,10 @@ public class transpilerParser extends Parser {
 		public Sentlist_pContext sentlist_p() {
 			return getRuleContext(Sentlist_pContext.class,0);
 		}
-		public Sentlist_pContext(ParserRuleContext parent, int invokingState) {
+		public Sentlist_pContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public Sentlist_pContext(ParserRuleContext parent, int invokingState, int tab) {
 			super(parent, invokingState);
+			this.tab = tab;
 		}
 		@Override public int getRuleIndex() { return RULE_sentlist_p; }
 		@Override
@@ -432,8 +443,8 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final Sentlist_pContext sentlist_p() throws RecognitionException {
-		Sentlist_pContext _localctx = new Sentlist_pContext(_ctx, getState());
+	public final Sentlist_pContext sentlist_p(int tab) throws RecognitionException {
+		Sentlist_pContext _localctx = new Sentlist_pContext(_ctx, getState(), tab);
 		enterRule(_localctx, 8, RULE_sentlist_p);
 		try {
 			setState(116);
@@ -453,9 +464,9 @@ public class transpilerParser extends Parser {
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(112);
-				((Sentlist_pContext)_localctx).sent = sent();
+				((Sentlist_pContext)_localctx).sent = sent(_localctx.tab);
 				setState(113);
-				((Sentlist_pContext)_localctx).sentlist_p = sentlist_p();
+				((Sentlist_pContext)_localctx).sentlist_p = sentlist_p(tab);
 				((Sentlist_pContext)_localctx).v = ((Sentlist_pContext)_localctx).sent.v + ((Sentlist_pContext)_localctx).sentlist_p.v;
 				}
 				break;
@@ -476,6 +487,7 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class DclContext extends ParserRuleContext {
+		public int tab;
 		public String v;
 		public DefcteContext defcte;
 		public DefvarContext defvar;
@@ -493,8 +505,10 @@ public class transpilerParser extends Parser {
 		public DeffunContext deffun() {
 			return getRuleContext(DeffunContext.class,0);
 		}
-		public DclContext(ParserRuleContext parent, int invokingState) {
+		public DclContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public DclContext(ParserRuleContext parent, int invokingState, int tab) {
 			super(parent, invokingState);
+			this.tab = tab;
 		}
 		@Override public int getRuleIndex() { return RULE_dcl; }
 		@Override
@@ -512,8 +526,8 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final DclContext dcl() throws RecognitionException {
-		DclContext _localctx = new DclContext(_ctx, getState());
+	public final DclContext dcl(int tab) throws RecognitionException {
+		DclContext _localctx = new DclContext(_ctx, getState(), tab);
 		enterRule(_localctx, 10, RULE_dcl);
 		try {
 			setState(130);
@@ -524,7 +538,7 @@ public class transpilerParser extends Parser {
 				{
 				setState(118);
 				((DclContext)_localctx).defcte = defcte();
-				((DclContext)_localctx).v =  ((DclContext)_localctx).defcte.v; 
+				((DclContext)_localctx).v =  "\t".repeat(_localctx.tab) + ((DclContext)_localctx).defcte.v; 
 				}
 				break;
 			case VAR:
@@ -532,14 +546,14 @@ public class transpilerParser extends Parser {
 				{
 				setState(121);
 				((DclContext)_localctx).defvar = defvar();
-				((DclContext)_localctx).v =  ((DclContext)_localctx).defvar.v; 
+				((DclContext)_localctx).v =  "\t".repeat(_localctx.tab) + ((DclContext)_localctx).defvar.v; 
 				}
 				break;
 			case PROCEDURE:
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(124);
-				((DclContext)_localctx).defproc = defproc();
+				((DclContext)_localctx).defproc = defproc(_localctx.tab);
 				((DclContext)_localctx).v =  ((DclContext)_localctx).defproc.v;
 				}
 				break;
@@ -547,7 +561,7 @@ public class transpilerParser extends Parser {
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(127);
-				((DclContext)_localctx).deffun = deffun();
+				((DclContext)_localctx).deffun = deffun(_localctx.tab);
 				((DclContext)_localctx).v =  ((DclContext)_localctx).deffun.v;
 				}
 				break;
@@ -1147,6 +1161,7 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class DefprocContext extends ParserRuleContext {
+		public int tab;
 		public String v;
 		public Token ID;
 		public Formal_paramlistContext formal_paramlist;
@@ -1159,8 +1174,10 @@ public class transpilerParser extends Parser {
 		public BlqContext blq() {
 			return getRuleContext(BlqContext.class,0);
 		}
-		public DefprocContext(ParserRuleContext parent, int invokingState) {
+		public DefprocContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public DefprocContext(ParserRuleContext parent, int invokingState, int tab) {
 			super(parent, invokingState);
+			this.tab = tab;
 		}
 		@Override public int getRuleIndex() { return RULE_defproc; }
 		@Override
@@ -1178,8 +1195,8 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final DefprocContext defproc() throws RecognitionException {
-		DefprocContext _localctx = new DefprocContext(_ctx, getState());
+	public final DefprocContext defproc(int tab) throws RecognitionException {
+		DefprocContext _localctx = new DefprocContext(_ctx, getState(), tab);
 		enterRule(_localctx, 30, RULE_defproc);
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -1193,7 +1210,7 @@ public class transpilerParser extends Parser {
 			setState(197);
 			match(T__0);
 			setState(198);
-			((DefprocContext)_localctx).blq = blq(false);
+			((DefprocContext)_localctx).blq = blq(false, _localctx.tab);
 			setState(199);
 			match(T__0);
 			((DefprocContext)_localctx).v =  combinator.createFunction((((DefprocContext)_localctx).ID!=null?((DefprocContext)_localctx).ID.getText():null),((DefprocContext)_localctx).formal_paramlist.v, "void", ((DefprocContext)_localctx).blq.v);
@@ -1212,6 +1229,7 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class DeffunContext extends ParserRuleContext {
+		public int tab;
 		public String v;
 		public Token ID;
 		public Formal_paramlistContext formal_paramlist;
@@ -1228,8 +1246,10 @@ public class transpilerParser extends Parser {
 		public BlqContext blq() {
 			return getRuleContext(BlqContext.class,0);
 		}
-		public DeffunContext(ParserRuleContext parent, int invokingState) {
+		public DeffunContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public DeffunContext(ParserRuleContext parent, int invokingState, int tab) {
 			super(parent, invokingState);
+			this.tab = tab;
 		}
 		@Override public int getRuleIndex() { return RULE_deffun; }
 		@Override
@@ -1247,8 +1267,8 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final DeffunContext deffun() throws RecognitionException {
-		DeffunContext _localctx = new DeffunContext(_ctx, getState());
+	public final DeffunContext deffun(int tab) throws RecognitionException {
+		DeffunContext _localctx = new DeffunContext(_ctx, getState(), tab);
 		enterRule(_localctx, 32, RULE_deffun);
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -1266,7 +1286,7 @@ public class transpilerParser extends Parser {
 			setState(207);
 			match(T__0);
 			setState(208);
-			((DeffunContext)_localctx).blq = blq(false);
+			((DeffunContext)_localctx).blq = blq(false, _localctx.tab);
 			setState(209);
 			match(T__0);
 			((DeffunContext)_localctx).v =  combinator.createFunction((((DeffunContext)_localctx).ID!=null?((DeffunContext)_localctx).ID.getText():null),((DeffunContext)_localctx).formal_paramlist.v, ((DeffunContext)_localctx).tbas.v, ((DeffunContext)_localctx).blq.v);
@@ -1568,6 +1588,7 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class SentContext extends ParserRuleContext {
+		public int tabs;
 		public String v;
 		public If_Context if_;
 		public Token ID;
@@ -1588,8 +1609,10 @@ public class transpilerParser extends Parser {
 		public Sent_pContext sent_p() {
 			return getRuleContext(Sent_pContext.class,0);
 		}
-		public SentContext(ParserRuleContext parent, int invokingState) {
+		public SentContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public SentContext(ParserRuleContext parent, int invokingState, int tabs) {
 			super(parent, invokingState);
+			this.tabs = tabs;
 		}
 		@Override public int getRuleIndex() { return RULE_sent; }
 		@Override
@@ -1607,8 +1630,8 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final SentContext sent() throws RecognitionException {
-		SentContext _localctx = new SentContext(_ctx, getState());
+	public final SentContext sent(int tabs) throws RecognitionException {
+		SentContext _localctx = new SentContext(_ctx, getState(), tabs);
 		enterRule(_localctx, 42, RULE_sent);
 		try {
 			setState(263);
@@ -1619,7 +1642,7 @@ public class transpilerParser extends Parser {
 				{
 				setState(246);
 				((SentContext)_localctx).if_ = if_();
-				((SentContext)_localctx).v =  ((SentContext)_localctx).if_.v;
+				((SentContext)_localctx).v =  "\t".repeat(_localctx.tabs) + ((SentContext)_localctx).if_.v;
 				}
 				break;
 			case T__14:
@@ -1627,7 +1650,7 @@ public class transpilerParser extends Parser {
 				{
 				setState(249);
 				while_();
-				((SentContext)_localctx).v =  "while";
+				((SentContext)_localctx).v =  "\t".repeat(_localctx.tabs) + "while";
 				}
 				break;
 			case T__16:
@@ -1635,7 +1658,7 @@ public class transpilerParser extends Parser {
 				{
 				setState(252);
 				repeat();
-				((SentContext)_localctx).v =  "repeat";
+				((SentContext)_localctx).v = "\t".repeat(_localctx.tabs) + "repeat";
 				}
 				break;
 			case T__18:
@@ -1643,7 +1666,7 @@ public class transpilerParser extends Parser {
 				{
 				setState(255);
 				for_();
-				((SentContext)_localctx).v =  "for";
+				((SentContext)_localctx).v = "\t".repeat(_localctx.tabs) + "for";
 				}
 				break;
 			case ID:
@@ -1655,7 +1678,7 @@ public class transpilerParser extends Parser {
 				((SentContext)_localctx).sent_p = sent_p();
 				setState(260);
 				match(T__0);
-				((SentContext)_localctx).v =  (((SentContext)_localctx).ID!=null?((SentContext)_localctx).ID.getText():null) + ((SentContext)_localctx).sent_p.v + ";\n";
+				((SentContext)_localctx).v =  "\t".repeat(_localctx.tabs) + (((SentContext)_localctx).ID!=null?((SentContext)_localctx).ID.getText():null) + ((SentContext)_localctx).sent_p.v + ";\n";
 				}
 				break;
 			default:
@@ -1720,7 +1743,7 @@ public class transpilerParser extends Parser {
 			setState(267);
 			match(T__12);
 			setState(268);
-			((If_Context)_localctx).blq = blq(false);
+			((If_Context)_localctx).blq = blq(false, 0);
 			setState(269);
 			((If_Context)_localctx).if_p = if_p();
 			((If_Context)_localctx).v =  combinator.createIf(((If_Context)_localctx).expcond.v, ((If_Context)_localctx).blq.v) + ((If_Context)_localctx).if_p.v;
@@ -1787,7 +1810,7 @@ public class transpilerParser extends Parser {
 				setState(273);
 				match(T__13);
 				setState(274);
-				((If_pContext)_localctx).blq = blq(false);
+				((If_pContext)_localctx).blq = blq(false, 0);
 				((If_pContext)_localctx).v =  combinator.createElse(((If_pContext)_localctx).blq.v);
 				}
 				break;
@@ -1846,7 +1869,7 @@ public class transpilerParser extends Parser {
 			setState(281);
 			match(T__15);
 			setState(282);
-			blq(false);
+			blq(false, 0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1896,7 +1919,7 @@ public class transpilerParser extends Parser {
 			setState(284);
 			match(T__16);
 			setState(285);
-			blq(false);
+			blq(false, 0);
 			setState(286);
 			match(T__17);
 			setState(287);
@@ -1969,7 +1992,7 @@ public class transpilerParser extends Parser {
 			setState(296);
 			match(T__15);
 			setState(297);
-			blq(false);
+			blq(false, 0);
 			}
 		}
 		catch (RecognitionException re) {
