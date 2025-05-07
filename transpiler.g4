@@ -115,8 +115,8 @@ sent_p returns[String v]: subparamlist {$v= $subparamlist.v;}| ':=' exp  {$v= "=
 
 exp returns[String v] : factor exp_p {$v= $factor.v + $exp_p.v;};
 exp_p returns[String v]: {$v= "";}| op factor exp_p {$v= $op.v + $factor.v;};
-op returns [String v] :  OPARIT{$v= $OPARIT.text;} | OPLOG{$v= $OPLOG.text;} | OPCOMP{$v= $OPCOMP.text;}; //TODO preguntar acerca de como pasar el OPLOG ya que no vale el .text (or -> ||)
-
+op returns [String v] :  OPARIT{$v= $OPARIT.text;} | oplog {$v= $oplog.v;} | OPCOMP{$v= $OPCOMP.text;};
+oplog returns [String v] : 'or'{$v= "||";} | 'and'{$v= "&&";};
 factor returns[String v]:  simpvalue {$v= $simpvalue.v;}| '(' exp ')'{$v= "( " + $exp.v + " )";} | ID subparamlist {$v= $ID.text + $subparamlist.v;};
 subparamlist returns[String v]:  {$v= "";} | '(' explist ')' {$v= "( " + $explist.v + " )";};
 explist returns[String v]:  exp explist_p {$v= $exp.v + $explist_p.v;};
