@@ -16,12 +16,6 @@ public class Combinator {
         return result.toString();
     }
 
-    /*public String createFor(String ID, String exp1, String INC, String exp2, String blq) {
-        String result;
-        result = "for";
-        result += ""
-    }*/
-
     public String createFunction(String ID,String formal_paramlist, String tbas, String blq){
         String result;
         result = tbas;
@@ -74,7 +68,59 @@ public class Combinator {
         result = " else";
         result += "{\n";
         result +=  blq;
+        result += "\t".repeat(tabs) + "}\n";
+        return result;
+    }
+
+    public String createWhile(String expcond, String blq, int tabs){
+        String result;
+        result = "\n";
+        result += "\t".repeat(tabs);
+        result += "while (";
+        result += expcond;
+        result += ") {\n";
+        result += blq;
         result += "\t".repeat(tabs) + "}";
         return result;
     }
+
+    public String createDo(String blq, String expcond, int tabs){
+        String result;
+        result = "\n";
+        result += "\t".repeat(tabs);
+        result += "do\n";
+        result += blq;
+        result += "until ( ";
+        result += expcond;
+        result += ")\n";
+        return result;
+    }
+
+    public String createFor(String ID, String exp1, String inc, String exp2, String blq, int tabs) {
+        String result;
+        String sign;
+
+        result = "\n";
+        result += "\t".repeat(tabs);
+        result += "for";
+        result += "( ";
+        result += ID;
+        result += "=";
+        result += exp1;
+        result += "; ";
+        result += ID;
+        result += inc;
+        result += exp2;
+        if(inc.equals("<")) sign="+";
+        else sign="-";
+        result += sign;
+        result += "1; ";
+        result += ID + "="+ID;
+        result += sign + "1";
+        result += "){\n";
+        result += blq;
+        result += "\t".repeat(tabs) + "}\n";
+        return result;
+    }
+
 }

@@ -1,4 +1,4 @@
-// Generated from C:/Users/migouche/codes/urjc/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+// Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -304,13 +304,13 @@ public class transpilerBaseListener implements transpilerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterWhile(transpilerParser.WhileContext ctx) { }
+	@Override public void enterWhile_(transpilerParser.While_Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitWhile(transpilerParser.WhileContext ctx) { }
+	@Override public void exitWhile_(transpilerParser.While_Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -328,13 +328,13 @@ public class transpilerBaseListener implements transpilerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFor(transpilerParser.ForContext ctx) { }
+	@Override public void enterFor_(transpilerParser.For_Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFor(transpilerParser.ForContext ctx) { }
+	@Override public void exitFor_(transpilerParser.For_Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -347,6 +347,18 @@ public class transpilerBaseListener implements transpilerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSent_p(transpilerParser.Sent_pContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInc(transpilerParser.IncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInc(transpilerParser.IncContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -395,6 +407,18 @@ public class transpilerBaseListener implements transpilerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitOplog(transpilerParser.OplogContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterOpcomp(transpilerParser.OpcompContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOpcomp(transpilerParser.OpcompContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

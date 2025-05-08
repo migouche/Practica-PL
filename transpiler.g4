@@ -24,10 +24,9 @@ FUNCTION : 'FUNCTION' | 'function';
 VAR : 'VAR' | 'var';
 
 OPARIT :  '+' | '-' | '*' | '/' | 'mod' | 'div' | 'MOD' | 'DIV';
-OPCOMP : '<' | '>' | '<=' | '>=' | '=';
+
 
 //--PARTE OPCIONAL--
-INC : 'to' | 'downto';
 UNIT : 'unit' | 'UNIT';
 
 fragment IDENTIFIER_START: [a-zA-Z];
@@ -66,7 +65,7 @@ prg :
     UNIT ID ';' dcllist[0] '.' {System.out.println($dcllist.v);};
 blq[boolean is_main, int tab] returns [String v] : dcllist[$tab] BEGIN sentlist[$tab + 1] END {
     if(is_main){
-        $v = $dcllist.v + "void main ( void )\n{\n"+ $sentlist.v + "\n}";
+        $v = $dcllist.v + "void main ( void ) {\n"+ $sentlist.v + "\n}";
     }
     else{
         $v = $dcllist.v + $sentlist.v;
@@ -129,19 +128,21 @@ tbas returns[String v] :
 //--ZONA DE SENTENCIAS--
 sent[int tabs] returns[String v] :
     if_[$tabs] { $v = $if_.v;} |
-    while[$tabs] {$v= "\t".repeat($tabs) + "while";} |
-    repeat[$tabs] {$v="\t".repeat($tabs) + "repeat";} |
-    for[$tabs] {$v="\t".repeat($tabs) + "for";} |
+    while_[$tabs] {$v = $while_.v;} |
+    repeat[$tabs] {$v = $repeat.v;} |
+    for_[$tabs] {$v = $for_.v;} |
     ID sent_p ';' {$v= "\t".repeat($tabs) + $ID.text + $sent_p.v + ";\n";};
+
 if_[int tabs] returns[String v] : 'if' expcond 'then' blq[false, $tabs] if_p[$tabs] {$v= combinator.createIf($expcond.v, $blq.v, $tabs) + $if_p.v;};
 if_p[int tabs] returns[String v]:  {$v= "";}| 'else' blq[false, $tabs] {$v= combinator.createElse($blq.v, $tabs);};
-while[int tabs] : 'while' expcond 'do' blq[false, $tabs];
-repeat[int tabs] : 'repeat' blq[false, $tabs] 'until' expcond ';';
-for[int tabs] : 'for' ID ':=' exp INC exp 'do' blq[false, $tabs];
+while_[int tabs] returns[String v]: 'while' expcond 'do' blq[false, $tabs]{$v= combinator.createWhile($expcond.v, $blq.v, $tabs);};
+repeat[int tabs] returns[String v]: 'repeat' blq[false, $tabs] 'until' expcond ';'{$v = combinator.createDo($blq.v, $expcond.v, $tabs);};
+for_[int tabs] returns[String v]: 'for' ID ':=' e1=exp inc e2=exp 'do' blq[false, $tabs] {$v = combinator.createFor($ID.text, $e1.v, $inc.v, $e2.v, $blq.v, $tabs);};
 sent_p returns[String v]:
     subparamlist {$v= $subparamlist.v;} |
     ':=' exp  {$v= "=" + $exp.v;}; //Incluye el proc_call y el asig, para evitar no determinismo
 
+inc returns[String v]: 'to'{$v = "<";} | 'downto'{$v = ">";};
 
 exp returns[String v] : factor exp_p {$v= $factor.v + $exp_p.v;};
 exp_p returns[String v]:
@@ -150,10 +151,12 @@ exp_p returns[String v]:
 op returns [String v] :
     OPARIT{$v= $OPARIT.text;} |
     oplog{$v= $oplog.v;} |
-    OPCOMP{$v= $OPCOMP.text;};
+    opcomp{$v= $opcomp.v;};
 oplog returns [String v] :
     'or'{$v= "||";} |
     'and'{$v= "&&";};
+
+opcomp returns[String v]: '<'{$v= "<";} | '>' {$v= ">";}| '<=' {$v= "<=";}| '>=' {$v= ">=";}| '=' {$v= "==";};
 factor returns[String v]:
     simpvalue {$v= $simpvalue.v;} |
     '(' exp ')'{$v= "( " + $exp.v + " )";} |
@@ -170,6 +173,6 @@ expcond_p returns[String v] :
     {$v= "";} |
     oplog factorcond expcond_p {$v= $oplog.v + $factorcond.v + $expcond_p.v;};
 factorcond returns[String v] :
-    exp OPCOMP exp {$v= $exp.v + $OPCOMP.text + $exp.v;} |
+    exp opcomp exp {$v= $exp.v + $opcomp.v + $exp.v;} |
     '(' exp ')' {$v= "( " + $exp.v + " )";} |
     'not' factorcond {$v= "!" + $factorcond.v;};

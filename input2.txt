@@ -7,6 +7,7 @@ const
 var
   x, y: INTEGER;
   r: REAL;
+  cont: INTEGER;
 
 procedure MostrarMensaje(m: INTEGER);
 begin
@@ -23,6 +24,21 @@ begin
   x := 10;
   y := 5;
   r := PI * x;
-  MostrarMensaje(x);
-  y := Sumar(x, y);
+
+  if not (a > b) then
+      begin
+      writeln('a no es mayor que b');
+      end
+    else
+    begin
+      writeln('a es mayor que b');
+    end
+for cont := 1 to 5 do
+  begin
+    writeln('Valor de cont: ', cont);
+  end
+MostrarMensaje(x);
+y := Sumar(x, y);
+
+
 end.
