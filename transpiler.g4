@@ -175,7 +175,7 @@ op returns [String v] :
     oplog{$v= $oplog.v;} |
     opcomp{$v= $opcomp.v;};
 
-oparit returns [String v] :  '+' {$v= "+";}| '-'{$v= "-";} | '*' {$v= "*";} | 'mod'{$v= "%";} | 'div'{$v= "/";} | 'MOD'{$v= "%";} | 'DIV'{$v= "/";};
+oparit returns [String v] :  '+' {$v= "+";}| '-'{$v= "-";} | '*' {$v= "*";} | 'mod'{$v= "%";} | 'MOD'{$v= "%";} | 'div'{$v= "/";} | 'DIV'{$v= "/";};
 oplog returns [String v] :
     'or'{$v= "||";} |
     'and'{$v= "&&";};

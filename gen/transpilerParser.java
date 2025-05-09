@@ -1,4 +1,4 @@
-// Generated from C:/Users/migouche/codes/urjc/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+// Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 
     import java.io.FileWriter;
     import java.io.IOException;
@@ -56,7 +56,7 @@ public class transpilerParser extends Parser {
 			null, "';'", "'.'", "'='", "':'", "','", "'('", "')'", "'INTEGER'", "'REAL'", 
 			"'integer'", "'real'", "'if'", "'then'", "'else'", "'while'", "'do'", 
 			"'repeat'", "'until'", "'for'", "':='", "'to'", "'downto'", "'+'", "'-'", 
-			"'*'", "'mod'", "'div'", "'MOD'", "'DIV'", "'or'", "'and'", "'<'", "'>'", 
+			"'*'", "'mod'", "'MOD'", "'div'", "'DIV'", "'or'", "'and'", "'<'", "'>'", 
 			"'<='", "'>='", "'not'"
 		};
 	}
@@ -2483,7 +2483,7 @@ public class transpilerParser extends Parser {
 				{
 				setState(354);
 				match(T__26);
-				((OparitContext)_localctx).v =  "/";
+				((OparitContext)_localctx).v =  "%";
 				}
 				break;
 			case T__27:
@@ -2491,7 +2491,7 @@ public class transpilerParser extends Parser {
 				{
 				setState(356);
 				match(T__27);
-				((OparitContext)_localctx).v =  "%";
+				((OparitContext)_localctx).v =  "/";
 				}
 				break;
 			case T__28:

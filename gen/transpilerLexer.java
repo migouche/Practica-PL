@@ -1,4 +1,4 @@
-// Generated from C:/Users/migouche/codes/urjc/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+// Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 
     import java.io.FileWriter;
     import java.io.IOException;
@@ -54,7 +54,7 @@ public class transpilerLexer extends Lexer {
 			null, "';'", "'.'", "'='", "':'", "','", "'('", "')'", "'INTEGER'", "'REAL'", 
 			"'integer'", "'real'", "'if'", "'then'", "'else'", "'while'", "'do'", 
 			"'repeat'", "'until'", "'for'", "':='", "'to'", "'downto'", "'+'", "'-'", 
-			"'*'", "'mod'", "'div'", "'MOD'", "'DIV'", "'or'", "'and'", "'<'", "'>'", 
+			"'*'", "'mod'", "'MOD'", "'div'", "'DIV'", "'or'", "'and'", "'<'", "'>'", 
 			"'<='", "'>='", "'not'"
 		};
 	}
@@ -282,10 +282,10 @@ public class transpilerLexer extends Lexer {
 		"\u0000\u0000\u0000\u00d1\u00d2\u0005-\u0000\u0000\u00d20\u0001\u0000\u0000"+
 		"\u0000\u00d3\u00d4\u0005*\u0000\u0000\u00d42\u0001\u0000\u0000\u0000\u00d5"+
 		"\u00d6\u0005m\u0000\u0000\u00d6\u00d7\u0005o\u0000\u0000\u00d7\u00d8\u0005"+
-		"d\u0000\u0000\u00d84\u0001\u0000\u0000\u0000\u00d9\u00da\u0005d\u0000"+
-		"\u0000\u00da\u00db\u0005i\u0000\u0000\u00db\u00dc\u0005v\u0000\u0000\u00dc"+
-		"6\u0001\u0000\u0000\u0000\u00dd\u00de\u0005M\u0000\u0000\u00de\u00df\u0005"+
-		"O\u0000\u0000\u00df\u00e0\u0005D\u0000\u0000\u00e08\u0001\u0000\u0000"+
+		"d\u0000\u0000\u00d84\u0001\u0000\u0000\u0000\u00d9\u00da\u0005M\u0000"+
+		"\u0000\u00da\u00db\u0005O\u0000\u0000\u00db\u00dc\u0005D\u0000\u0000\u00dc"+
+		"6\u0001\u0000\u0000\u0000\u00dd\u00de\u0005d\u0000\u0000\u00de\u00df\u0005"+
+		"i\u0000\u0000\u00df\u00e0\u0005v\u0000\u0000\u00e08\u0001\u0000\u0000"+
 		"\u0000\u00e1\u00e2\u0005D\u0000\u0000\u00e2\u00e3\u0005I\u0000\u0000\u00e3"+
 		"\u00e4\u0005V\u0000\u0000\u00e4:\u0001\u0000\u0000\u0000\u00e5\u00e6\u0005"+
 		"o\u0000\u0000\u00e6\u00e7\u0005r\u0000\u0000\u00e7<\u0001\u0000\u0000"+

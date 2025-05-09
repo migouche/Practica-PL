@@ -1,30 +1,29 @@
-#define PI 3.14
-#define SALUDO "Hola"
-int x,y;
-float r;
-int cont;
-void MostrarMensaje (int m){
-	writeln( SALUDO );
-	writeln( "Mensaje con número:", m );
+	#define PI 3.14159
+#define FACTOR 2
+	int a,b,c;
+float r,area;
+void ShowValues (int x, int y){
+		int d,e,f,g;
+float r2,r3,r4,r5;
+		writeln( "First value: ", x );
+		writeln( "Second value: ", y );
 }
-int Sumar (int a, int b){
-	return a+b;
+int Multiply (int n1, int n2){
+		int n2;
+		return n1*n2;
+}
+float CircleArea (float radius){
+		return PI*radius;
 }
 void main ( void ) {
-	x=10;
-	y=5;
-	r=PI*x;
-
-	if (!( a>b )) {
-		writeln( "a no es mayor que b" );
-	} else{
-		writeln( "a es mayor que b" );
-	}
-
-	for( cont=1; cont<5+1; cont=cont+1){
-		writeln( "Valor de cont: ", cont );
-	}
-	MostrarMensaje( x );
-	y=Sumar( x, y );
+	a=5;
+	b=10;
+	c=Multiply( a, b );
+	ShowValues( a, c );
+	r=7.5;
+	area=CircleArea( r );
+	writeln( "Radius: ", r );
+	writeln( "Area of circle: ", area );
+	writeln( "Constant factor: ", FACTOR );
 
 }

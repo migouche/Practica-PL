@@ -15,7 +15,7 @@ begin
   writeln('Mensaje con número:', m);
 end;
 
-function Sumar(a, b: INTEGER): INTEGER;
+function Sumar(a, b: INTEGER; c: REAL): INTEGER;
 begin
   Sumar := a + b;
 end;
@@ -38,7 +38,7 @@ for cont := 1 to 5 do
     writeln('Valor de cont: ', cont);
   end
 MostrarMensaje(x);
-y := Sumar(x, y);
+y := Sumar(x, y, r);
 
 
 end.
