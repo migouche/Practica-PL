@@ -495,7 +495,7 @@ public class transpilerParser extends Parser {
 				setState(118);
 				((Sentlist_pContext)_localctx).sent = sent(_localctx.tab);
 				setState(119);
-				((Sentlist_pContext)_localctx).sentlist_p = sentlist_p(tab);
+				((Sentlist_pContext)_localctx).sentlist_p = sentlist_p(_localctx.tab);
 				((Sentlist_pContext)_localctx).v = ((Sentlist_pContext)_localctx).sent.v + ((Sentlist_pContext)_localctx).sentlist_p.v;
 				}
 				break;

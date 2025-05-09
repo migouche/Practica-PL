@@ -97,7 +97,7 @@ dcllist[int tab] returns [String v] :
     {$v="";} |
     dcl[$tab] dcllist[$tab] {$v =$dcl.v + $dcllist.v;} ;
 sentlist[int tab] returns [String v] : sent[$tab] sentlist_p[$tab] {$v =$sent.v + $sentlist_p.v;};
-sentlist_p[int tab] returns [String v]: {$v="";}| sent[$tab] sentlist_p[tab] {$v =$sent.v + $sentlist_p.v;};
+sentlist_p[int tab] returns [String v]: {$v="";}| sent[$tab] sentlist_p[$tab] {$v =$sent.v + $sentlist_p.v;};
 
 //--DECLARACIONES--
 dcl[int tab] returns [String v] :

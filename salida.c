@@ -1,19 +1,19 @@
-	#define PI 3.14159
+#define PI 3.14159
 #define FACTOR 2
-	int a,b,c;
+int a,b,c;
 float r,area;
 void ShowValues (int x, int y){
-		int d,e,f,g;
+int d,e,f,g;
 float r2,r3,r4,r5;
-		writeln( "First value: ", x );
-		writeln( "Second value: ", y );
+	writeln( "First value: ", x );
+	writeln( "Second value: ", y );
 }
 int Multiply (int n1, int n2){
-		int n2;
-		return n1*n2;
+int n2;
+	return n1*n2;
 }
 float CircleArea (float radius){
-		return PI*radius;
+	return PI*radius;
 }
 void main ( void ) {
 	a=5;
