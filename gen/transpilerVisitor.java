@@ -1,4 +1,8 @@
 // Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+
+    import java.io.FileWriter;
+    import java.io.IOException;
+
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -201,6 +205,12 @@ public interface transpilerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitOp(transpilerParser.OpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link transpilerParser#oparit}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOparit(transpilerParser.OparitContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link transpilerParser#oplog}.
 	 * @param ctx the parse tree

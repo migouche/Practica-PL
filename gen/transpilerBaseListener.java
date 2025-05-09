@@ -1,5 +1,9 @@
 // Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 
+    import java.io.FileWriter;
+    import java.io.IOException;
+
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -395,6 +399,18 @@ public class transpilerBaseListener implements transpilerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitOp(transpilerParser.OpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterOparit(transpilerParser.OparitContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOparit(transpilerParser.OparitContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

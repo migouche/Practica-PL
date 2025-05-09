@@ -16,6 +16,10 @@ public class Combinator {
         return result.toString();
     }
 
+    public String createConstLit(String constLit){
+        return constLit.replace('\'','"');
+    }
+
     public String createFunction(String ID,String formal_paramlist, String tbas, String blq){
         String result;
         result = tbas;

@@ -1,11 +1,35 @@
 grammar transpiler;
 
+@header {
+    import java.io.FileWriter;
+    import java.io.IOException;
+}
+
 @parser :: members{
     private Combinator combinator = new Combinator();
+    private FileWriter writer;
 
-    public void printAtEnd(){
-        //System.out.println(combinator.toString());
+    private void printAtEnd(String text){
+       openFile();
+       closeFile(text);
     }
+
+    private void openFile(){
+        try {
+            writer = new FileWriter("salida.c", false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        }
+
+        private void closeFile(String text) {
+            try {
+                writer.write(text);
+                if (writer != null) writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
 }
 
@@ -22,8 +46,6 @@ CONST: 'CONST' | 'const';
 PROCEDURE: 'PROCEDURE' | 'procedure';
 FUNCTION : 'FUNCTION' | 'function';
 VAR : 'VAR' | 'var';
-
-OPARIT :  '+' | '-' | '*' | '/' | 'mod' | 'div' | 'MOD' | 'DIV';
 
 
 //--PARTE OPCIONAL--
@@ -61,8 +83,8 @@ MULTILINE_COMMENT : '(*' .*? '*)' -> skip;
 
 //--PROGRAMA--
 prg :
-    PROGRAM ID ';' blq[true, 0] '.' {System.out.println($blq.v);} |
-    UNIT ID ';' dcllist[0] '.' {System.out.println($dcllist.v);};
+    PROGRAM ID ';' blq[true, 0] '.' {printAtEnd($blq.v);} |
+    UNIT ID ';' dcllist[0] '.' {printAtEnd($dcllist.v);};
 blq[boolean is_main, int tab] returns [String v] : dcllist[$tab] BEGIN sentlist[$tab + 1] END {
     if(is_main){
         $v = $dcllist.v + "void main ( void ) {\n"+ $sentlist.v + "\n}";
@@ -92,7 +114,7 @@ ctelist_p returns [String v] :
     ID '=' simpvalue ';' ctelist_p{$v = combinator.createConst($ID.text, $simpvalue.v) +  $ctelist_p.v;};
 simpvalue returns [String v] :
     CONSTREAL {$v= $CONSTREAL.text;} |
-    CONSTINT {$v= $CONSTINT.text;}| CONSTLIT {$v= $CONSTLIT.text;};
+    CONSTINT {$v= $CONSTINT.text;}| CONSTLIT {$v= combinator.createConstLit($CONSTLIT.text);};
 
 
 // # variables # (fer) --> NS SI ESTA BIEN, REVISAR LA GRAMATICA
@@ -149,12 +171,15 @@ exp_p returns[String v]:
     {$v= "";} |
     op factor exp_p {$v= $op.v + $factor.v;};
 op returns [String v] :
-    OPARIT{$v= $OPARIT.text;} |
+    oparit{$v= $oparit.v;} |
     oplog{$v= $oplog.v;} |
     opcomp{$v= $opcomp.v;};
+
+oparit returns [String v] :  '+' {$v= "+";}| '-'{$v= "-";} | '*' {$v= "*";} | 'mod'{$v= "%";} | 'div'{$v= "/";} | 'MOD'{$v= "%";} | 'DIV'{$v= "/";};
 oplog returns [String v] :
     'or'{$v= "||";} |
     'and'{$v= "&&";};
+
 
 opcomp returns[String v]: '<'{$v= "<";} | '>' {$v= ">";}| '<=' {$v= "<=";}| '>=' {$v= ">=";}| '=' {$v= "==";};
 factor returns[String v]:
