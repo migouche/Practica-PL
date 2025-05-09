@@ -27,12 +27,38 @@ public class Combinator {
         if(formal_paramlist.isEmpty()){
             result += "( void )";
         }else{
-            result += formal_paramlist;
+            result += fixFormalParamList(formal_paramlist);
         }
         result += "{\n";
         result += blq;
         result += "}\n";
         return result;
+    }
+
+    public String fixFormalParamList(String formal_paramlist){
+        StringBuilder result = new StringBuilder();
+        result.append("(");
+
+        formal_paramlist = formal_paramlist.substring(1, formal_paramlist.length() - 1);
+
+        String[] params = formal_paramlist.split(",");
+        String type = params[0].split(" ")[0];
+
+        for (String param : params) {
+            String[] parts = param.trim().split(" ");
+            if (parts.length == 1) {
+                result.append(type).append(" ").append(parts[0]).append(", ");
+            } else {
+                result.append(parts[0]).append(" ").append(parts[1]).append(", ");
+                type = parts[0];
+            }
+        }
+        // remove last comma and space
+        if (!result.isEmpty()) {
+            result.setLength(result.length() - 2);
+        }
+        result.append(")");
+        return result.toString();
     }
 
     public String createConst(String ID, String simpvalue){
