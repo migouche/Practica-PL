@@ -8,7 +8,7 @@ void MostrarMensaje (int m){
 	writeln( "Mensaje con número:", m );
 }
 int Sumar (int a, int b){
-	Sumar=a+b;
+	return a+b;
 }
 void main ( void ) {
 	x=10;

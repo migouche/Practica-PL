@@ -30,12 +30,29 @@ public class Combinator {
             result += fixFormalParamList(formal_paramlist);
         }
         result += "{\n";
-        result += blq;
+        result += fixReturn(ID,blq);
         result += "}\n";
         return result;
     }
 
-    public String fixFormalParamList(String formal_paramlist){
+    private String fixReturn(String id, String blq){
+        StringBuilder result = new StringBuilder();
+        String[] lines = blq.split("\n");
+
+        for (String line : lines) {
+            if (line.contains(id + "=")) {
+                result.append("\t".repeat(line.indexOf(line.trim()))).
+                        append("return ").
+                        append(line.split("=")[1].trim()).
+                        append("\n");
+            } else {
+                result.append(line).append("\n");
+            }
+        }
+        return result.toString();
+    }
+
+    private String fixFormalParamList(String formal_paramlist){
         StringBuilder result = new StringBuilder();
         result.append("(");
 
