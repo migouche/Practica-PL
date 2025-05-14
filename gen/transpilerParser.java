@@ -1,4 +1,4 @@
-// Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+// Generated from /home/migouche/codes/windows/urjc/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 
     import java.io.FileWriter;
     import java.io.IOException;
@@ -279,7 +279,7 @@ public class transpilerParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(100);
-			((BlqContext)_localctx).dcllist = dcllist(_localctx.tab);
+			((BlqContext)_localctx).dcllist = dcllist(_localctx.tab + (is_main ? 0: 1));
 			setState(101);
 			match(BEGIN);
 			setState(102);
@@ -574,8 +574,8 @@ public class transpilerParser extends Parser {
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(127);
-				((DclContext)_localctx).defvar = defvar();
-				((DclContext)_localctx).v =  "\t".repeat(_localctx.tab) + ((DclContext)_localctx).defvar.v; 
+				((DclContext)_localctx).defvar = defvar(_localctx.tab);
+				((DclContext)_localctx).v =  ((DclContext)_localctx).defvar.v; 
 				}
 				break;
 			case PROCEDURE:
@@ -879,14 +879,17 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class DefvarContext extends ParserRuleContext {
+		public int tabs;
 		public String v;
 		public DefvarlistContext defvarlist;
 		public TerminalNode VAR() { return getToken(transpilerParser.VAR, 0); }
 		public DefvarlistContext defvarlist() {
 			return getRuleContext(DefvarlistContext.class,0);
 		}
-		public DefvarContext(ParserRuleContext parent, int invokingState) {
+		public DefvarContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public DefvarContext(ParserRuleContext parent, int invokingState, int tabs) {
 			super(parent, invokingState);
+			this.tabs = tabs;
 		}
 		@Override public int getRuleIndex() { return RULE_defvar; }
 		@Override
@@ -904,8 +907,8 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final DefvarContext defvar() throws RecognitionException {
-		DefvarContext _localctx = new DefvarContext(_ctx, getState());
+	public final DefvarContext defvar(int tabs) throws RecognitionException {
+		DefvarContext _localctx = new DefvarContext(_ctx, getState(), tabs);
 		enterRule(_localctx, 20, RULE_defvar);
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -913,7 +916,7 @@ public class transpilerParser extends Parser {
 			setState(167);
 			match(VAR);
 			setState(168);
-			((DefvarContext)_localctx).defvarlist = defvarlist();
+			((DefvarContext)_localctx).defvarlist = defvarlist(_localctx.tabs);
 			setState(169);
 			match(T__0);
 			((DefvarContext)_localctx).v =  ((DefvarContext)_localctx).defvarlist.v;
@@ -932,6 +935,7 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class DefvarlistContext extends ParserRuleContext {
+		public int tab;
 		public String v;
 		public VarlistContext varlist;
 		public TbasContext tbas;
@@ -945,8 +949,10 @@ public class transpilerParser extends Parser {
 		public Defvarlist_pContext defvarlist_p() {
 			return getRuleContext(Defvarlist_pContext.class,0);
 		}
-		public DefvarlistContext(ParserRuleContext parent, int invokingState) {
+		public DefvarlistContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public DefvarlistContext(ParserRuleContext parent, int invokingState, int tab) {
 			super(parent, invokingState);
+			this.tab = tab;
 		}
 		@Override public int getRuleIndex() { return RULE_defvarlist; }
 		@Override
@@ -964,8 +970,8 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final DefvarlistContext defvarlist() throws RecognitionException {
-		DefvarlistContext _localctx = new DefvarlistContext(_ctx, getState());
+	public final DefvarlistContext defvarlist(int tab) throws RecognitionException {
+		DefvarlistContext _localctx = new DefvarlistContext(_ctx, getState(), tab);
 		enterRule(_localctx, 22, RULE_defvarlist);
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -977,8 +983,8 @@ public class transpilerParser extends Parser {
 			setState(174);
 			((DefvarlistContext)_localctx).tbas = tbas();
 			setState(175);
-			((DefvarlistContext)_localctx).defvarlist_p = defvarlist_p();
-			((DefvarlistContext)_localctx).v =  combinator.createVarlist(((DefvarlistContext)_localctx).varlist.v, ((DefvarlistContext)_localctx).tbas.v) + ((DefvarlistContext)_localctx).defvarlist_p.v;
+			((DefvarlistContext)_localctx).defvarlist_p = defvarlist_p(_localctx.tab);
+			((DefvarlistContext)_localctx).v =  combinator.createVarlist(((DefvarlistContext)_localctx).varlist.v, "\t".repeat(_localctx.tab) + ((DefvarlistContext)_localctx).tbas.v) + ((DefvarlistContext)_localctx).defvarlist_p.v;
 			}
 		}
 		catch (RecognitionException re) {
@@ -994,6 +1000,7 @@ public class transpilerParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Defvarlist_pContext extends ParserRuleContext {
+		public int tab;
 		public String v;
 		public VarlistContext varlist;
 		public TbasContext tbas;
@@ -1007,8 +1014,10 @@ public class transpilerParser extends Parser {
 		public Defvarlist_pContext defvarlist_p() {
 			return getRuleContext(Defvarlist_pContext.class,0);
 		}
-		public Defvarlist_pContext(ParserRuleContext parent, int invokingState) {
+		public Defvarlist_pContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public Defvarlist_pContext(ParserRuleContext parent, int invokingState, int tab) {
 			super(parent, invokingState);
+			this.tab = tab;
 		}
 		@Override public int getRuleIndex() { return RULE_defvarlist_p; }
 		@Override
@@ -1026,8 +1035,8 @@ public class transpilerParser extends Parser {
 		}
 	}
 
-	public final Defvarlist_pContext defvarlist_p() throws RecognitionException {
-		Defvarlist_pContext _localctx = new Defvarlist_pContext(_ctx, getState());
+	public final Defvarlist_pContext defvarlist_p(int tab) throws RecognitionException {
+		Defvarlist_pContext _localctx = new Defvarlist_pContext(_ctx, getState(), tab);
 		enterRule(_localctx, 24, RULE_defvarlist_p);
 		try {
 			setState(186);
@@ -1051,8 +1060,8 @@ public class transpilerParser extends Parser {
 				setState(182);
 				((Defvarlist_pContext)_localctx).tbas = tbas();
 				setState(183);
-				((Defvarlist_pContext)_localctx).defvarlist_p = defvarlist_p();
-				((Defvarlist_pContext)_localctx).v =  ";\n" + combinator.createVarlist(((Defvarlist_pContext)_localctx).varlist.v, ((Defvarlist_pContext)_localctx).tbas.v) + ((Defvarlist_pContext)_localctx).defvarlist_p.v;
+				((Defvarlist_pContext)_localctx).defvarlist_p = defvarlist_p(_localctx.tab);
+				((Defvarlist_pContext)_localctx).v =  ";\n" + combinator.createVarlist(((Defvarlist_pContext)_localctx).varlist.v, "\t".repeat(_localctx.tab) + ((Defvarlist_pContext)_localctx).tbas.v) + ((Defvarlist_pContext)_localctx).defvarlist_p.v;
 				}
 				break;
 			}

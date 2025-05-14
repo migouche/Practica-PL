@@ -85,7 +85,7 @@ MULTILINE_COMMENT : '(*' .*? '*)' -> skip;
 prg :
     PROGRAM ID ';' blq[true, 0] '.' {printAtEnd($blq.v);} |
     UNIT ID ';' dcllist[0] '.' {printAtEnd($dcllist.v);};
-blq[boolean is_main, int tab] returns [String v] : dcllist[$tab] BEGIN sentlist[$tab + 1] END {
+blq[boolean is_main, int tab] returns [String v] :  dcllist[$tab + (is_main ? 0: 1)] BEGIN sentlist[$tab + 1] END {
     if(is_main){
         $v = $dcllist.v + "void main ( void ) {\n"+ $sentlist.v + "\n}";
     }
@@ -102,7 +102,7 @@ sentlist_p[int tab] returns [String v]: {$v="";}| sent[$tab] sentlist_p[$tab] {$
 //--DECLARACIONES--
 dcl[int tab] returns [String v] :
     defcte {$v= "\t".repeat($tab) + $defcte.v; } |
-    defvar {$v= "\t".repeat($tab) + $defvar.v; } |
+    defvar[$tab] {$v= $defvar.v; } |
     defproc[$tab] {$v = $defproc.v;} |
     deffun[$tab] {$v= $deffun.v;};
 
@@ -118,11 +118,11 @@ simpvalue returns [String v] :
 
 
 // # variables # (fer) --> NS SI ESTA BIEN, REVISAR LA GRAMATICA
-defvar returns [String v] : VAR defvarlist ';' {$v= $defvarlist.v;};
-defvarlist returns [String v] : varlist ':' tbas defvarlist_p{$v = combinator.createVarlist($varlist.v, $tbas.v) + $defvarlist_p.v;};
-defvarlist_p returns [String v]:
+defvar[int tabs] returns [String v] : VAR defvarlist[$tabs] ';' {$v= $defvarlist.v;};
+defvarlist[int tab] returns [String v] : varlist ':' tbas defvarlist_p[$tab] {$v = combinator.createVarlist($varlist.v, "\t".repeat($tab) + $tbas.v) + $defvarlist_p.v;};
+defvarlist_p[int tab] returns [String v]:
     {$v = ";\n";} |
-    ';' varlist ':' tbas defvarlist_p {$v = ";\n" + combinator.createVarlist($varlist.v, $tbas.v) + $defvarlist_p.v;};
+    ';' varlist ':' tbas defvarlist_p[$tab] {$v = ";\n" + combinator.createVarlist($varlist.v, "\t".repeat($tab) + $tbas.v) + $defvarlist_p.v;};
 varlist returns[String v] : ID varlist_p {$v= $ID.text + $varlist_p.v;};
 varlist_p returns[String v]:
     {$v= "";} |
