@@ -1,4 +1,4 @@
-// Generated from /home/migouche/codes/windows/urjc/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+// Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 
     import java.io.FileWriter;
     import java.io.IOException;

@@ -1,4 +1,4 @@
-// Generated from /home/migouche/codes/windows/urjc/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+// Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 
     import java.io.FileWriter;
     import java.io.IOException;
@@ -26,7 +26,8 @@ public class transpilerParser extends Parser {
 		T__24=25, T__25=26, T__26=27, T__27=28, T__28=29, T__29=30, T__30=31, 
 		T__31=32, T__32=33, T__33=34, T__34=35, T__35=36, PROGRAM=37, BEGIN=38, 
 		END=39, CONST=40, PROCEDURE=41, FUNCTION=42, VAR=43, UNIT=44, WHITE_SPACE=45, 
-		ID=46, CONSTINT=47, CONSTREAL=48, CONSTLIT=49, ONE_LINE_COMMENT=50, MULTILINE_COMMENT=51;
+		ID=46, CONSTINT=47, CONSTREAL=48, CONSTLIT=49, ONE_LINE_COMMENT=50, MULTILINE_COMMENT=51, 
+		ERROR_CHAR=52;
 	public static final int
 		RULE_prg = 0, RULE_blq = 1, RULE_dcllist = 2, RULE_sentlist = 3, RULE_sentlist_p = 4, 
 		RULE_dcl = 5, RULE_defcte = 6, RULE_ctelist = 7, RULE_ctelist_p = 8, RULE_simpvalue = 9, 
@@ -68,7 +69,7 @@ public class transpilerParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, "PROGRAM", "BEGIN", "END", "CONST", "PROCEDURE", "FUNCTION", "VAR", 
 			"UNIT", "WHITE_SPACE", "ID", "CONSTINT", "CONSTREAL", "CONSTLIT", "ONE_LINE_COMMENT", 
-			"MULTILINE_COMMENT"
+			"MULTILINE_COMMENT", "ERROR_CHAR"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -3193,7 +3194,7 @@ public class transpilerParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u00013\u01bb\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u00014\u01bb\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+

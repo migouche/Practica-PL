@@ -76,6 +76,16 @@ CONSTLIT: '\'' ('\\\''|~['])+ '\'';
 ONE_LINE_COMMENT : '{' ~('}')* '}' -> skip;
 MULTILINE_COMMENT : '(*' .*? '*)' -> skip;
 
+//#####################
+//ERROR DE RECUPERACION
+//#####################
+ERROR_CHAR: . {
+    System.err.println("[LÉXICO] Línea " + getLine() + ":" + (getCharPositionInLine()+1) + " - Símbolo inválido: '" + getText() + "'");
+    ErrorListener.errorCount++;
+    skip();
+};
+
+
 
 //############################################
 //ESPECIFICACION SINTATICA DEL LENGUAJE FUENTE

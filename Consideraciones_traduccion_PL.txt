@@ -1,6 +1,6 @@
 @parser:members{
 	int contador;
-	Function func;
+	ErrorListener func;
 	public ParserMiniPascalv11(..., int count){
 	contador = count;
 	...
@@ -9,7 +9,7 @@
 
 
 
-public class Function(){
+public class ErrorListener(){
 	String nombre;
 	String tipo;
 	String retorno;
@@ -19,7 +19,7 @@ public function(String nombre, String tipo, String retorno, ArrayList<String> pa
 }
 
 
-FUNCTION:  "function" ID formal_paramlist ':' tbas ';' blq';' {func = new Function($ID.text, $tbas.vlex, ...);};
+FUNCTION:  "function" ID formal_paramlist ':' tbas ';' blq';' {func = new ErrorListener($ID.text, $tbas.vlex, ...);};
 
 tbas returns [String vlex]: 'INTEGER' {$vlex = "int";} | 'REAL' {$vlex = "float";} ;
-		↑ (puede ser de distintos valores, puede devolver incluso un Function)
+		↑ (puede ser de distintos valores, puede devolver incluso un ErrorListener)
