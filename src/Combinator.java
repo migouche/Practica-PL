@@ -137,9 +137,10 @@ public class Combinator {
         result += "\t".repeat(tabs);
         result += "do\n";
         result += blq;
+        result += "\t".repeat(tabs);
         result += "until ( ";
         result += expcond;
-        result += ")\n";
+        result += ");\n";
         return result;
     }
 
