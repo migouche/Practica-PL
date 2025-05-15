@@ -4,6 +4,7 @@ import org.antlr.v4.runtime.*;
 public class Main {
     public static void main(String[] args) {
         try {
+            String outputName = args[0];
             ErrorListener.errorCount = 0;
 
             CharStream input = CharStreams.fromFileName(args[0]);
@@ -15,6 +16,7 @@ public class Main {
             CommonTokenStream tokens = new CommonTokenStream(analex);
 
             transpilerParser anasint = new transpilerParser(tokens);
+            anasint.setOutputName(outputName);
             anasint.removeErrorListeners();
             anasint.addErrorListener(new ErrorListener());
             anasint.setErrorHandler(new DefaultErrorStrategy());

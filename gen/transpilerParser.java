@@ -2,6 +2,7 @@
 
     import java.io.FileWriter;
     import java.io.IOException;
+    import java.io.File;
 
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -121,15 +122,18 @@ public class transpilerParser extends Parser {
 
 	    private Combinator combinator = new Combinator();
 	    private FileWriter writer;
+	    private String name;
 
 	    private void printAtEnd(String text){
 	       openFile();
 	       closeFile(text);
+	       File f = new File(name);
+	       System.out.println("Archivo generado en " + f.getAbsolutePath());
 	    }
 
 	    private void openFile(){
 	        try {
-	            writer = new FileWriter("salida.c", false);
+	            writer = new FileWriter(name, false);
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
@@ -142,6 +146,11 @@ public class transpilerParser extends Parser {
 	            } catch (IOException e) {
 	                e.printStackTrace();
 	            }
+	        }
+
+	        public void setOutputName(String name){
+	            int lastDot = name.lastIndexOf('.');
+	            this.name = name.substring(0, lastDot) + ".c";
 	        }
 
 
