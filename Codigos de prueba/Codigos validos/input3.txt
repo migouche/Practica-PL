@@ -1,0 +1,28 @@
+program DemoWhile;
+
+const
+  LIMITE = 5;
+  MENSAJE = 'Contando...';
+
+var
+  contador: INTEGER;
+  suma: INTEGER;
+
+function Doble(n: INTEGER): INTEGER;
+begin
+  Doble := n * 2;
+end;
+
+begin
+  contador := 1;
+  suma := 0;
+
+  while contador <= LIMITE do
+    begin
+      writeln(MENSAJE, ' ', contador);
+      suma := suma + Doble(contador);
+      contador := contador + 1;
+    end
+
+  writeln('Suma total: ', suma);
+end.

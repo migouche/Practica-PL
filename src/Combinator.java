@@ -127,7 +127,7 @@ public class Combinator {
         result += expcond;
         result += ") {\n";
         result += blq;
-        result += "\t".repeat(tabs) + "}";
+        result += "\t".repeat(tabs) + "}\n";
         return result;
     }
 
