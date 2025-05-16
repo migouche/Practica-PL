@@ -103,27 +103,27 @@ ERROR_CHAR: . {
 //--PROGRAMA--
 prg :
     PROGRAM ID ';' blq[true, 0] '.' {printAtEnd($blq.v);} |
-    UNIT ID ';' dcllist[0] '.' {printAtEnd($dcllist.v);};
-blq[boolean is_main, int tab] returns [String v] :  dcllist[$tab + (is_main ? 0: 1)] BEGIN sentlist[$tab + 1] END {
+    UNIT ID ';' dcllist[0, false] '.' {printAtEnd($dcllist.v);};
+blq[boolean is_main, int tab] returns [String v] :  dcllist[$tab + (is_main ? 0: 1), is_main] BEGIN sentlist[$tab + 1] END {
     if(is_main){
-        $v = $dcllist.v + "void main ( void ) {\n"+ $sentlist.v + "\n}";
+        $v = $dcllist.v + "void main ( void ) {\n"+ $dcllist.global_vars + $sentlist.v + "\n}";
     }
     else{
         $v = $dcllist.v + $sentlist.v;
     }
 };
-dcllist[int tab] returns [String v] :
-    {$v="";} |
-    dcl[$tab] dcllist[$tab] {$v =$dcl.v + $dcllist.v;} ;
+dcllist[int tab, boolean global] returns [String v, String global_vars] :
+    {$v=""; $global_vars="";} |
+    dcl[$tab, $global] dcllist[$tab, $global] {$v =$dcl.v + $dcllist.v; $global_vars = $dcl.global_vars + $dcllist.global_vars;} ;
 sentlist[int tab] returns [String v] : sent[$tab] sentlist_p[$tab] {$v =$sent.v + $sentlist_p.v;};
 sentlist_p[int tab] returns [String v]: {$v="";}| sent[$tab] sentlist_p[$tab] {$v =$sent.v + $sentlist_p.v;};
 
 //--DECLARACIONES--
-dcl[int tab] returns [String v] :
-    defcte {$v= "\t".repeat($tab) + $defcte.v; } |
-    defvar[$tab] {$v= $defvar.v; } |
-    defproc[$tab] {$v = $defproc.v;} |
-    deffun[$tab] {$v= $deffun.v;};
+dcl[int tab, boolean global] returns [String v, String global_vars] :
+    defcte {$v= "\t".repeat($tab) + $defcte.v; $global_vars = "";} |
+    defvar[$tab, $global] {$v= $defvar.v; $global_vars = $defvar.global_vars;} |
+    defproc[$tab] {$v = $defproc.v; $global_vars = "";} |
+    deffun[$tab] {$v= $deffun.v; $global_vars = "";};
 
 // # constantes #
 defcte returns [String v] : CONST ctelist {$v= $ctelist.v; };
@@ -137,11 +137,45 @@ simpvalue returns [String v] :
 
 
 // # variables # (fer) --> NS SI ESTA BIEN, REVISAR LA GRAMATICA
-defvar[int tabs] returns [String v] : VAR defvarlist[$tabs] ';' {$v= $defvarlist.v;};
-defvarlist[int tab] returns [String v] : varlist ':' tbas defvarlist_p[$tab] {$v = combinator.createVarlist($varlist.v, "\t".repeat($tab) + $tbas.v) + $defvarlist_p.v;};
-defvarlist_p[int tab] returns [String v]:
-    {$v = ";\n";} |
-    ';' varlist ':' tbas defvarlist_p[$tab] {$v = ";\n" + combinator.createVarlist($varlist.v, "\t".repeat($tab) + $tbas.v) + $defvarlist_p.v;};
+defvar[int tabs, boolean global] returns [String v, String global_vars] : VAR defvarlist[$tabs, $global] ';' {
+    if ($global) {
+        $v = "";
+        $global_vars = $defvarlist.v;
+    } else {
+        $v = $defvarlist.v;
+        $global_vars = "";
+    }
+};
+defvarlist[int tab, boolean global] returns [String v, String global_vars] : varlist ':' tbas defvarlist_p[$tab, $global] {
+    String varDecl = combinator.createVarlist($varlist.v, "\t".repeat($tab) + $tbas.v) + (global? $defvarlist_p.global_vars : $defvarlist_p.v);
+    if ($global) {
+        $v = "";
+        $global_vars = varDecl;
+    } else {
+        $v = varDecl;
+        $global_vars = "";
+    }
+};
+defvarlist_p[int tab, boolean global] returns [String v, String global_vars] :
+    {
+        if ($global) {
+            $v = "";
+            $global_vars = ";\n";
+        } else {
+            $v = ";\n";
+            $global_vars = "";
+        }
+    } |
+    ';' varlist ':' tbas defvarlist_p[$tab, $global] {
+        String varDecl = ";\n" + combinator.createVarlist($varlist.v, "\t".repeat($tab) + $tbas.v) + (global? $defvarlist_p.global_vars : $defvarlist_p.v);
+        if ($global) {
+            $v = "";
+            $global_vars = varDecl;
+        } else {
+            $v = varDecl;
+            $global_vars = "";
+        }
+    };
 varlist returns[String v] : ID varlist_p {$v= $ID.text + $varlist_p.v;};
 varlist_p returns[String v]:
     {$v= "";} |
