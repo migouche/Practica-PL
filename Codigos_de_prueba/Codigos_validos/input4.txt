@@ -1,0 +1,27 @@
+unit DemoRepeat;
+
+const
+  TEXTO = 'Iteración:';
+
+var
+  numero: INTEGER;
+  total: INTEGER;
+
+function Cuadrado(n: INTEGER): INTEGER;
+begin
+  Cuadrado := n * n;
+end;
+
+function TestDoWhile(x: INTEGER): INTEGER;
+var
+  i: INTEGER;
+begin
+    i := 1;
+    total := 0;
+    repeat begin
+        writeln(TEXTO, i);
+        total := total + Cuadrado(i);
+        i := i + 1;
+    end until (i > x);
+    TestDoWhile := total;
+end;.

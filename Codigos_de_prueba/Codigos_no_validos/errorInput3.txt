@@ -1,0 +1,29 @@
+program DemoWhile;
+
+const
+  LIMITE = 5;
+  MENSAJE = 'Contando...';
+
+var
+  contador: INTEGER;
+  suma: INTEGER;
+
+// Funcion mal declarada                            { Comentario mal implementado con "//", se pone entre llaves {} }
+function Doble n: INTEGER): INTEGER;                { Falta apertura de paréntesis después de Doble }
+begin
+  Doble := n ** 2;                                  { El operador "**" no existe, es '*' }
+end;
+
+begin
+  contador := 1;
+  suma := ;                                         { No se pone valor a la derecha de la variable suma }
+
+  while contador <= LIMITE do
+    begin
+      writeln(MENSAJE, ' ', contador);
+      suma := suma + Doble(contador);
+      contador := contador + 1;
+    end
+
+  writeln('Suma total: ', suma);
+fin.                                                { "fin" no es valido para acabar, se debe poner "end" }

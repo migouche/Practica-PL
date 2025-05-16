@@ -24,6 +24,7 @@ public class Combinator {
         String result;
         result = tbas;
         result += " " + ID + " ";
+
         if(formal_paramlist.isEmpty()){
             result += "( void )";
         }else{
@@ -138,9 +139,9 @@ public class Combinator {
         result += "do\n";
         result += blq;
         result += "\t".repeat(tabs);
-        result += "until ( ";
+        result += "until ";
         result += expcond;
-        result += ");\n";
+        result += ";\n";
         return result;
     }
 

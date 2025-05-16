@@ -1,4 +1,4 @@
-// Generated from /home/migouche/codes/windows/urjc/PL/Practica-PL/transpiler.g4 by ANTLR 4.13.2
+// Generated from C:/Users/ferch/Desktop/GITHUB/Practica-PL/transpiler.g4 by ANTLR 4.13.2
 
     import java.io.FileWriter;
     import java.io.IOException;
@@ -139,19 +139,19 @@ public class transpilerParser extends Parser {
 	        }
 	        }
 
-	        private void closeFile(String text) {
-	            try {
-	                writer.write(text);
-	                if (writer != null) writer.close();
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
+	    private void closeFile(String text) {
+	        try {
+	            writer.write(text);
+	            if (writer != null) writer.close();
+	        } catch (IOException e) {
+	            e.printStackTrace();
 	        }
+	    }
 
-	        public void setOutputName(String name){
-	            int lastDot = name.lastIndexOf('.');
-	            this.name = name.substring(0, lastDot) + ".c";
-	        }
+	    public void setOutputName(String name){
+	        int lastDot = name.lastIndexOf('.');
+	        this.name = name.substring(0, lastDot);
+	    }
 
 
 	public transpilerParser(TokenStream input) {
@@ -211,7 +211,7 @@ public class transpilerParser extends Parser {
 				((PrgContext)_localctx).blq = blq(true, 0);
 				setState(88);
 				match(T__1);
-				printAtEnd(((PrgContext)_localctx).blq.v);
+				name=name+".c"; printAtEnd(((PrgContext)_localctx).blq.v); 
 				}
 				break;
 			case UNIT:
@@ -227,7 +227,7 @@ public class transpilerParser extends Parser {
 				((PrgContext)_localctx).dcllist = dcllist(0, false);
 				setState(95);
 				match(T__1);
-				printAtEnd(((PrgContext)_localctx).dcllist.v);
+				name=name+".h";printAtEnd(((PrgContext)_localctx).dcllist.v);
 				}
 				break;
 			default:
@@ -583,7 +583,7 @@ public class transpilerParser extends Parser {
 				{
 				setState(124);
 				((DclContext)_localctx).defcte = defcte();
-				((DclContext)_localctx).v =  "\t".repeat(_localctx.tab) + ((DclContext)_localctx).defcte.v; ((DclContext)_localctx).global_vars =  "";
+				((DclContext)_localctx).v =  ((DclContext)_localctx).defcte.v; ((DclContext)_localctx).global_vars =  "";
 				}
 				break;
 			case VAR:

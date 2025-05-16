@@ -1,11 +1,11 @@
 #define LIMITE 5
 #define MENSAJE "Contando..."
-int contador;
-int suma;
 int Doble (int n){
-	return n*2;
+		return n*2;
 }
 void main ( void ) {
+	int contador;
+	int suma;
 	contador=1;
 	suma=0;
 

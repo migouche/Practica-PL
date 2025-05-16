@@ -1,0 +1,27 @@
+program DemoRepeat;
+
+const
+  LIMITE = 5;
+  TEXTO = 'Iteración:';
+
+var
+  numero: INTEGER                                   { Falta el ';' al final }
+  total: INTEGER;
+
+function Cuadrado(n INTEGER): INTEGER;              { Falta ':' entre 'n' e "INTEGER" }
+begin
+  Cuadrado := n * n;
+end;
+
+begin
+  numero := 1;
+  total := 0;
+
+  repeat; begin                                     { Se ha añadido un ';' }
+    writeln(TEXTO, ' ', numero);
+    total := total + Cuadrado(num);                 { La variable "num" no existe, en todo caso es "numero" }
+    numero := numero + 1;
+  end until numero > LIMITE;
+
+  writeln('Suma de cuadrados: ', total);
+end.

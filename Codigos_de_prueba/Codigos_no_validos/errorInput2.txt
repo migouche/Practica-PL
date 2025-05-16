@@ -1,0 +1,44 @@
+programa Demo;                                      { Se pone "program", no "programa" }
+
+const
+  PI == 3.14;                                       { Se pone '=', no "==" }
+  SALUDO = 'Hola';
+
+var
+  x, y: ENTERO;                                     { Se pone INTEGER, no ENTERO }
+  r: REAL;
+  cont: INTEGER;
+
+procedure MostrarMensaje(m: INTEGER);
+begin
+  writeln SALUDO;                                   { Paréntesis no puestos en writeln }
+  writeln('Mensaje con número:', m);
+end;
+
+function Sumar(a, b: INTEGER; c: REAL): INTEGER;
+begin
+  Sumar := a + b;
+end;
+
+begin
+  x := 10;
+  y := 5;
+  r := PI * x;
+
+  if !(a > b) then                                  { No se puede poner '!' para negación, se tiene que poner not }
+      begin
+      writeln('a no es mayor que b');
+      end
+    else
+    begin
+      writeln('a es mayor que b');
+    end
+for cont == 1 to 5                                  { Se tiene que poner ":=", no "==" y falta do al final de la línea de código }
+  begin
+    writeln('Valor de cont: ', cont);
+  end
+MostrarMensaje(x);
+y := Sumar(x, y, r);
+
+
+end.
