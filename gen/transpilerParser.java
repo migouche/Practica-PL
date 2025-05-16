@@ -289,7 +289,7 @@ public class transpilerParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(100);
-			((BlqContext)_localctx).dcllist = dcllist(_localctx.tab + (is_main ? 0: 1), is_main);
+			((BlqContext)_localctx).dcllist = dcllist(_localctx.tab + 1, is_main);
 			setState(101);
 			match(BEGIN);
 			setState(102);
@@ -941,7 +941,7 @@ public class transpilerParser extends Parser {
 
 			    if (_localctx.global) {
 			        ((DefvarContext)_localctx).v =  "";
-			        ((DefvarContext)_localctx).global_vars =  ((DefvarContext)_localctx).defvarlist.v;
+			        ((DefvarContext)_localctx).global_vars =  ((DefvarContext)_localctx).defvarlist.global_vars;
 			    } else {
 			        ((DefvarContext)_localctx).v =  ((DefvarContext)_localctx).defvarlist.v;
 			        ((DefvarContext)_localctx).global_vars =  "";
@@ -1015,15 +1015,15 @@ public class transpilerParser extends Parser {
 			setState(175);
 			((DefvarlistContext)_localctx).defvarlist_p = defvarlist_p(_localctx.tab, _localctx.global);
 
-			    String varDecl = combinator.createVarlist(((DefvarlistContext)_localctx).varlist.v, "\t".repeat(_localctx.tab) + ((DefvarlistContext)_localctx).tbas.v) + (global? ((DefvarlistContext)_localctx).defvarlist_p.global_vars : ((DefvarlistContext)_localctx).defvarlist_p.v);
-			    if (_localctx.global) {
-			        ((DefvarlistContext)_localctx).v =  "";
-			        ((DefvarlistContext)_localctx).global_vars =  varDecl;
-			    } else {
-			        ((DefvarlistContext)_localctx).v =  varDecl;
-			        ((DefvarlistContext)_localctx).global_vars =  "";
-			    }
-
+			        String varDecl = combinator.createVarlist(((DefvarlistContext)_localctx).varlist.v, "\t".repeat(_localctx.tab) + ((DefvarlistContext)_localctx).tbas.v);
+			        if (_localctx.global) {
+			            ((DefvarlistContext)_localctx).v =  "";
+			            ((DefvarlistContext)_localctx).global_vars =  varDecl + ((DefvarlistContext)_localctx).defvarlist_p.global_vars;
+			        } else {
+			            ((DefvarlistContext)_localctx).v =  varDecl + ((DefvarlistContext)_localctx).defvarlist_p.v;
+			            ((DefvarlistContext)_localctx).global_vars =  "";
+			        }
+			    
 			}
 		}
 		catch (RecognitionException re) {
@@ -1112,12 +1112,12 @@ public class transpilerParser extends Parser {
 				setState(183);
 				((Defvarlist_pContext)_localctx).defvarlist_p = defvarlist_p(_localctx.tab, _localctx.global);
 
-				        String varDecl = ";\n" + combinator.createVarlist(((Defvarlist_pContext)_localctx).varlist.v, "\t".repeat(_localctx.tab) + ((Defvarlist_pContext)_localctx).tbas.v) + (global? ((Defvarlist_pContext)_localctx).defvarlist_p.global_vars : ((Defvarlist_pContext)_localctx).defvarlist_p.v);
+				        String varDecl = combinator.createVarlist(((Defvarlist_pContext)_localctx).varlist.v, "\t".repeat(_localctx.tab) + ((Defvarlist_pContext)_localctx).tbas.v);
 				        if (_localctx.global) {
 				            ((Defvarlist_pContext)_localctx).v =  "";
-				            ((Defvarlist_pContext)_localctx).global_vars =  varDecl;
+				            ((Defvarlist_pContext)_localctx).global_vars =  ";\n" + varDecl + ((Defvarlist_pContext)_localctx).defvarlist_p.global_vars;
 				        } else {
-				            ((Defvarlist_pContext)_localctx).v =  varDecl;
+				            ((Defvarlist_pContext)_localctx).v =  ";\n" + varDecl + ((Defvarlist_pContext)_localctx).defvarlist_p.v;
 				            ((Defvarlist_pContext)_localctx).global_vars =  "";
 				        }
 				    

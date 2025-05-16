@@ -104,7 +104,7 @@ ERROR_CHAR: . {
 prg :
     PROGRAM ID ';' blq[true, 0] '.' {printAtEnd($blq.v);} |
     UNIT ID ';' dcllist[0, false] '.' {printAtEnd($dcllist.v);};
-blq[boolean is_main, int tab] returns [String v] :  dcllist[$tab + (is_main ? 0: 1), is_main] BEGIN sentlist[$tab + 1] END {
+blq[boolean is_main, int tab] returns [String v] :  dcllist[$tab + 1, is_main] BEGIN sentlist[$tab + 1] END {
     if(is_main){
         $v = $dcllist.v + "void main ( void ) {\n"+ $dcllist.global_vars + $sentlist.v + "\n}";
     }
@@ -140,22 +140,24 @@ simpvalue returns [String v] :
 defvar[int tabs, boolean global] returns [String v, String global_vars] : VAR defvarlist[$tabs, $global] ';' {
     if ($global) {
         $v = "";
-        $global_vars = $defvarlist.v;
+        $global_vars = $defvarlist.global_vars;
     } else {
         $v = $defvarlist.v;
         $global_vars = "";
     }
 };
-defvarlist[int tab, boolean global] returns [String v, String global_vars] : varlist ':' tbas defvarlist_p[$tab, $global] {
-    String varDecl = combinator.createVarlist($varlist.v, "\t".repeat($tab) + $tbas.v) + (global? $defvarlist_p.global_vars : $defvarlist_p.v);
-    if ($global) {
-        $v = "";
-        $global_vars = varDecl;
-    } else {
-        $v = varDecl;
-        $global_vars = "";
-    }
-};
+defvarlist[int tab, boolean global] returns [String v, String global_vars] :
+    varlist ':' tbas defvarlist_p[$tab, $global] {
+        String varDecl = combinator.createVarlist($varlist.v, "\t".repeat($tab) + $tbas.v);
+        if ($global) {
+            $v = "";
+            $global_vars = varDecl + $defvarlist_p.global_vars;
+        } else {
+            $v = varDecl + $defvarlist_p.v;
+            $global_vars = "";
+        }
+    };
+
 defvarlist_p[int tab, boolean global] returns [String v, String global_vars] :
     {
         if ($global) {
@@ -167,12 +169,12 @@ defvarlist_p[int tab, boolean global] returns [String v, String global_vars] :
         }
     } |
     ';' varlist ':' tbas defvarlist_p[$tab, $global] {
-        String varDecl = ";\n" + combinator.createVarlist($varlist.v, "\t".repeat($tab) + $tbas.v) + (global? $defvarlist_p.global_vars : $defvarlist_p.v);
+        String varDecl = combinator.createVarlist($varlist.v, "\t".repeat($tab) + $tbas.v);
         if ($global) {
             $v = "";
-            $global_vars = varDecl;
+            $global_vars = ";\n" + varDecl + $defvarlist_p.global_vars;
         } else {
-            $v = varDecl;
+            $v = ";\n" + varDecl + $defvarlist_p.v;
             $global_vars = "";
         }
     };
